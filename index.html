@@ -2,210 +2,776 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>FIX ANIME STUDIO | Admin</title>
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:#080817;color:#f5edff;font-family:Arial,sans-serif}
-button,input,select{font:inherit}
-button{cursor:pointer}
-.layout{display:flex;min-height:100vh}
-.sidebar{width:245px;background:#101024;border-right:1px solid #35204f;padding:25px 15px;flex-shrink:0}
-.logo{font-size:21px;font-weight:900;color:#d17aff;margin:5px 10px 35px}
-.logo small{display:block;color:#999;font-size:10px;letter-spacing:2px;margin-top:5px}
-.menu button{width:100%;text-align:left;background:transparent;border:0;color:#bbb;padding:14px;border-radius:9px;margin:3px 0}
-.menu button:hover,.menu button.active{background:#54217b;color:white}
-.main{flex:1;min-width:0}
-.top{height:75px;border-bottom:1px solid #302044;display:flex;align-items:center;justify-content:space-between;padding:0 28px}
-.top small{color:#b9a8cc}
-.top strong{color:#d47cff}
-.content{padding:28px;max-width:1300px;margin:auto}
-.heading{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap;margin-bottom:25px}
-h1{font-size:27px}
-p.muted{color:#a9a0bd;font-size:13px;margin-top:7px}
-.btn{background:linear-gradient(100deg,#7527ce,#c52fff);color:white;border:0;border-radius:9px;padding:11px 17px}
-.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:25px}
-.card,.panel{background:#121228;border:1px solid #30204c;border-radius:13px;padding:20px}
-.card small{color:#b1a2c8}
-.card h2{font-size:27px;margin:12px 0 5px}
-.card .emoji{font-size:23px}
-.panel{margin-bottom:20px;overflow:auto}
-.panel h3{margin-bottom:18px}
-table{width:100%;border-collapse:collapse;min-width:480px}
-th,td{text-align:left;padding:14px 10px;border-bottom:1px solid #302044;font-size:13px}
-th{color:#d59bff}
-.status{color:#72e5aa}
-.action{background:#32204b;color:#e5c9ff;border:0;padding:7px 10px;border-radius:6px;margin:2px}
-.action.delete{background:#512033;color:#ff9ab3}
-input,select{background:#09091b;border:1px solid #45305f;color:white;border-radius:8px;padding:12px;width:100%;margin:8px 0 15px}
-label{font-size:13px;color:#c5b7d9}
-.page{display:none}
-.page.active{display:block}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
-.notice{background:#261b39;border:1px solid #7244a0;border-radius:9px;padding:13px;color:#d9c5ed;font-size:13px;line-height:1.6;margin-bottom:20px}
-@media(max-width:850px){.sidebar{width:185px}.cards{grid-template-columns:repeat(2,1fr)}.content{padding:18px}}
-@media(max-width:550px){.layout{display:block}.sidebar{width:100%;padding:12px}.logo{margin:5px 10px 12px}.menu{display:flex;overflow-x:auto;gap:5px}.menu button{white-space:nowrap;width:auto;padding:10px}.top{height:60px;padding:0 15px}.content{padding:15px}.cards{gap:9px}.card{padding:13px}.form-grid{grid-template-columns:1fr}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080b18">
+  <title>FIX ANIME STUDIO | Create Your Anime Universe</title>
+  <meta name="description" content="Create your own anime universe with FIX ANIME STUDIO.">
+
+  <style>
+    :root {
+      --bg: #080b18;
+      --panel: #11182b;
+      --panel2: #151f38;
+      --text: #f4f5ff;
+      --muted: #a5acc7;
+      --purple: #a855f7;
+      --blue: #38bdf8;
+      --border: rgba(255,255,255,.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at 80% 10%, #29134d 0, transparent 30%),
+        radial-gradient(circle at 10% 40%, #10284b 0, transparent 35%),
+        var(--bg);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+      min-height: 100vh;
+    }
+
+    button, input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 17px 7%;
+      background: rgba(8,11,24,.88);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 23px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      color: white;
+    }
+
+    .logo span {
+      color: var(--purple);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 25px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .nav-links a:hover {
+      color: var(--blue);
+    }
+
+    .nav-button, .primary-button {
+      border: 0;
+      border-radius: 10px;
+      padding: 12px 18px;
+      color: white;
+      font-weight: bold;
+      background: linear-gradient(100deg,var(--purple),#5267ff);
+      box-shadow: 0 0 22px rgba(168,85,247,.25);
+    }
+
+    .hero {
+      min-height: 570px;
+      display: flex;
+      align-items: center;
+      padding: 80px 8%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      max-width: 720px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-label {
+      color: var(--blue);
+      letter-spacing: 3px;
+      font-size: 12px;
+      font-weight: bold;
+      margin-bottom: 22px;
+    }
+
+    .hero h1 {
+      font-size: clamp(42px,7vw,78px);
+      line-height: 1.08;
+      margin-bottom: 22px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg,#c084fc,#38bdf8);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      max-width: 560px;
+      line-height: 1.8;
+      color: var(--muted);
+      margin-bottom: 30px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 13px;
+    }
+
+    .secondary-button {
+      border: 1px solid rgba(255,255,255,.2);
+      background: rgba(255,255,255,.05);
+      color: white;
+      border-radius: 10px;
+      padding: 12px 20px;
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 330px;
+      height: 330px;
+      right: 12%;
+      top: 18%;
+      border-radius: 50%;
+      background: #7828d6;
+      filter: blur(130px);
+      opacity: .25;
+    }
+
+    .section {
+      padding: 65px 7%;
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(25px,4vw,36px);
+      margin-bottom: 12px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(3,minmax(0,1fr));
+      gap: 20px;
+    }
+
+    .project-card {
+      background: linear-gradient(145deg,var(--panel2),var(--panel));
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 23px;
+      transition: .25s;
+    }
+
+    .project-card:hover, .character-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--purple);
+      box-shadow: 0 12px 35px rgba(93,45,180,.15);
+    }
+
+    .project-icon {
+      width: 55px;
+      height: 55px;
+      display: grid;
+      place-items: center;
+      font-size: 27px;
+      background: rgba(168,85,247,.15);
+      border-radius: 13px;
+      margin-bottom: 18px;
+    }
+
+    .project-card h3 {
+      margin-bottom: 10px;
+    }
+
+    .project-card p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+
+    .small-link {
+      color: var(--blue);
+      font-size: 14px;
+      font-weight: bold;
+      background: none;
+      border: 0;
+    }
+
+    /* Character section */
+
+    .character-section {
+      padding: 70px 7%;
+    }
+
+    .character-heading {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .character-heading h2 {
+      font-size: clamp(27px,4vw,38px);
+      margin-bottom: 12px;
+    }
+
+    .character-heading p {
+      color: var(--muted);
+    }
+
+    .character-grid {
+      display: grid;
+      grid-template-columns: repeat(3,minmax(0,1fr));
+      gap: 22px;
+    }
+
+    .character-card {
+      background: linear-gradient(145deg,#17213b,#0e1427);
+      border: 1px solid var(--border);
+      border-radius: 17px;
+      overflow: hidden;
+      transition: .3s;
+    }
+
+    .character-art {
+      height: 210px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 90px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .character-art::after {
+      content: "";
+      position: absolute;
+      width: 170px;
+      height: 170px;
+      border-radius: 50%;
+      background: white;
+      filter: blur(90px);
+      opacity: .3;
+    }
+
+    .hero-art {
+      background: linear-gradient(135deg,#123b76,#6724bd);
+    }
+
+    .ninja-art {
+      background: linear-gradient(135deg,#101522,#34345e);
+    }
+
+    .villain-art {
+      background: linear-gradient(135deg,#4b123d,#160e2d);
+    }
+
+    .fire-art {
+      background: linear-gradient(135deg,#76250e,#d45a16);
+    }
+
+    .ice-art {
+      background: linear-gradient(135deg,#125078,#5bc9ee);
+    }
+
+    .dragon-art {
+      background: linear-gradient(135deg,#15523b,#172b39);
+    }
+
+    .character-info {
+      padding: 21px;
+    }
+
+    .character-info h3 {
+      font-size: 21px;
+      margin-bottom: 10px;
+    }
+
+    .character-info p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+      min-height: 45px;
+      margin-bottom: 14px;
+    }
+
+    .character-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      color: #d8b4fe;
+      background: rgba(168,85,247,.17);
+      border: 1px solid rgba(168,85,247,.25);
+      border-radius: 30px;
+      padding: 7px 11px;
+    }
+
+    .character-power {
+      color: var(--blue);
+      font-size: 13px;
+      margin: 15px 0;
+    }
+
+    .character-info button {
+      width: 100%;
+      padding: 11px;
+      background: rgba(255,255,255,.06);
+      color: white;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+    }
+
+    .character-info button:hover {
+      background: linear-gradient(90deg,var(--purple),#5267ff);
+    }
+
+    .creator-banner {
+      margin: 30px 7% 70px;
+      padding: 45px 25px;
+      text-align: center;
+      background: linear-gradient(120deg,#27134c,#122e53);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+    }
+
+    .creator-banner h2 {
+      font-size: 30px;
+      margin-bottom: 12px;
+    }
+
+    .creator-banner p {
+      color: var(--muted);
+      margin-bottom: 22px;
+      line-height: 1.6;
+    }
+
+    footer {
+      text-align: center;
+      padding: 28px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* Modal */
+
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(0,0,0,.8);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    .modal-box {
+      width: 100%;
+      max-width: 420px;
+      padding: 28px;
+      background: #141c32;
+      border: 1px solid var(--border);
+      border-radius: 17px;
+    }
+
+    .modal-box h2 {
+      margin-bottom: 20px;
+    }
+
+    .modal-box input {
+      width: 100%;
+      padding: 13px;
+      margin-bottom: 15px;
+      background: #080e20;
+      border: 1px solid var(--border);
+      color: white;
+      border-radius: 9px;
+      outline: none;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .modal-actions button {
+      flex: 1;
+    }
+
+    .close-button {
+      background: #29334c;
+      color: white;
+      border: 0;
+      border-radius: 9px;
+      padding: 12px;
+    }
+
+    .empty-message {
+      display: none;
+      color: var(--muted);
+      text-align: center;
+      padding: 20px;
+    }
+
+    @media(max-width:850px) {
+      .project-grid, .character-grid {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+      }
+
+      .nav-links {
+        gap: 12px;
+      }
+    }
+
+    @media(max-width:600px) {
+      .navbar {
+        padding: 15px 5%;
+        flex-wrap: wrap;
+      }
+
+      .nav-links {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        font-size: 12px;
+      }
+
+      .nav-button {
+        padding: 9px 12px;
+        font-size: 12px;
+      }
+
+      .hero {
+        min-height: 490px;
+        padding: 65px 6%;
+      }
+
+      .project-grid, .character-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section, .character-section {
+        padding: 50px 6%;
+      }
+
+      .character-art {
+        height: 230px;
+      }
+
+      .creator-banner {
+        margin-left: 6%;
+        margin-right: 6%;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<div class="layout">
-<aside class="sidebar">
- <div class="logo">♛ FIX ANIME <small>ADMIN CONTROL CENTER</small></div>
- <div class="menu">
-  <button class="active" onclick="showPage('dashboard',this)">◈ Dashboard</button>
-  <button onclick="showPage('projects',this)">🎬 Anime Projects</button>
-  <button onclick="showPage('characters',this)">🎨 Characters</button>
-  <button onclick="showPage('episodes',this)">🎞 Episodes</button>
-  <button onclick="showPage('users',this)">♟ Users</button>
-  <button onclick="showPage('settings',this)">⚙ Settings</button>
- </div>
-</aside>
-<main class="main">
- <div class="top">
-  <strong>FIX ANIME STUDIO</strong>
-  <small>Administrator • Demo Mode</small>
- </div>
- <div class="content">
 
- <section class="page active" id="dashboard">
-  <div class="heading"><div><h1>Dashboard</h1><p class="muted">Welcome to your creative control center.</p></div><span>⚡ Admin</span></div>
-  <div class="notice">This is your frontend admin prototype. Data is stored in this browser only. Secure admin authentication and a shared database will be connected later.</div>
-  <div class="cards">
-   <div class="card"><span class="emoji">🎬</span><h2 id="projectCount">0</h2><small>Anime Projects</small></div>
-   <div class="card"><span class="emoji">🎨</span><h2 id="characterCount">0</h2><small>Characters</small></div>
-   <div class="card"><span class="emoji">🎞️</span><h2 id="episodeCount">0</h2><small>Episodes</small></div>
-   <div class="card"><span class="emoji">👥</span><h2 id="userCount">0</h2><small>Registered Users</small></div>
-  </div>
-  <div class="panel"><h3>Quick Actions</h3>
-   <button class="btn" onclick="showPage('projects')">+ Add Anime Project</button>
-   <button class="btn" onclick="showPage('characters')">+ Add Character</button>
-   <button class="btn" onclick="showPage('episodes')">+ Add Episode</button>
-  </div>
- </section>
+  <header class="navbar">
+    <a href="#" class="logo">FIX <span>ANIME</span> STUDIO</a>
 
- <section class="page" id="projects">
-  <div class="heading"><div><h1>Anime Projects</h1><p class="muted">Manage your original anime series.</p></div></div>
-  <div class="panel">
-   <h3>Add New Project</h3>
-   <label>Project Name</label><input id="projectInput" placeholder="Enter anime name">
-   <label>Genre</label><select id="projectGenre"><option>Fantasy</option><option>Action</option><option>Adventure</option><option>Sci-Fi</option><option>Romance</option></select>
-   <button class="btn" onclick="addItem('projects','projectInput','projectGenre')">Add Project +</button>
-  </div>
-  <div class="panel"><h3>Project List</h3><div id="projectsList"></div></div>
- </section>
+    <nav class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#projects">Projects</a>
+      <a href="#characters">Characters</a>
+      <a href="#creator">Creator</a>
+      <a href="admin.html">Admin</a>
+    </nav>
 
- <section class="page" id="characters">
-  <div class="heading"><div><h1>Characters</h1><p class="muted">Manage your anime characters.</p></div></div>
-  <div class="panel">
-   <h3>Create Character</h3>
-   <label>Character Name</label><input id="characterInput" placeholder="Character name">
-   <label>Role</label><select id="characterRole"><option>Hero</option><option>Villain</option><option>Side Character</option><option>Mentor</option></select>
-   <button class="btn" onclick="addItem('characters','characterInput','characterRole')">Add Character +</button>
-  </div>
-  <div class="panel"><h3>Character List</h3><div id="charactersList"></div></div>
- </section>
+    <button class="nav-button" onclick="openModal()">
+      + New Project
+    </button>
+  </header>
 
- <section class="page" id="episodes">
-  <div class="heading"><div><h1>Episodes</h1><p class="muted">Organize your anime episodes.</p></div></div>
-  <div class="panel">
-   <h3>Add Episode</h3>
-   <label>Episode Title</label><input id="episodeInput" placeholder="Episode title">
-   <label>Season / Episode Number</label><input id="episodeNumber" placeholder="Season 1 - Episode 1">
-   <button class="btn" onclick="addItem('episodes','episodeInput','episodeNumber')">Add Episode +</button>
-  </div>
-  <div class="panel"><h3>Episode List</h3><div id="episodesList"></div></div>
- </section>
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-glow"></div>
 
- <section class="page" id="users">
-  <div class="heading"><div><h1>Users</h1><p class="muted">Registered user management.</p></div></div>
-  <div class="panel">
-   <h3>Demo User List</h3>
-   <p class="muted">Real users will appear here after database and authentication integration.</p>
-   <div id="usersList"></div>
-  </div>
- </section>
+      <div class="hero-content">
+        <div class="hero-label">✦ YOUR IMAGINATION. YOUR UNIVERSE.</div>
 
- <section class="page" id="settings">
-  <div class="heading"><div><h1>Settings</h1><p class="muted">Manage website identity.</p></div></div>
-  <div class="panel">
-   <h3>Website Information</h3>
-   <label>Website Name</label><input id="siteName" value="FIX ANIME STUDIO">
-   <label>Tagline</label><input id="tagline" value="Create • Imagine • Animate">
-   <button class="btn" onclick="saveSettings()">Save Settings</button>
-   <p id="settingsMessage" class="muted"></p>
-  </div>
- </section>
- </div>
-</main>
-</div>
+        <h1>
+          Create Your Own<br>
+          <span class="gradient-text">Anime Universe</span>
+        </h1>
 
-<script>
-const keys=['projects','characters','episodes','users'];
-let data={};
-keys.forEach(k=>{
- try{data[k]=JSON.parse(localStorage.getItem('fix_'+k))||[]}
- catch(e){data[k]=[]}
-});
-function persist(){
- keys.forEach(k=>localStorage.setItem('fix_'+k,JSON.stringify(data[k])));
- render();
-}
-function showPage(id,btn){
- document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
- document.getElementById(id).classList.add('active');
- document.querySelectorAll('.menu button').forEach(b=>b.classList.remove('active'));
- if(btn)btn.classList.add('active');
-}
-function addItem(type,inputId,detailId){
- const input=document.getElementById(inputId);
- const detail=document.getElementById(detailId);
- const name=input.value.trim();
- if(!name){alert('Please enter a name');return}
- data[type].push({id:Date.now(),name,detail:detail.value});
- input.value='';
- persist();
- alert('Added successfully!');
-}
-function removeItem(type,id){
- if(!confirm('Delete this item?'))return;
- data[type]=data[type].filter(x=>x.id!==id);
- persist();
-}
-function renderList(type,id){
- const box=document.getElementById(id);
- if(!data[type].length){box.innerHTML='<p class="muted">No items added yet.</p>';return}
- const table=document.createElement('table');
- table.innerHTML='<thead><tr><th>Name</th><th>Details</th><th>Action</th></tr></thead>';
- const tbody=document.createElement('tbody');
- data[type].forEach(item=>{
-  const tr=document.createElement('tr');
-  const name=document.createElement('td');name.textContent=item.name;
-  const detail=document.createElement('td');detail.textContent=item.detail||'—';
-  const action=document.createElement('td');
-  const btn=document.createElement('button');
-  btn.className='action delete';btn.textContent='Delete';
-  btn.onclick=()=>removeItem(type,item.id);
-  action.appendChild(btn);tr.append(name,detail,action);tbody.appendChild(tr);
- });
- table.appendChild(tbody);box.replaceChildren(table);
-}
-function render(){
- document.getElementById('projectCount').textContent=data.projects.length;
- document.getElementById('characterCount').textContent=data.characters.length;
- document.getElementById('episodeCount').textContent=data.episodes.length;
- document.getElementById('userCount').textContent=data.users.length;
- renderList('projects','projectsList');
- renderList('characters','charactersList');
- renderList('episodes','episodesList');
- renderList('users','usersList');
-}
-function saveSettings(){
- localStorage.setItem('fix_site_name',document.getElementById('siteName').value);
- localStorage.setItem('fix_tagline',document.getElementById('tagline').value);
- document.getElementById('settingsMessage').textContent='Settings saved in this browser.';
-}
-render();
-</script>
+        <p>
+          Welcome to FIX ANIME STUDIO. Build original anime characters,
+          design your own worlds and bring your imagination to life.
+          Your anime journey starts here.
+        </p>
+
+        <div class="hero-actions">
+          <button class="primary-button" onclick="openModal()">
+            Start Creating →
+          </button>
+
+          <a href="#characters" class="secondary-button">
+            Explore Characters
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="section-heading">
+        <h2>✦ Your Creative Workspace</h2>
+        <p>Everything you need to begin your anime journey.</p>
+      </div>
+
+      <div class="project-grid" id="projectGrid">
+
+        <article class="project-card">
+          <div class="project-icon">🎨</div>
+          <h3>Character Creator</h3>
+          <p>Develop original heroes, villains and unique anime characters.</p>
+          <button class="small-link" onclick="showFeature('Character Creator')">
+            Explore →
+          </button>
+        </article>
+
+        <article class="project-card">
+          <div class="project-icon">🌌</div>
+          <h3>Anime World</h3>
+          <p>Imagine fantasy worlds, kingdoms, cities and amazing locations.</p>
+          <button class="small-link" onclick="showFeature('Anime World')">
+            Explore →
+          </button>
+        </article>
+
+        <article class="project-card">
+          <div class="project-icon">🎬</div>
+          <h3>Anime Episodes</h3>
+          <p>Organize your stories into episodes and build your own series.</p>
+          <button class="small-link" onclick="showFeature('Anime Episodes')">
+            Explore →
+          </button>
+        </article>
+
+      </div>
+    </section>
+
+    <section id="characters" class="character-section">
+      <div class="character-heading">
+        <h2>✦ Anime Universe Characters</h2>
+        <p>Meet the heroes and legends of FIX ANIME STUDIO</p>
+      </div>
+
+      <div class="character-grid">
+
+        <div class="character-card">
+          <div class="character-art hero-art">⚡</div>
+          <div class="character-info">
+            <h3>Akira Storm</h3>
+            <p>A fearless young hero with mysterious energy powers.</p>
+            <span class="character-tag">MAIN HERO</span>
+            <div class="character-power">Power: Thunder Strike</div>
+            <button onclick="showCharacter('Akira Storm','A fearless young hero with mysterious energy powers.','Thunder Strike')">View Character →</button>
+          </div>
+        </div>
+
+        <div class="character-card">
+          <div class="character-art ninja-art">🥷</div>
+          <div class="character-info">
+            <h3>Kage Shadow</h3>
+            <p>A mysterious ninja who protects the forgotten kingdom.</p>
+            <span class="character-tag">DARK NINJA</span>
+            <div class="character-power">Power: Shadow Control</div>
+            <button onclick="showCharacter('Kage Shadow','A mysterious ninja who protects the forgotten kingdom.','Shadow Control')">View Character →</button>
+          </div>
+        </div>
+
+        <div class="character-card">
+          <div class="character-art villain-art">👿</div>
+          <div class="character-info">
+            <h3>Lord Zareth</h3>
+            <p>An ancient villain seeking control of the dark universe.</p>
+            <span class="character-tag">MAIN VILLAIN</span>
+            <div class="character-power">Power: Dark Energy</div>
+            <button onclick="showCharacter('Lord Zareth','An ancient villain seeking control of the dark universe.','Dark Energy')">View Character →</button>
+          </div>
+        </div>
+
+        <div class="character-card">
+          <div class="character-art fire-art">🔥</div>
+          <div class="character-info">
+            <h3>Ryu Blaze</h3>
+            <p>A powerful warrior whose spirit burns like a dragon.</p>
+            <span class="character-tag">FIRE WARRIOR</span>
+            <div class="character-power">Power: Inferno Flame</div>
+            <button onclick="showCharacter('Ryu Blaze','A powerful warrior whose spirit burns like a dragon.','Inferno Flame')">View Character →</button>
+          </div>
+        </div>
+
+        <div class="character-card">
+          <div class="character-art ice-art">❄️</div>
+          <div class="character-info">
+            <h3>Yuki Frost</h3>
+            <p>A brave princess with the ancient power of ice.</p>
+            <span class="character-tag">ICE PRINCESS</span>
+            <div class="character-power">Power: Frozen Storm</div>
+            <button onclick="showCharacter('Yuki Frost','A brave princess with the ancient power of ice.','Frozen Storm')">View Character →</button>
+          </div>
+        </div>
+
+        <div class="character-card">
+          <div class="character-art dragon-art">🐉</div>
+          <div class="character-info">
+            <h3>Drakon Vey</h3>
+            <p>A legendary dragon master from a forgotten world.</p>
+            <span class="character-tag">DRAGON MASTER</span>
+            <div class="character-power">Power: Dragon Soul</div>
+            <button onclick="showCharacter('Drakon Vey','A legendary dragon master from a forgotten world.','Dragon Soul')">View Character →</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="creator-banner" id="creator">
+      <h2>Ready to Create Your Anime?</h2>
+      <p>
+        Start with an idea. Build a character. Create a story.
+        Make your own anime universe.
+      </p>
+      <button class="primary-button" onclick="openModal()">
+        Create New Project →
+      </button>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 FIX ANIME STUDIO. All Rights Reserved.</p>
+    <p style="margin-top:8px;">Create • Imagine • Animate</p>
+  </footer>
+
+  <!-- Project Modal -->
+  <div class="modal" id="projectModal">
+    <div class="modal-box">
+      <h2>✦ Create New Project</h2>
+
+      <input id="projectName" type="text" placeholder="Enter your anime project name">
+
+      <div class="modal-actions">
+        <button class="primary-button" onclick="createProject()">Create</button>
+        <button class="close-button" onclick="closeModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openModal() {
+      document.getElementById("projectModal").classList.add("show");
+      document.getElementById("projectName").focus();
+    }
+
+    function closeModal() {
+      document.getElementById("projectModal").classList.remove("show");
+    }
+
+    function createProject() {
+      const input = document.getElementById("projectName");
+      const name = input.value.trim();
+
+      if (!name) {
+        alert("Please enter your project name.");
+        return;
+      }
+
+      const card = document.createElement("article");
+      card.className = "project-card";
+
+      const icon = document.createElement("div");
+      icon.className = "project-icon";
+      icon.textContent = "🎬";
+
+      const heading = document.createElement("h3");
+      heading.textContent = name;
+
+      const description = document.createElement("p");
+      description.textContent = "Your new anime project has been created in this browser.";
+
+      const status = document.createElement("span");
+      status.className = "character-tag";
+      status.textContent = "NEW PROJECT";
+
+      card.append(icon, heading, description, status);
+      document.getElementById("projectGrid").appendChild(card);
+
+      input.value = "";
+      closeModal();
+      alert("Project created!");
+    }
+
+    function showFeature(feature) {
+      alert(feature + " is part of the FIX ANIME STUDIO roadmap.");
+    }
+
+    function showCharacter(name, description, power) {
+      alert(
+        "CHARACTER PROFILE\n\n" +
+        "Name: " + name + "\n" +
+        "Description: " + description + "\n" +
+        "Power: " + power
+      );
+    }
+
+    document.getElementById("projectModal").addEventListener("click", function(event) {
+      if (event.target === this) closeModal();
+    });
+
+    document.getElementById("projectName").addEventListener("keydown", function(event) {
+      if (event.key === "Enter") createProject();
+      if (event.key === "Escape") closeModal();
+    });
+  </script>
+
 </body>
 </html>
