@@ -8,18 +8,18 @@
 <title>FIX ANIME STUDIO — AI Animation Workspace</title>
 <style>
 :root{
- --bg:#080914;--panel:#111326;--panel2:#171a32;--line:#292c4c;
- --text:#f4f3ff;--muted:#969ab8;--purple:#9670ff;--cyan:#43d9ed;
- --pink:#f36bb6;--green:#5de0b1;--red:#ff718b;
+ --bg:#080914;--panel:#111326;--panel2:#191b34;--line:#292c4c;
+ --text:#f4f3ff;--muted:#969ab8;--purple:#9670ff;
+ --cyan:#43d9ed;--pink:#f36bb6;--green:#5de0b1;--red:#ff718b;
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif}
 button,input,textarea,select{font:inherit}
 button{cursor:pointer}
 a{color:inherit;text-decoration:none}
-.app{min-height:100vh;display:flex}
+.app{min-height:100vh}
 .sidebar{width:245px;background:#0d0f20;border-right:1px solid var(--line);padding:22px 15px;position:fixed;inset:0 auto 0 0;z-index:10;overflow:auto}
-.brand{font-size:20px;font-weight:900;letter-spacing:-.8px;padding:5px 10px 25px}
+.brand{font-size:20px;font-weight:900;padding:5px 10px 25px}
 .brand span{color:var(--purple)}
 .brand small{display:block;font-size:10px;color:var(--muted);letter-spacing:3px;margin-top:7px}
 .nav-label{font-size:10px;color:#727795;letter-spacing:2px;margin:20px 10px 9px}
@@ -74,9 +74,9 @@ label{font-size:11px;color:#b7bad3;display:block;margin-bottom:7px}
 textarea.field{min-height:95px;resize:vertical}
 .cards{grid-template-columns:repeat(3,minmax(0,1fr))}
 .character{overflow:hidden;padding:0}
-.art{height:205px;position:relative;display:grid;place-items:center;overflow:hidden;background:radial-gradient(circle at 50% 45%,#6550a4,#20203e 55%,#101221)}
+.art{height:230px;position:relative;display:grid;place-items:center;overflow:hidden;background:radial-gradient(circle at 50% 45%,#6550a4,#20203e 55%,#101221)}
 .art img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
-.art .initial{font-size:74px;font-weight:900;color:#fff;text-shadow:0 4px 35px #080914;z-index:1}
+.art .initial{font-size:90px;font-weight:900;color:#fff;text-shadow:0 4px 35px #080914;z-index:1}
 .art:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 55%,#101222)}
 .char-info{padding:15px}
 .char-info h3{margin:0 0 6px;font-size:15px}
@@ -92,14 +92,13 @@ textarea.field{min-height:95px;resize:vertical}
 .scene p{font-size:11px;color:var(--muted);margin:5px 0}
 .editor{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:15px}
 .preview{aspect-ratio:16/9;background:radial-gradient(circle at 50% 40%,#38305e,#0b0d1a 75%);border:1px solid #39385e;border-radius:13px;display:grid;place-items:center;position:relative;overflow:hidden}
-.preview-text{text-align:center;padding:20px}
+.preview img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.preview-text{text-align:center;padding:20px;position:relative;z-index:1;text-shadow:0 2px 10px #000}
 .preview-text strong{display:block;font-size:clamp(18px,3vw,32px)}
 .preview-text p{color:#c1b7e7;font-size:12px}
 .timeline{margin-top:15px;background:#101225;border:1px solid var(--line);padding:14px;border-radius:12px}
 .track{height:33px;border-radius:6px;background:#1d2040;margin:8px 0;display:flex;overflow:hidden}
 .clip{height:100%;min-width:70px;flex:1;background:linear-gradient(90deg,#7855dd,#b16be9);margin-right:3px;border-radius:4px;display:grid;place-items:center;font-size:10px}
-.clip:nth-child(2){background:linear-gradient(90deg,#267f9b,#47bfd2)}
-.clip:nth-child(3){background:linear-gradient(90deg,#a94b83,#e36ca9)}
 .track-label{font-size:10px;color:var(--muted)}
 .list{display:grid;gap:9px}
 .list-item{padding:13px;background:#15172c;border:1px solid var(--line);border-radius:10px}
@@ -123,7 +122,7 @@ hr{border:0;border-top:1px solid var(--line);margin:18px 0}
  .cards{grid-template-columns:1fr 1fr}.editor{grid-template-columns:1fr}
  .quick-grid{grid-template-columns:1fr 1fr}
 }
-@media(max-width:430px){.cards{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.stat strong{font-size:23px}.topbar small{display:none}.quick-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:430px){.cards{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.stat strong{font-size:23px}.topbar small{display:none}}
 </style>
 </head>
 <body>
@@ -161,7 +160,6 @@ hr{border:0;border-top:1px solid var(--line);margin:18px 0}
 </header>
 
 <div class="content">
-
 <section class="page active" id="dashboard">
  <div class="row">
   <div><div class="eyebrow">YOUR ANIMATION WORKSPACE</div><h1>Create your next universe.</h1><p class="sub">Turn original ideas into characters, scenes and animated stories.</p></div>
@@ -180,7 +178,7 @@ hr{border:0;border-top:1px solid var(--line);margin:18px 0}
   <div class="quick" onclick="go('scenes')"><div class="ico">▧</div><strong>Storyboard Builder</strong><small>Plan scenes, shots and dialogue.</small></div>
   <div class="quick" onclick="go('backgrounds')"><div class="ico">▦</div><strong>Background Studio</strong><small>Prepare scene background artwork.</small></div>
   <div class="quick" onclick="go('voice')"><div class="ico">♫</div><strong>Voice Studio</strong><small>Prepare narration and dialogue.</small></div>
-  <div class="quick" onclick="go('video')"><div class="ico">▶</div><strong>Animation Editor</strong><small>Arrange scenes on a timeline.</small></div>
+  <div class="quick" onclick="go('video')"><div class="ico">▶</div><strong>Animation Editor</strong><small>Arrange scenes and export a video.</small></div>
  </div>
  <div class="panel">
   <div class="row"><h3>Recent Projects</h3><button class="btn secondary small" onclick="go('library')">View Library</button></div>
@@ -189,7 +187,7 @@ hr{border:0;border-top:1px solid var(--line);margin:18px 0}
 </section>
 
 <section class="page" id="characters">
- <div class="row"><div><div class="eyebrow">CHARACTER UNIVERSE</div><h1>Character Library</h1><p class="sub">Create and manage your own consistent original characters.</p></div><button class="btn" onclick="openCharacter()">＋ New Character</button></div>
+ <div class="row"><div><div class="eyebrow">CHARACTER UNIVERSE</div><h1>Character Library</h1><p class="sub">Create and manage your own original characters.</p></div><button class="btn" onclick="openCharacter()">＋ New Character</button></div>
  <div class="toolbar">
   <input class="field" id="charSearch" placeholder="Search characters..." oninput="renderCharacters()">
   <select class="field" id="charType" onchange="renderCharacters()"><option value="all">All Styles</option><option>2D</option><option>3D</option></select>
@@ -206,10 +204,10 @@ hr{border:0;border-top:1px solid var(--line);margin:18px 0}
    <div class="form-group"><label>Project / Episode Title</label><input class="field" id="storyTitle" placeholder="The Last Light"></div>
    <div class="form-group"><label>Genre</label><select class="field" id="storyGenre"><option>Fantasy Adventure</option><option>Action</option><option>Mystery</option><option>Comedy</option><option>Science Fiction</option><option>Drama</option></select></div>
    <div class="form-group full"><label>Story Idea</label><textarea class="field" id="storyIdea" placeholder="Describe your original anime story..."></textarea></div>
-   <div class="form-group full"><label>Episode Script / Dialogue</label><textarea class="field" id="script" style="min-height:220px" placeholder="SCENE 1 — EXT. ANCIENT CITY — NIGHT&#10;&#10;NARRATOR: A new journey begins...&#10;&#10;HERO: Who is there?"></textarea></div>
+   <div class="form-group full"><label>Episode Script / Dialogue</label><textarea class="field" id="script" style="min-height:220px" placeholder="SCENE 1 — EXT. ANCIENT CITY — NIGHT&#10;&#10;NARRATOR: A new journey begins..."></textarea></div>
   </div>
-  <div class="toolbar"><button class="btn" onclick="saveStory()">Save Story</button><button class="btn secondary" onclick="downloadScript()">Download Script</button></div>
-  <div class="notice">AI script writing is not connected yet. This editor saves your own writing locally. An AI writing API can be connected through a secure backend later.</div>
+  <div class="toolbar"><button class="btn" onclick="saveStory()">Save Story</button><button class="btn secondary" onclick="downloadScript()">Download Script</button><button class="btn ghost" onclick="makeStoryPrompt()">Create AI Writing Prompt</button></div>
+  <div class="notice">AI writing prompt তৈরি করে কপি করতে পারবে। সরাসরি AI লেখার সুবিধার জন্য পরে secure AI API যুক্ত করতে হবে।</div>
  </div>
 </section>
 
@@ -232,28 +230,28 @@ hr{border:0;border-top:1px solid var(--line);margin:18px 0}
 
 <section class="page" id="video">
  <div class="eyebrow">PRODUCTION WORKSPACE</div><h1>Animation Studio</h1>
- <p class="sub">Arrange your storyboard into a video production plan.</p>
+ <p class="sub">Create a simple animated scene preview and export it as a video.</p>
  <div class="editor">
   <div>
    <div class="preview" id="videoPreview"><div class="preview-text"><strong>FIX ANIME STUDIO</strong><p>Your animation preview canvas</p></div></div>
    <div class="toolbar">
     <button class="btn" onclick="previewScene()">▶ Preview Scene</button>
-    <button class="btn secondary" onclick="downloadProduction()">Export Project Data</button>
+    <button class="btn secondary" onclick="exportVideo()">⬇ Export Video</button>
+    <button class="btn ghost" onclick="downloadProduction()">Export Project Data</button>
    </div>
    <div class="timeline">
     <div class="row"><strong style="font-size:12px">EDITING TIMELINE</strong><span class="sub">Scene sequence</span></div>
     <div class="track-label">VIDEO / SCENES</div><div class="track" id="videoTrack"></div>
-    <div class="track-label">CHARACTERS / ACTIONS</div><div class="track"><div class="clip">Character</div><div class="clip">Action</div></div>
-    <div class="track-label">VOICE / AUDIO</div><div class="track"><div class="clip">Dialogue</div><div class="clip">Narration</div></div>
    </div>
   </div>
   <div class="panel">
    <h3>Animation Controls</h3>
-   <label>Character Action</label><select class="field" id="action"><option>Idle</option><option>Walking</option><option>Running</option><option>Talking</option><option>Waving</option><option>Jumping</option><option>Surprised</option></select>
+   <label>Choose Scene</label><select class="field" id="videoScene"></select>
+   <label style="margin-top:13px">Character Action</label><select class="field" id="action"><option>Idle</option><option>Walking</option><option>Running</option><option>Talking</option><option>Waving</option><option>Jumping</option></select>
    <label style="margin-top:13px">Facial Expression</label><select class="field" id="expression"><option>Neutral</option><option>Happy</option><option>Angry</option><option>Sad</option><option>Surprised</option><option>Determined</option></select>
    <label style="margin-top:13px">Camera Movement</label><select class="field" id="camera"><option>Static</option><option>Zoom In</option><option>Zoom Out</option><option>Pan Left</option><option>Pan Right</option></select>
-   <label style="margin-top:13px">Scene Duration (seconds)</label><input class="field" id="duration" type="number" min="1" max="300" value="8">
-   <div class="notice">These controls save production settings. Real character rigging, lip-sync and rendered video require an animation engine or AI video API.</div>
+   <label style="margin-top:13px">Video Duration (seconds)</label><input class="field" id="duration" type="number" min="3" max="30" value="8">
+   <div class="notice">Export creates a simple animated scene video from your storyboard and selected character artwork. Full AI character motion, advanced rigging and lip-sync need a dedicated animation engine/API.</div>
   </div>
  </div>
 </section>
@@ -262,11 +260,10 @@ hr{border:0;border-top:1px solid var(--line);margin:18px 0}
  <div class="eyebrow">ENVIRONMENT DESIGN</div><h1>Background Studio</h1>
  <p class="sub">Organize visual references and background prompts for your anime scenes.</p>
  <div class="panel">
-  <label>Background Description</label><textarea id="bgPrompt" class="field" placeholder="A mysterious ancient city, glowing blue lanterns, cinematic night atmosphere, original anime environment..."></textarea>
+  <label>Background Description</label><textarea id="bgPrompt" class="field" placeholder="A mysterious ancient city, glowing blue lanterns, cinematic night atmosphere..."></textarea>
   <label style="margin-top:14px">Visual Style</label><select class="field" id="bgStyle"><option>2D Anime</option><option>3D Cinematic</option><option>Watercolor Fantasy</option><option>Dark Fantasy</option><option>Cyberpunk</option></select>
   <label style="margin-top:14px">Reference Image URL (optional)</label><input id="bgUrl" class="field" placeholder="https://...">
   <div class="toolbar"><button class="btn" onclick="saveBackground()">Save Background Brief</button><button class="btn secondary" onclick="downloadBackgrounds()">Export Briefs</button></div>
-  <div class="notice">This is a background planning tool. Actual AI background generation will need a connected image-generation service.</div>
  </div>
  <div class="grid cards" id="backgroundGrid"></div>
 </section>
@@ -282,8 +279,8 @@ hr{border:0;border-top:1px solid var(--line);margin:18px 0}
    <div class="form-group"><label>Voice Type</label><select class="field" id="voiceType"><option>Natural</option><option>Deep</option><option>Bright</option><option>Soft</option></select></div>
    <div class="form-group full"><label>Dialogue / Narration</label><textarea class="field" id="voiceText" placeholder="Write the dialogue here..."></textarea></div>
   </div>
-  <div class="toolbar"><button class="btn" onclick="saveVoice()">Save Voice Script</button><button class="btn secondary" onclick="downloadVoice()">Download Voice Script</button></div>
-  <div class="notice">Voice generation and lip-sync are not active in this frontend version. Connect a text-to-speech service through a secure server to generate audio.</div>
+  <div class="toolbar"><button class="btn" onclick="saveVoice()">Save Voice Script</button><button class="btn secondary" onclick="downloadVoice()">Download Voice Script</button><button class="btn ghost" onclick="speakVoice()">Play Browser Voice</button></div>
+  <div class="notice">Browser voice uses the voices installed on your device. Professional AI voice and lip-sync need a separate service.</div>
  </div>
  <div class="panel"><h3>Saved Voice Scripts</h3><div class="list" id="voiceList"></div></div>
 </section>
@@ -307,7 +304,7 @@ hr{border:0;border-top:1px solid var(--line);margin:18px 0}
  <div class="panel">
   <h3>Workspace Management</h3>
   <div class="toolbar"><button class="btn" onclick="exportAll()">Download Backup</button><button class="btn secondary" onclick="document.getElementById('importFile').click()">Restore Backup</button></div>
-  <div class="notice">This Admin Panel is a local browser workspace, not a secure multi-user admin system. For a public website, use server-side authentication and a shared database. Never store admin passwords or private API keys in frontend code.</div>
+  <div class="notice">This is a local browser workspace, not a secure multi-user admin system. A shared online admin requires server-side authentication and a database.</div>
  </div>
  <div class="panel">
   <h3>Data Management</h3>
@@ -333,14 +330,16 @@ hr{border:0;border-top:1px solid var(--line);margin:18px 0}
    <div class="form-group"><label>Role</label><select class="field" id="cRole"><option>Hero</option><option>Villain</option><option>Warrior</option><option>Princess</option><option>Mage</option><option>Other</option></select></div>
    <div class="form-group"><label>Special Ability</label><input class="field" id="cPower" placeholder="Special ability"></div>
    <div class="form-group full"><label>Artwork Image URL</label><input class="field" id="cImage" placeholder="https://..."></div>
+   <div class="form-group full"><label>Or Upload Character Image</label><input class="field" id="cUpload" type="file" accept="image/*"></div>
    <div class="form-group full"><label>Character Description</label><textarea class="field" id="cStory" placeholder="Personality, appearance, backstory..."></textarea></div>
   </div>
   <div class="toolbar"><button class="btn" onclick="saveCharacter()">Save Character</button><button class="btn secondary" onclick="closeCharacter()">Cancel</button></div>
+  <p class="sub">Tip: Upload a character artwork or paste its image URL. Large uploads may exceed browser storage limits.</p>
  </div>
 </div>
 
 <script>
-const DBKEY="fixAnimeStudio_v1";
+const DBKEY="fixAnimeStudio_v2";
 const initial={
  characters:[
  {id:"a1",name:"Astra Raiyan",type:"2D",role:"Hero",power:"Void Strike",story:"A thoughtful young explorer with a mysterious cosmic gift.",image:"",color:"#7255be"},
@@ -348,19 +347,35 @@ const initial={
  {id:"a3",name:"Draco Vortex",type:"3D",role:"Villain",power:"Dark Eclipse",story:"A calculating antagonist who seeks an ancient source of power.",image:"",color:"#773b70"},
  {id:"a4",name:"Sakura Mirai",type:"2D",role:"Princess",power:"Ice Blossom",story:"A kind but determined royal protector of a winter kingdom.",image:"",color:"#a64e89"},
  {id:"a5",name:"Ryu Kazen",type:"2D",role:"Warrior",power:"Inferno Flame",story:"A bold wanderer with a fiery spirit and a strong sense of justice.",image:"",color:"#b45d35"},
- {id:"a6",name:"Miyu Seraph",type:"3D",role:"Mage",power:"Spirit Magic",story:"A quiet scholar who studies the hidden language of spirits.",image:"",color:"#416eaa"}
+ {id:"a6",name:"Miyu Seraph",type:"3D",role:"Mage",power:"Spirit Magic",story:"A quiet scholar who studies the hidden language of spirits.",image:"",color:"#416eaa"},
+ {id:"a7",name:"Kage Noctis",type:"2D",role:"Villain",power:"Nightfall",story:"A mysterious rival whose motives are hidden behind a mask.",image:"",color:"#30354e"},
+ {id:"a8",name:"Elara Moon",type:"3D",role:"Hero",power:"Lunar Shield",story:"A brave protector who draws strength from the moon.",image:"",color:"#456a9c"}
  ],
  projects:[],scenes:[],stories:[],backgrounds:[],voices:[],exports:0
 };
+
+function cloneInitial(){return JSON.parse(JSON.stringify(initial))}
 function load(){
  try{
   const saved=JSON.parse(localStorage.getItem(DBKEY));
-  if(saved&&typeof saved==="object")return {...structuredClone(initial),...saved};
+  if(saved&&typeof saved==="object"){
+   return {...cloneInitial(),...saved,
+    characters:Array.isArray(saved.characters)?saved.characters:cloneInitial().characters,
+    projects:Array.isArray(saved.projects)?saved.projects:[],
+    scenes:Array.isArray(saved.scenes)?saved.scenes:[],
+    stories:Array.isArray(saved.stories)?saved.stories:[],
+    backgrounds:Array.isArray(saved.backgrounds)?saved.backgrounds:[],
+    voices:Array.isArray(saved.voices)?saved.voices:[]
+   };
+  }
  }catch(e){}
- return structuredClone(initial);
+ return cloneInitial();
 }
 let db=load();
-function persist(){try{localStorage.setItem(DBKEY,JSON.stringify(db));refreshAll();return true}catch(e){alert("Storage is full. Export a backup or remove some large data.");return false}}
+function persist(){
+ try{localStorage.setItem(DBKEY,JSON.stringify(db));refreshAll();return true}
+ catch(e){alert("Browser storage is full. Try a smaller image or remove some saved data.");return false}
+}
 function uid(){return "x"+Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
 function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 function go(id){
@@ -373,6 +388,7 @@ function go(id){
  refreshAll();
 }
 document.querySelectorAll(".nav-btn").forEach(b=>b.addEventListener("click",()=>go(b.dataset.page)));
+
 function refreshAll(){
  const count=id=>document.getElementById(id);
  ["statChars","adminChars"].forEach(id=>count(id).textContent=db.characters.length);
@@ -380,8 +396,9 @@ function refreshAll(){
  ["statScenes","adminScenes"].forEach(id=>count(id).textContent=db.scenes.length);
  count("adminBackgrounds").textContent=db.backgrounds.length;
  count("statExports").textContent=db.exports||0;
- renderCharacters();renderScenes();renderProjects();renderBackgrounds();renderVoices();renderTimeline();fillCharacterSelects();
+ renderCharacters();renderScenes();renderProjects();renderBackgrounds();renderVoices();renderTimeline();fillCharacterSelects();renderVideoSceneSelect();
 }
+
 function openCharacter(id){
  const c=db.characters.find(x=>x.id===id);
  document.getElementById("modalTitle").textContent=c?"Edit Character":"Create Character";
@@ -392,15 +409,28 @@ function openCharacter(id){
  document.getElementById("cPower").value=c?.power||"";
  document.getElementById("cImage").value=c?.image||"";
  document.getElementById("cStory").value=c?.story||"";
+ document.getElementById("cUpload").value="";
  document.getElementById("characterModal").classList.add("open");
 }
 function closeCharacter(){document.getElementById("characterModal").classList.remove("open")}
-function saveCharacter(){
+async function saveCharacter(){
  const name=document.getElementById("cName").value.trim();
  if(!name){alert("Enter a character name.");return}
  const id=document.getElementById("characterId").value;
- const obj={id:id||uid(),name,type:document.getElementById("cType").value,role:document.getElementById("cRole").value,power:document.getElementById("cPower").value.trim(),image:document.getElementById("cImage").value.trim(),story:document.getElementById("cStory").value.trim(),color:"#55418f"};
- if(obj.image&&!/^https?:\/\//i.test(obj.image)){alert("Use a valid https:// or http:// image URL.");return}
+ const old=db.characters.find(c=>c.id===id);
+ let image=document.getElementById("cImage").value.trim()||old?.image||"";
+ const file=document.getElementById("cUpload").files[0];
+ if(file){
+  if(!file.type.startsWith("image/")){alert("Please choose an image file.");return}
+  if(file.size>1500000){alert("Please use an image under 1.5 MB for browser storage.");return}
+  image=await new Promise((resolve,reject)=>{
+   const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=reject;reader.readAsDataURL(file);
+  });
+ }
+ if(image&&!/^https?:\/\//i.test(image)&&!image.startsWith("data:image/")){
+  alert("Use a valid image URL or upload an image.");return;
+ }
+ const obj={id:id||uid(),name,type:document.getElementById("cType").value,role:document.getElementById("cRole").value,power:document.getElementById("cPower").value.trim(),image,story:document.getElementById("cStory").value.trim(),color:old?.color||"#55418f"};
  if(id)db.characters=db.characters.map(c=>c.id===id?obj:c);else db.characters.unshift(obj);
  if(persist())closeCharacter();
 }
@@ -414,13 +444,15 @@ function renderCharacters(){
  grid.innerHTML=list.map(c=>`<article class="panel character">
  <div class="art" style="background:radial-gradient(circle at 50% 45%,${esc(c.color||"#55418f")},#17172f 70%)">
  ${c.image?`<img src="${esc(c.image)}" alt="${esc(c.name)}" onerror="this.remove()">`:""}
- <span class="initial">${esc(c.name.slice(0,1).toUpperCase())}</span>
- </div><div class="char-info"><h3>${esc(c.name)}</h3>
+ <span class="initial">${esc(c.name.slice(0,1).toUpperCase())}</span></div>
+ <div class="char-info"><h3>${esc(c.name)}</h3>
  <div class="tags"><span class="tag">${esc(c.type)}</span><span class="tag">${esc(c.role)}</span></div>
  <p>${esc(c.story||"No description yet.")}</p><div class="sub">✦ ${esc(c.power||"Ability not set")}</div>
- <div class="card-actions"><button class="btn secondary small" onclick="openCharacter('${c.id}')">Edit</button><button class="btn danger small" onclick="deleteCharacter('${c.id}')">Delete</button></div></div></article>`).join("");
+ <div class="card-actions"><button class="btn secondary small" onclick="openCharacter('${c.id}')">Edit</button><button class="btn danger small" onclick="deleteCharacter('${c.id}')">Delete</button></div>
+ </div></article>`).join("");
 }
 function deleteCharacter(id){if(!confirm("Delete this character?"))return;db.characters=db.characters.filter(c=>c.id!==id);persist()}
+
 function newProject(){
  const name=prompt("Enter your project title:");
  if(!name||!name.trim())return;
@@ -435,21 +467,26 @@ function renderProjects(){
  recent.innerHTML=db.projects.slice(0,3).map(p=>`<div class="list-item"><strong>${esc(p.name)}</strong><p>${esc(p.date||"Saved project")}</p></div>`).join("")||'<div class="empty">Your recent projects will appear here.</div>';
 }
 function deleteProject(id){if(!confirm("Delete this project?"))return;db.projects=db.projects.filter(p=>p.id!==id);persist()}
+
 function saveStory(){
- const title=document.getElementById("storyTitle").value.trim();
- const script=document.getElementById("script").value;
+ const title=document.getElementById("storyTitle").value.trim(),script=document.getElementById("script").value;
  if(!title&&!script){alert("Enter a story title or script.");return}
- const obj={id:uid(),title:title||"Untitled Story",genre:document.getElementById("storyGenre").value,idea:document.getElementById("storyIdea").value,script,date:new Date().toLocaleString()};
- db.stories.unshift(obj);persist();alert("Story saved to workspace.");
+ db.stories.unshift({id:uid(),title:title||"Untitled Story",genre:document.getElementById("storyGenre").value,idea:document.getElementById("storyIdea").value,script,date:new Date().toLocaleString()});
+ persist();alert("Story saved.");
 }
 function downloadText(name,text){
  const blob=new Blob([text],{type:"text/plain;charset=utf-8"});
- const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=name;a.click();URL.revokeObjectURL(url);
+ const url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
 function downloadScript(){
  const text="FIX ANIME STUDIO — SCRIPT\n\n"+document.getElementById("storyTitle").value+"\n\n"+document.getElementById("storyIdea").value+"\n\n"+document.getElementById("script").value;
  downloadText("fix-anime-script.txt",text);db.exports++;persist();
 }
+function makeStoryPrompt(){
+ const promptText="Write an original anime episode. Genre: "+document.getElementById("storyGenre").value+". Title: "+document.getElementById("storyTitle").value+". Story idea: "+document.getElementById("storyIdea").value+". Create a detailed scene-by-scene script with original characters, dialogue, camera directions and visual descriptions. Do not copy existing anime.";
+ copyText(promptText);
+}
+
 function addScene(){
  const title=document.getElementById("sceneTitle").value.trim();
  if(!title){alert("Enter a scene title.");return}
@@ -464,6 +501,7 @@ function renderScenes(){
 }
 function deleteScene(id){db.scenes=db.scenes.filter(s=>s.id!==id);persist()}
 function downloadStoryboard(){downloadText("fix-anime-storyboard.txt",db.scenes.map((s,i)=>`SCENE ${i+1}: ${s.title}\nLocation: ${s.location}\nCharacter: ${s.character}\nCamera: ${s.camera}\nAction: ${s.action}`).join("\n\n"))}
+
 function fillCharacterSelects(){
  ["sceneCharacter","voiceCharacter"].forEach(id=>{
   const el=document.getElementById(id);if(!el)return;
@@ -476,15 +514,100 @@ function renderTimeline(){
  const el=document.getElementById("videoTrack");if(!el)return;
  el.innerHTML=db.scenes.map((s,i)=>`<div class="clip" title="${esc(s.title)}">Scene ${i+1}</div>`).join("")||'<span class="sub" style="padding:8px">Add storyboard scenes to build your timeline.</span>';
 }
-let previewIndex=0;
-function previewScene(){
- if(!db.scenes.length){alert("Add scenes in Storyboard first.");return}
- const s=db.scenes[previewIndex%db.scenes.length];previewIndex++;
- document.getElementById("videoPreview").innerHTML=`<div class="preview-text"><div class="eyebrow">SCENE PREVIEW ${previewIndex}</div><strong>${esc(s.title)}</strong><p>${esc(s.location)} · ${esc(s.character)}</p><p>${esc(s.action)}</p><span class="tag">${esc(document.getElementById("action").value)} · ${esc(document.getElementById("expression").value)}</span></div>`;
+function renderVideoSceneSelect(){
+ const el=document.getElementById("videoScene");if(!el)return;
+ const old=el.value;
+ el.innerHTML=db.scenes.map((s,i)=>`<option value="${s.id}">${i+1}. ${esc(s.title)}</option>`).join("")||'<option value="">No scenes yet</option>';
+ if([...el.options].some(o=>o.value===old))el.value=old;
 }
-function downloadProduction(){downloadJSON("fix-anime-production.json",{scenes:db.scenes,characters:db.characters,settings:{action:document.getElementById("action").value,expression:document.getElementById("expression").value,camera:document.getElementById("camera").value,duration:document.getElementById("duration").value}});db.exports++;persist()}
+function getSelectedScene(){return db.scenes.find(s=>s.id===document.getElementById("videoScene").value)||db.scenes[0]}
+function previewScene(){
+ const s=getSelectedScene();
+ if(!s){alert("Add scenes in Storyboard first.");return}
+ const c=db.characters.find(x=>x.name===s.character);
+ const box=document.getElementById("videoPreview");
+ box.innerHTML=(c?.image?`<img src="${esc(c.image)}" alt="">`:"")+`<div class="preview-text"><div class="eyebrow">SCENE PREVIEW</div><strong>${esc(s.title)}</strong><p>${esc(s.location)} · ${esc(s.character)}</p><p>${esc(s.action)}</p><span class="tag">${esc(document.getElementById("action").value)} · ${esc(document.getElementById("expression").value)}</span></div>`;
+}
+function downloadJSON(name,obj){
+ const blob=new Blob([JSON.stringify(obj,null,2)],{type:"application/json"});
+ const url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+function downloadProduction(){
+ downloadJSON("fix-anime-production.json",{scenes:db.scenes,characters:db.characters,settings:{action:document.getElementById("action").value,expression:document.getElementById("expression").value,camera:document.getElementById("camera").value,duration:document.getElementById("duration").value}});
+ db.exports++;persist();
+}
+
+async function exportVideo(){
+ const s=getSelectedScene();
+ if(!s){alert("Add a storyboard scene first.");return}
+ const duration=Math.max(3,Math.min(30,Number(document.getElementById("duration").value)||8));
+ const c=db.characters.find(x=>x.name===s.character);
+ const canvas=document.createElement("canvas");canvas.width=1280;canvas.height=720;
+ const ctx=canvas.getContext("2d");
+ let img=null;
+ if(c?.image){
+  try{
+   img=new Image();img.crossOrigin="anonymous";
+   await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=reject;img.src=c.image});
+  }catch(e){img=null}
+ }
+ function draw(t){
+  const w=canvas.width,h=canvas.height;
+  const g=ctx.createLinearGradient(0,0,w,h);
+  g.addColorStop(0,"#16112e");g.addColorStop(.55,"#30305e");g.addColorStop(1,"#080914");
+  ctx.fillStyle=g;ctx.fillRect(0,0,w,h);
+  ctx.fillStyle="rgba(150,112,255,.13)";
+  for(let i=0;i<18;i++){ctx.beginPath();ctx.arc((i*173+t*20)%w,(i*91)%h,2+(i%4),0,Math.PI*2);ctx.fill()}
+  if(img){
+   const scale=Math.min(500/img.width,600/img.height);
+   const iw=img.width*scale,ih=img.height*scale;
+   const x=w/2-iw/2+Math.sin(t*1.4)*15,y=40+Math.sin(t*1.8)*8;
+   ctx.drawImage(img,x,y,iw,ih);
+  }else{
+   ctx.fillStyle="#a78bfa";ctx.beginPath();ctx.arc(w/2,270+Math.sin(t*2)*10,105,0,Math.PI*2);ctx.fill();
+   ctx.fillStyle="#17152d";ctx.beginPath();ctx.arc(w/2,270+Math.sin(t*2)*10,87,0,Math.PI*2);ctx.fill();
+   ctx.fillStyle="#fff";ctx.font="bold 100px Arial";ctx.textAlign="center";ctx.fillText((s.character||"F").slice(0,1).toUpperCase(),w/2,305+Math.sin(t*2)*10);
+  }
+  ctx.fillStyle="rgba(5,6,16,.7)";ctx.fillRect(0,560,w,160);
+  ctx.fillStyle="#43d9ed";ctx.font="bold 18px Arial";ctx.textAlign="left";ctx.fillText("FIX ANIME STUDIO  /  ORIGINAL ANIMATION",55,605);
+  ctx.fillStyle="#fff";ctx.font="bold 38px Arial";ctx.fillText(s.title.slice(0,45),55,655);
+  ctx.fillStyle="#d7caff";ctx.font="18px Arial";ctx.fillText((s.location||"Anime Universe").slice(0,80),55,690);
+ }
+ draw(0);
+ if(!canvas.captureStream||!window.MediaRecorder){
+  const a=document.createElement("a");a.download="fix-anime-scene.png";a.href=canvas.toDataURL("image/png");a.click();
+  alert("Video recording is not supported by this browser. Downloaded a preview image instead.");return;
+ }
+ const stream=canvas.captureStream(24);
+ let mime="video/webm;codecs=vp9";
+ if(!MediaRecorder.isTypeSupported(mime))mime="video/webm";
+ let recorder;
+ try{recorder=new MediaRecorder(stream,{mimeType:mime})}
+ catch(e){alert("Video export is not supported in this browser.");return}
+ const chunks=[];
+ recorder.ondataavailable=e=>{if(e.data.size)chunks.push(e.data)};
+ recorder.onstop=()=>{
+  const blob=new Blob(chunks,{type:"video/webm"});
+  const url=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=url;a.download="fix-anime-scene.webm";a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),5000);
+  db.exports++;persist();
+  alert("Your scene video has been exported.");
+ };
+ recorder.start();
+ const start=performance.now();
+ function frame(now){
+  const t=(now-start)/1000;
+  draw(t);
+  if(t<duration&&recorder.state==="recording")requestAnimationFrame(frame);
+  else if(recorder.state==="recording")recorder.stop();
+ }
+ requestAnimationFrame(frame);
+}
+
 function saveBackground(){
- const promptText=document.getElementById("bgPrompt").value.trim();if(!promptText){alert("Enter a background description.");return}
+ const promptText=document.getElementById("bgPrompt").value.trim();
+ if(!promptText){alert("Enter a background description.");return}
  db.backgrounds.unshift({id:uid(),prompt:promptText,style:document.getElementById("bgStyle").value,url:document.getElementById("bgUrl").value.trim()});
  persist();document.getElementById("bgPrompt").value="";
 }
@@ -494,6 +617,7 @@ function renderBackgrounds(){
 }
 function deleteBackground(id){db.backgrounds=db.backgrounds.filter(b=>b.id!==id);persist()}
 function downloadBackgrounds(){downloadText("fix-anime-background-briefs.txt",db.backgrounds.map((b,i)=>`${i+1}. ${b.style}\n${b.prompt}\n${b.url||""}`).join("\n\n"))}
+
 function saveVoice(){
  const text=document.getElementById("voiceText").value.trim();if(!text){alert("Write some dialogue first.");return}
  db.voices.unshift({id:uid(),character:document.getElementById("voiceCharacter").value,style:document.getElementById("voiceStyle").value,language:document.getElementById("voiceLanguage").value,type:document.getElementById("voiceType").value,text});
@@ -505,26 +629,38 @@ function renderVoices(){
 }
 function deleteVoice(id){db.voices=db.voices.filter(v=>v.id!==id);persist()}
 function downloadVoice(){const text=document.getElementById("voiceText").value;if(!text){alert("Write dialogue first.");return}downloadText("fix-anime-voice-script.txt",text)}
-function downloadJSON(name,obj){
- const blob=new Blob([JSON.stringify(obj,null,2)],{type:"application/json"});
- const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=name;a.click();URL.revokeObjectURL(url);
+function speakVoice(){
+ const text=document.getElementById("voiceText").value.trim();
+ if(!text){alert("Write dialogue first.");return}
+ if(!("speechSynthesis" in window)){alert("Browser voice is not supported.");return}
+ speechSynthesis.cancel();
+ const utterance=new SpeechSynthesisUtterance(text);
+ utterance.lang={English:"en-US",Bangla:"bn-BD",Japanese:"ja-JP",Hindi:"hi-IN"}[document.getElementById("voiceLanguage").value];
+ utterance.rate=1;speechSynthesis.speak(utterance);
 }
-function downloadAll(){downloadJSON("fix-anime-studio-backup.json",db)}
-function exportAll(){downloadAll();db.exports++;persist()}
-function downloadBackgrounds(){}
+
+function exportAll(){downloadJSON("fix-anime-studio-backup.json",db)}
 function importBackup(event){
  const file=event.target.files[0];if(!file)return;
  const reader=new FileReader();
  reader.onload=()=>{
-  try{const data=JSON.parse(reader.result);if(!data||!Array.isArray(data.characters)||!Array.isArray(data.projects))throw Error("Invalid backup");db={...structuredClone(initial),...data};persist();alert("Workspace backup restored.");}
-  catch(e){alert("This file is not a valid FIX ANIME STUDIO backup.");}
+  try{
+   const data=JSON.parse(reader.result);
+   if(!data||!Array.isArray(data.characters)||!Array.isArray(data.projects))throw Error("Invalid backup");
+   db={...cloneInitial(),...data};persist();alert("Workspace backup restored.");
+  }catch(e){alert("This file is not a valid FIX ANIME STUDIO backup.");}
   event.target.value="";
  };
  reader.readAsText(file);
 }
 function resetWorkspace(){
  if(!confirm("This will erase all local workspace data. Download a backup first. Continue?"))return;
- db=structuredClone(initial);persist();alert("Workspace reset.");
+ db=cloneInitial();persist();alert("Workspace reset.");
+}
+function copyText(text){
+ if(navigator.clipboard&&window.isSecureContext){
+  navigator.clipboard.writeText(text).then(()=>alert("Prompt copied!")).catch(()=>prompt("Copy this prompt:",text));
+ }else prompt("Copy this prompt:",text);
 }
 refreshAll();
 </script>
