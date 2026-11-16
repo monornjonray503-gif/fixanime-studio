@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Characters | FIX ANIME STUDIO</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#080b18;color:#f7f5ff;font-family:Arial,sans-serif}
+header{padding:20px 7%;display:flex;justify-content:space-between;align-items:center;gap:15px;background:#10172b;border-bottom:1px solid #29324b;position:sticky;top:0;z-index:5}
+.logo{font-size:21px;font-weight:900}.logo span{color:#b56aff}
+a{color:#c6b5ff;text-decoration:none}
+.hero{text-align:center;padding:65px 20px 35px;background:radial-gradient(circle at 50% 0,#42216b,transparent 65%)}
+.hero h1{font-size:clamp(32px,6vw,55px);margin-bottom:12px}
+.hero p{color:#aeb8d3;line-height:1.7}
+.search{display:block;width:min(450px,90%);margin:25px auto 0;padding:14px 17px;border-radius:12px;border:1px solid #394362;background:#111a30;color:white;outline:none}
+main{padding:35px 7% 70px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.card{background:linear-gradient(145deg,#17213b,#101629);border:1px solid #29334d;border-radius:18px;overflow:hidden;transition:.25s}
+.card:hover{transform:translateY(-6px);border-color:#ad67ff;box-shadow:0 15px 35px #8b35ff22}
+.art{height:225px;display:grid;place-items:center;font-size:90px;position:relative;overflow:hidden}
+.art:after{content:"";position:absolute;width:170px;height:170px;border-radius:50%;background:white;filter:blur(90px);opacity:.25}
+.info{padding:21px}
+.info h2{font-size:23px;margin-bottom:10px}
+.info p{color:#aab4ce;line-height:1.6;font-size:14px;min-height:45px}
+.tag{display:inline-block;margin-top:15px;padding:7px 11px;border-radius:30px;background:#a855f722;color:#d9b5ff;font-size:11px;font-weight:bold}
+.power{color:#61d7ff;margin:15px 0;font-size:14px}
+.details{border:1px solid #485273;background:#202a43;color:white;padding:11px 15px;border-radius:9px;width:100%}
+.details:hover{background:#793de1}
+.empty{text-align:center;color:#aab4ce;padding:35px;display:none}
+footer{text-align:center;padding:25px;border-top:1px solid #29334d;color:#8994b1}
+@media(max-width:850px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:570px){header{padding:16px 5%}.grid{grid-template-columns:1fr}main{padding:25px 5%}.art{height:240px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">FIX <span>ANIME STUDIO</span></div>
+  <a href="index.html">← Home</a>
+</header>
+
+<section class="hero">
+  <h1>Anime <span style="color:#bd83ff">Universe</span></h1>
+  <p>Discover heroes, legends, warriors and mysterious characters.</p>
+  <input class="search" id="search" placeholder="Search your favourite character...">
+</section>
+
+<main>
+  <div class="grid" id="grid"></div>
+  <div class="empty" id="empty">No characters found.</div>
+</main>
+
+<footer>© 2026 FIX ANIME STUDIO · Create Your Own Universe</footer>
+
+<script>
+const KEY="fixAnimeCharacters";
+
+const defaults=[
+ {id:"akira",name:"Akira Storm",role:"MAIN HERO",power:"Thunder Strike",description:"A fearless young hero with mysterious energy powers. His destiny is connected to an ancient storm.",emoji:"⚡",color:"#193b77"},
+ {id:"kage",name:"Kage Shadow",role:"DARK NINJA",power:"Shadow Control",description:"A mysterious ninja who protects the forgotten kingdom and guards its ancient secrets.",emoji:"🥷",color:"#282342"},
+ {id:"zareth",name:"Lord Zareth",role:"MAIN VILLAIN",power:"Dark Energy",description:"An ancient villain seeking control of the dark universe and its hidden power.",emoji:"👿",color:"#571b49"},
+ {id:"ryu",name:"Ryu Blaze",role:"FIRE WARRIOR",power:"Inferno Flame",description:"A powerful warrior whose spirit burns like a dragon. He never gives up.",emoji:"🔥",color:"#873719"},
+ {id:"yuki",name:"Yuki Frost",role:"ICE PRINCESS",power:"Frozen Storm",description:"A brave princess with the ancient power of ice and a mysterious royal past.",emoji:"❄️",color:"#155579"},
+ {id:"drakon",name:"Drakon Vey",role:"DRAGON MASTER",power:"Dragon Soul",description:"A legendary dragon master from a forgotten world who can communicate with ancient dragons.",emoji:"🐉",color:"#17513e"}
+];
+
+function getCharacters(){
+ try{
+  const saved=localStorage.getItem(KEY);
+  if(saved!==null)return JSON.parse(saved);
+ }catch(e){}
+ localStorage.setItem(KEY,JSON.stringify(defaults));
+ return defaults;
+}
+
+function render(){
+ const list=getCharacters();
+ const query=document.getElementById("search").value.toLowerCase();
+ const grid=document.getElementById("grid");
+ grid.innerHTML="";
+ const filtered=list.filter(c=>
+  [c.name,c.role,c.power,c.description].join(" ").toLowerCase().includes(query)
+ );
+ document.getElementById("empty").style.display=filtered.length?"none":"block";
+
+ filtered.forEach(c=>{
+  const card=document.createElement("article");
+  card.className="card";
+  const art=document.createElement("div");
+  art.className="art";
+  art.style.background=`linear-gradient(135deg,${c.color||"#34245b"},#101629)`;
+  art.textContent=c.emoji||"✨";
+
+  const info=document.createElement("div");
+  info.className="info";
+  const name=document.createElement("h2");
+  name.textContent=c.name;
+  const desc=document.createElement("p");
+  desc.textContent=c.description;
+  const tag=document.createElement("span");
+  tag.className="tag";
+  tag.textContent=c.role;
+  const power=document.createElement("div");
+  power.className="power";
+  power.textContent="✦ Power: "+c.power;
+  const button=document.createElement("button");
+  button.className="details";
+  button.textContent="View Full Profile →";
+  button.onclick=()=>alert(
+   "CHARACTER PROFILE\n\nName: "+c.name+
+   "\nRole: "+c.role+
+   "\nPower: "+c.power+
+   "\n\n"+c.description
+  );
+
+  info.append(name,desc,tag,power,button);
+  card.append(art,info);
+  grid.appendChild(card);
+ });
+}
+
+document.getElementById("search").addEventListener("input",render);
+window.addEventListener("storage",render);
+render();
+</script>
+</body>
+</html>
