@@ -3,812 +3,563 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>FIX ANIME STUDIO — Original Anime Creator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FIX ANIME STUDIO</title>
 <style>
-:root{
---bg:#080b16;--panel:#101629;--panel2:#151d34;
---line:#263250;--text:#f3f5ff;--muted:#929db8;
---blue:#6b8cff;--purple:#a36bff;--cyan:#42d9e8;
---green:#55e3aa;--red:#ff6485;
-}
+:root{--bg:#080b16;--panel:#111729;--panel2:#171f35;--line:#27324d;--text:#f4f6ff;--muted:#929db8;--blue:#6d7cff;--purple:#a46cff;--cyan:#4edbff;--danger:#ff5578}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Segoe UI,Arial,sans-serif}
 button,input,textarea,select{font:inherit}
-button{cursor:pointer}
+button{cursor:pointer;border:0}
 .app{display:flex;min-height:100vh}
-.sidebar{width:255px;background:#0c1120;border-right:1px solid var(--line);padding:22px 14px;position:fixed;inset:0 auto 0 0;overflow:auto;z-index:5}
-.logo{font-size:21px;font-weight:900;letter-spacing:1px;padding:8px 10px}
-.logo span{color:var(--cyan)}
-.logo small{display:block;font-size:10px;color:var(--muted);letter-spacing:3px;margin-top:6px}
-.nav-label{font-size:10px;color:#64718f;font-weight:800;letter-spacing:2px;padding:20px 12px 8px}
-.nav button{width:100%;border:0;background:transparent;color:#aab5ce;text-align:left;padding:12px;border-radius:10px;margin:2px 0;font-size:13px;display:flex;gap:12px;align-items:center}
-.nav button:hover,.nav button.active{background:#1b2744;color:white}
-.nav button.active{box-shadow:inset 3px 0 var(--cyan)}
-.sidebar-bottom{border-top:1px solid var(--line);margin-top:25px;padding-top:15px}
-.main{margin-left:255px;width:calc(100% - 255px);padding:25px 30px 60px}
-.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;gap:12px}
-.topbar h1{font-size:23px;margin:0}
-.topbar p{font-size:12px;color:var(--muted);margin:6px 0 0}
-.top-actions{display:flex;gap:9px;align-items:center}
-.status{font-size:11px;color:var(--green);border:1px solid #285e51;padding:8px 11px;border-radius:30px}
-.btn{border:1px solid var(--line);background:#18223b;color:white;padding:10px 14px;border-radius:9px;font-size:12px;font-weight:700}
-.btn:hover{filter:brightness(1.2)}
-.btn.primary{background:linear-gradient(120deg,#526ff3,#8d5bea);border:0}
-.btn.cyan{background:#173b4b;border-color:#246175;color:#83f1f6}
-.btn.danger{background:#401d2b;border-color:#743044;color:#ff9aaf}
-.btn.small{padding:7px 10px;font-size:11px}
-.page{display:none}
-.page.active{display:block}
-.hero{padding:28px;border:1px solid #34416a;border-radius:18px;background:radial-gradient(circle at 85% 10%,#42306e 0,transparent 35%),linear-gradient(120deg,#151d38,#111629);margin-bottom:20px}
-.hero h2{font-size:28px;margin:0 0 10px}
-.hero p{color:#aab6d4;max-width:650px;line-height:1.7;font-size:13px}
-.hero-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:20px}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:20px}
-.stat,.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:17px}
-.stat small{color:var(--muted);font-size:11px}
-.stat strong{display:block;font-size:26px;margin-top:9px}
-.section-head{display:flex;justify-content:space-between;align-items:center;margin:25px 0 14px;gap:10px}
-.section-head h2{font-size:16px;margin:0}
-.muted{color:var(--muted)}
-.smalltext{font-size:11px;color:var(--muted);line-height:1.6}
-.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
-.character-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
-.character-image{height:190px;background:linear-gradient(135deg,#1d2850,#422c60);display:flex;align-items:center;justify-content:center;overflow:hidden}
-.character-image img{width:100%;height:100%;object-fit:cover}
-.character-image .placeholder{font-size:55px;color:#a9baff;font-weight:900}
-.character-info{padding:14px}
-.character-info h3{margin:0 0 7px;font-size:15px}
-.character-info p{font-size:11px;color:var(--muted);line-height:1.6;min-height:32px}
-.tags{display:flex;gap:6px;flex-wrap:wrap;margin:9px 0}
-.tag{font-size:10px;background:#202c4b;color:#b9c8ff;padding:5px 8px;border-radius:20px}
-.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
+.sidebar{width:245px;background:#0d1222;border-right:1px solid var(--line);padding:22px 15px;position:fixed;inset:0 auto 0 0;overflow:auto;z-index:5}
+.logo{font-size:21px;font-weight:900;letter-spacing:1px;margin:5px 10px 28px}
+.logo span{color:var(--purple)}
+.nav-label{color:#66718e;font-size:10px;font-weight:800;letter-spacing:2px;padding:15px 12px 8px}
+.nav{display:flex;align-items:center;gap:12px;padding:12px;border-radius:10px;color:#aab5d0;margin:3px 0;text-align:left;width:100%;background:transparent}
+.nav:hover,.nav.active{background:linear-gradient(100deg,#29335c,#211c42);color:white}
+.nav b{font-size:17px;width:22px;text-align:center}
+.side-bottom{margin-top:35px;padding:13px;border:1px solid var(--line);border-radius:12px;color:var(--muted);font-size:12px;line-height:1.6}
+.main{margin-left:245px;width:calc(100% - 245px);padding:28px;max-width:1600px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:28px}
+.topbar h1{font-size:25px;margin:0}
+.topbar p{color:var(--muted);font-size:13px;margin:6px 0 0}
+.top-actions{display:flex;gap:9px;flex-wrap:wrap}
+.btn{padding:10px 15px;border-radius:9px;background:var(--panel2);color:white;border:1px solid var(--line);font-weight:700}
+.btn.primary{background:linear-gradient(110deg,#596bff,#a15eff);border:0}
+.btn.danger{background:#411d31;color:#ff9cb1;border-color:#69304b}
+.btn.small{padding:7px 10px;font-size:12px}
+.page{display:none}.page.active{display:block}
+.hero{padding:28px;border-radius:18px;background:radial-gradient(circle at 85% 20%,#5940a3 0,transparent 35%),linear-gradient(120deg,#19264a,#17152e);border:1px solid #343b68;margin-bottom:22px}
+.hero h2{font-size:29px;margin:0 0 8px}.hero p{color:#c3c9e5;max-width:650px;line-height:1.6}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:18px 0 25px}
+.stat,.panel,.card{background:var(--panel);border:1px solid var(--line);border-radius:14px}
+.stat{padding:18px}.stat small{color:var(--muted)}.stat strong{display:block;font-size:27px;margin-top:9px}
+.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:24px 0 14px;flex-wrap:wrap}
+.section-head h2{margin:0;font-size:19px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.card{overflow:hidden;min-width:0}
+.portrait{height:190px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;background:radial-gradient(circle at 50% 35%,#596bb5,#171a37 68%)}
+.portrait .orb{width:112px;height:112px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:64px;background:linear-gradient(145deg,#f5d8ce,#7c8aff);box-shadow:0 0 45px #9a7cff77;border:4px solid #ffffff44}
+.portrait img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.portrait .role-tag{position:absolute;left:12px;top:12px;background:#080b16bb;padding:6px 9px;border-radius:20px;font-size:10px;border:1px solid #ffffff22}
+.card-body{padding:15px}.card-body h3{margin:0 0 5px;font-size:17px}.card-body p{margin:5px 0;color:var(--muted);font-size:12px;line-height:1.5}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}.tag{font-size:10px;padding:5px 8px;border-radius:20px;background:#272d4b;color:#c7caff}
+.card-actions{display:flex;gap:7px;margin-top:12px}
+.card-actions button{flex:1}
 .form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
-.field{display:flex;flex-direction:column;gap:7px;margin-bottom:13px}
-.field label{font-size:11px;color:#aebbd7;font-weight:700}
-.field input,.field textarea,.field select,.search{
-width:100%;background:#0b1121;border:1px solid #2a3858;color:white;padding:11px 12px;border-radius:9px;outline:none;font-size:12px
-}
+.field{display:flex;flex-direction:column;gap:7px;margin-bottom:12px}
+.field label{font-size:12px;color:#aeb8d2;font-weight:700}
+.field input,.field textarea,.field select,.search{width:100%;background:#0b1120;border:1px solid var(--line);color:white;padding:11px;border-radius:9px;outline:none}
 .field input:focus,.field textarea:focus,.field select:focus,.search:focus{border-color:var(--blue)}
-.field textarea{min-height:100px;resize:vertical;line-height:1.6}
-.field select option{background:#111a2e}
-.full{grid-column:1/-1}
-.upload-box{border:1px dashed #465b8a;background:#111a2e;border-radius:12px;padding:18px;text-align:center}
-.upload-box input{max-width:100%;font-size:11px}
-.preview-image{width:100%;max-height:260px;object-fit:contain;border-radius:10px;background:#080c17;margin-top:10px}
-.toolbar{display:flex;gap:9px;flex-wrap:wrap;margin:12px 0}
-.output{white-space:pre-wrap;background:#090f1e;border:1px solid var(--line);padding:15px;border-radius:10px;min-height:90px;font-size:12px;line-height:1.7;color:#c6d3f2}
-.scene{border:1px solid var(--line);background:#11192b;padding:13px;border-radius:11px;margin-bottom:10px}
-.scene h3{font-size:13px;margin:0 0 7px}
-.scene p{font-size:11px;color:var(--muted);line-height:1.6}
-.timeline{height:12px;background:#26324e;border-radius:20px;overflow:hidden;margin:12px 0}
-.timeline div{height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--cyan))}
-.canvas-wrap{background:#050812;border:1px solid #303b5c;border-radius:12px;overflow:hidden}
-canvas{display:block;width:100%;height:auto}
-.empty{text-align:center;color:var(--muted);padding:35px;border:1px dashed var(--line);border-radius:12px;font-size:12px}
-.notice{background:#17233a;border:1px solid #344c78;color:#b9caff;padding:12px;border-radius:10px;font-size:11px;line-height:1.7;margin:12px 0}
-.toast{position:fixed;right:20px;bottom:20px;background:#172743;border:1px solid #4563a0;padding:13px 18px;border-radius:10px;z-index:20;font-size:12px;display:none;max-width:85vw}
-.mobile-menu{display:none}
-hr{border:0;border-top:1px solid var(--line);margin:18px 0}
-@media(max-width:950px){
-.sidebar{width:210px}.main{margin-left:210px;width:calc(100% - 210px);padding:20px}
-.grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-}
-@media(max-width:650px){
-.sidebar{display:none;width:260px}.sidebar.open{display:block}
-.main{margin:0;width:100%;padding:16px}
-.mobile-menu{display:inline-block}
-.topbar h1{font-size:18px}
-.status{display:none}
-.stats{grid-template-columns:repeat(2,1fr)}
-.grid,.grid.two,.form-grid{grid-template-columns:1fr}
-.hero h2{font-size:23px}
-}
+.field textarea{min-height:95px;resize:vertical}
+.panel{padding:20px;margin-bottom:18px}
+.panel h2,.panel h3{margin-top:0}
+.muted{color:var(--muted);font-size:12px;line-height:1.6}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:15px}
+.toolbar .search{max-width:320px}
+.empty{padding:35px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:12px}
+.scene-list{display:grid;gap:10px}
+.scene{padding:14px;background:#0c1324;border:1px solid var(--line);border-radius:10px}
+.preview{background:#070a12;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+#animationCanvas{width:100%;height:auto;display:block;background:#10172a}
+.footer-note{color:#66718e;font-size:11px;margin-top:25px;text-align:center}
+.modal{display:none;position:fixed;inset:0;background:#000b;z-index:20;align-items:center;justify-content:center;padding:18px}
+.modal.show{display:flex}
+.modal-box{background:#111729;border:1px solid var(--line);border-radius:16px;padding:22px;width:min(600px,100%);max-height:90vh;overflow:auto}
+.close{float:right;background:#252e49;color:white;border-radius:8px;padding:6px 10px}
+.upload-preview{width:100%;max-height:180px;object-fit:contain;background:#080b16;border-radius:10px;margin-top:8px}
+@media(max-width:1050px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){.sidebar{width:65px;padding:12px 7px}.logo{font-size:0;margin:12px 5px 25px}.logo:first-letter{font-size:23px}.nav{justify-content:center;padding:12px 5px;font-size:0}.nav b{font-size:19px}.nav-label,.side-bottom{display:none}.main{margin-left:65px;width:calc(100% - 65px);padding:16px 12px}.grid{grid-template-columns:1fr}.stats{gap:8px}.stat{padding:12px}.stat strong{font-size:21px}.form-grid{grid-template-columns:1fr}.topbar h1{font-size:20px}.hero h2{font-size:23px}}
 </style>
 </head>
 <body>
 <div class="app">
-<aside class="sidebar" id="sidebar">
- <div class="logo">FIX <span>ANIME</span><small>CREATION STUDIO</small></div>
- <div class="nav">
+<aside class="sidebar">
+  <div class="logo">FIX <span>ANIME</span></div>
   <div class="nav-label">WORKSPACE</div>
-  <button class="active" data-page="dashboard">◈ Dashboard</button>
-  <button data-page="characters">♙ Character Library</button>
-  <button data-page="characterCreator">✦ Character Creator</button>
-  <button data-page="backgrounds">▧ Background Creator</button>
-  <button data-page="story">✎ Story & Script</button>
-  <button data-page="storyboard">▤ Storyboard</button>
-  <button data-page="animation">▶ Animation Studio</button>
-  <button data-page="projects">▣ Projects</button>
+  <button class="nav active" data-page="dashboard"><b>⌂</b>Dashboard</button>
+  <button class="nav" data-page="characters"><b>♙</b>Character Library</button>
+  <button class="nav" data-page="creator"><b>✦</b>Character Creator</button>
+  <button class="nav" data-page="backgrounds"><b>▧</b>Background Studio</button>
+  <button class="nav" data-page="story"><b>▤</b>Story & Script</button>
+  <button class="nav" data-page="storyboard"><b>▦</b>Storyboard</button>
+  <button class="nav" data-page="animation"><b>▶</b>Animation Studio</button>
   <div class="nav-label">MANAGEMENT</div>
-  <button data-page="admin">⚙ Admin Panel</button>
- </div>
- <div class="sidebar-bottom smalltext">
-  FIX ANIME STUDIO<br>Original Anime Creator<br><br>
-  <span style="color:#65dce8">● Local Workspace Active</span>
- </div>
+  <button class="nav" data-page="projects"><b>▣</b>Projects</button>
+  <button class="nav" data-page="admin"><b>⚙</b>Admin Panel</button>
+  <div class="side-bottom">FIX ANIME STUDIO<br>Original Anime Creation Workspace<br><span style="color:#a58aff">Version 2.0</span></div>
 </aside>
 
 <main class="main">
- <header class="topbar">
-  <div style="display:flex;align-items:center;gap:12px">
-   <button class="btn mobile-menu" onclick="toggleMenu()">☰</button>
-   <div><h1 id="pageTitle">Dashboard</h1><p>Build your own original anime universe.</p></div>
-  </div>
-  <div class="top-actions">
-   <span class="status">● WORKSPACE READY</span>
-   <button class="btn" onclick="exportBackup()">Export Backup</button>
-  </div>
- </header>
+<header class="topbar">
+  <div><h1 id="pageTitle">Dashboard</h1><p>Build your original anime universe.</p></div>
+  <div class="top-actions"><button class="btn" onclick="exportBackup()">⇩ Backup</button><button class="btn primary" onclick="go('creator')">＋ New Character</button></div>
+</header>
 
- <!-- DASHBOARD -->
- <section class="page active" id="dashboard">
+<section class="page active" id="dashboard">
   <div class="hero">
-   <div class="tag">ORIGINAL ANIME PRODUCTION</div>
-   <h2>Create Your Own Anime Universe.</h2>
-   <p>Design original characters, build worlds, write stories, organize scenes and create animated video previews — all inside your creative workspace.</p>
-   <div class="hero-actions">
-    <button class="btn primary" onclick="showPage('characterCreator')">＋ Create Character</button>
-    <button class="btn cyan" onclick="showPage('story')">Start a Story</button>
-    <button class="btn" onclick="showPage('animation')">Open Animation Studio</button>
-   </div>
+    <h2>Welcome to FIX ANIME STUDIO ✦</h2>
+    <p>Create original characters, design cinematic worlds, write stories and build your own anime universe in one creative workspace.</p>
+    <button class="btn primary" onclick="go('characters')">Explore Characters →</button>
   </div>
   <div class="stats">
-   <div class="stat"><small>CHARACTERS</small><strong id="statCharacters">0</strong></div>
-   <div class="stat"><small>BACKGROUNDS</small><strong id="statBackgrounds">0</strong></div>
-   <div class="stat"><small>STORY SCENES</small><strong id="statScenes">0</strong></div>
-   <div class="stat"><small>PROJECTS</small><strong id="statProjects">0</strong></div>
+    <div class="stat"><small>CHARACTERS</small><strong id="statCharacters">15</strong></div>
+    <div class="stat"><small>BACKGROUNDS</small><strong id="statBackgrounds">0</strong></div>
+    <div class="stat"><small>STORYBOARD SCENES</small><strong id="statScenes">0</strong></div>
+    <div class="stat"><small>PROJECTS</small><strong id="statProjects">0</strong></div>
   </div>
-  <div class="section-head"><h2>Creative Workspace</h2><span class="smalltext">Your production tools</span></div>
+  <div class="section-head"><h2>Featured Characters</h2><button class="btn small" onclick="go('characters')">View All →</button></div>
+  <div class="grid" id="featuredCharacters"></div>
+  <div class="section-head"><h2>Quick Start</h2></div>
   <div class="grid">
-   <div class="card"><div class="tag">01 / DESIGN</div><h3>Character Creator</h3><p class="smalltext">Create original character profiles and upload artwork.</p><button class="btn primary" onclick="showPage('characterCreator')">Open Creator →</button></div>
-   <div class="card"><div class="tag">02 / WORLD</div><h3>Background Creator</h3><p class="smalltext">Build a world and upload environment images.</p><button class="btn" onclick="showPage('backgrounds')">Open Creator →</button></div>
-   <div class="card"><div class="tag">03 / WRITING</div><h3>Story & Script</h3><p class="smalltext">Write episodes, dialogue and scene descriptions.</p><button class="btn" onclick="showPage('story')">Open Editor →</button></div>
-   <div class="card"><div class="tag">04 / PLANNING</div><h3>Storyboard</h3><p class="smalltext">Organize scenes into a visual production plan.</p><button class="btn" onclick="showPage('storyboard')">Open Board →</button></div>
-   <div class="card"><div class="tag">05 / MOTION</div><h3>Animation Studio</h3><p class="smalltext">Preview simple animated scenes and export WebM.</p><button class="btn" onclick="showPage('animation')">Open Studio →</button></div>
-   <div class="card"><div class="tag">06 / CONTROL</div><h3>Admin Panel</h3><p class="smalltext">Manage local characters, scenes and projects.</p><button class="btn" onclick="showPage('admin')">Manage →</button></div>
+    <div class="panel"><h3>✦ Character Creator</h3><p class="muted">Create a hero, villain, warrior or magical character.</p><button class="btn primary" onclick="go('creator')">Create Character</button></div>
+    <div class="panel"><h3>▧ Background Studio</h3><p class="muted">Build fantasy worlds and upload environment artwork.</p><button class="btn primary" onclick="go('backgrounds')">Create Background</button></div>
+    <div class="panel"><h3>▶ Animation Studio</h3><p class="muted">Preview motion and export a simple animated video.</p><button class="btn primary" onclick="go('animation')">Open Studio</button></div>
   </div>
-  <div class="section-head"><h2>Recent Characters</h2><button class="btn small" onclick="showPage('characters')">View Library</button></div>
-  <div id="dashboardCharacters" class="grid"></div>
- </section>
+</section>
 
- <!-- CHARACTER LIBRARY -->
- <section class="page" id="characters">
-  <div class="section-head"><h2>Character Library</h2><button class="btn primary" onclick="newCharacter()">＋ Add Character</button></div>
-  <div class="toolbar">
-   <input class="search" id="characterSearch" placeholder="Search character..." oninput="renderCharacters()" style="max-width:280px">
-   <select class="search" id="characterFilter" onchange="renderCharacters()" style="max-width:180px">
-    <option value="">All Roles</option><option>Hero</option><option>Villain</option><option>Warrior</option><option>Mage</option><option>Other</option>
-   </select>
-  </div>
+<section class="page" id="characters">
+  <div class="section-head"><h2>Anime Character Library</h2><button class="btn primary" onclick="go('creator')">＋ Add Character</button></div>
+  <div class="toolbar"><input class="search" id="characterSearch" placeholder="Search character..." oninput="renderCharacters()"><select class="search" id="roleFilter" onchange="renderCharacters()"><option value="">All Roles</option><option>Hero</option><option>Villain</option><option>Warrior</option><option>Mage</option><option>Guardian</option></select></div>
   <div class="grid" id="characterGrid"></div>
- </section>
+</section>
 
- <!-- CHARACTER CREATOR -->
- <section class="page" id="characterCreator">
-  <div class="section-head"><h2>Professional Character Creator</h2><span class="tag">ORIGINAL DESIGN</span></div>
-  <div class="grid two">
-   <div class="card">
+<section class="page" id="creator">
+  <div class="panel">
+    <h2 id="creatorHeading">✦ Character Creator</h2>
+    <p class="muted">Create a new original character or edit an existing one. Upload your own character artwork.</p>
     <form id="characterForm">
-     <input type="hidden" id="characterId">
-     <div class="field"><label>Character Name *</label><input id="cName" required placeholder="e.g. Astra Raiyan"></div>
-     <div class="form-grid">
-      <div class="field"><label>Role</label><select id="cRole"><option>Hero</option><option>Villain</option><option>Warrior</option><option>Mage</option><option>Princess</option><option>Scientist</option><option>Spirit</option><option>Other</option></select></div>
-      <div class="field"><label>Gender / Presentation</label><select id="cGender"><option>Male</option><option>Female</option><option>Androgynous</option><option>Unknown</option></select></div>
-      <div class="field"><label>Age / Age Group</label><input id="cAge" placeholder="e.g. 19"></div>
-      <div class="field"><label>Personality</label><input id="cPersonality" placeholder="Calm, brave, mysterious"></div>
-      <div class="field"><label>Hair Design</label><input id="cHair" placeholder="Silver layered hair"></div>
-      <div class="field"><label>Eye Design</label><input id="cEyes" placeholder="Glowing violet eyes"></div>
-      <div class="field"><label>Outfit</label><input id="cOutfit" placeholder="Dark futuristic coat"></div>
-      <div class="field"><label>Power / Ability</label><input id="cPower" placeholder="Void energy"></div>
-      <div class="field full"><label>Backstory</label><textarea id="cStory" placeholder="Write the character's original story..."></textarea></div>
-      <div class="field full"><label>Character Artwork Upload</label><input type="file" id="cImage" accept="image/*"><img id="cPreview" class="preview-image" style="display:none"></div>
-     </div>
-     <div class="toolbar">
-      <button class="btn primary" type="submit">Save Character</button>
-      <button class="btn" type="button" onclick="resetCharacterForm()">Clear Form</button>
-     </div>
+      <input type="hidden" id="editCharacterId">
+      <div class="form-grid">
+        <div class="field"><label>Character Name *</label><input id="cName" required placeholder="Example: Astra Raiyan"></div>
+        <div class="field"><label>Role / Class</label><input id="cRole" placeholder="Hero, Villain, Warrior..."></div>
+        <div class="field"><label>Gender</label><select id="cGender"><option>Male</option><option>Female</option><option>Other</option></select></div>
+        <div class="field"><label>Age</label><input id="cAge" placeholder="19"></div>
+        <div class="field"><label>Personality</label><input id="cPersonality" placeholder="Brave, mysterious, calm..."></div>
+        <div class="field"><label>Hair Style / Color</label><input id="cHair" placeholder="Silver spiky hair"></div>
+        <div class="field"><label>Eye Style / Color</label><input id="cEyes" placeholder="Glowing blue eyes"></div>
+        <div class="field"><label>Outfit</label><input id="cOutfit" placeholder="Dark futuristic armor"></div>
+        <div class="field"><label>Special Power</label><input id="cPower" placeholder="Void Strike"></div>
+        <div class="field"><label>Character Artwork</label><input id="cImage" type="file" accept="image/*"></div>
+      </div>
+      <div class="field"><label>Backstory</label><textarea id="cStory" placeholder="Write the character's origin story..."></textarea></div>
+      <img id="characterUploadPreview" class="upload-preview" style="display:none">
+      <div class="top-actions"><button class="btn primary" type="submit">Save Character</button><button class="btn" type="button" onclick="resetCharacterForm()">Clear Form</button></div>
     </form>
-   </div>
-   <div class="card">
-    <h3>Original Character Prompt Builder</h3>
-    <p class="smalltext">Build a detailed prompt for an original anime character. Copy it into your preferred image-generation tool.</p>
-    <div class="notice">This creates a text prompt, not an AI image. Upload the generated artwork to save it in your library.</div>
-    <div class="output" id="characterPrompt">Your character prompt will appear here.</div>
-    <div class="toolbar">
-     <button class="btn cyan" onclick="buildCharacterPrompt()">Generate Prompt</button>
-     <button class="btn" onclick="copyText('characterPrompt')">Copy Prompt</button>
-    </div>
-    <hr>
-    <h3>Character Preview</h3>
-    <div id="creatorPreview" class="empty">Upload character artwork to preview it here.</div>
-   </div>
   </div>
- </section>
+</section>
 
- <!-- BACKGROUNDS -->
- <section class="page" id="backgrounds">
-  <div class="section-head"><h2>Original Background Creator</h2><span class="tag">WORLD BUILDING</span></div>
-  <div class="grid two">
-   <div class="card">
-    <form id="backgroundForm">
-     <input type="hidden" id="bgId">
-     <div class="field"><label>Background Name *</label><input id="bgName" required placeholder="e.g. Moonlight Kingdom"></div>
-     <div class="field"><label>Environment Type</label><select id="bgType"><option>Fantasy City</option><option>Ancient Forest</option><option>Mountain Kingdom</option><option>Futuristic City</option><option>Desert</option><option>Ocean World</option><option>Dark Dimension</option><option>Other</option></select></div>
-     <div class="field"><label>Atmosphere / Description</label><textarea id="bgDescription" placeholder="Describe the original world, lighting, weather, colors and details..."></textarea></div>
-     <div class="field"><label>Background Artwork Upload</label><input type="file" id="bgImage" accept="image/*"><img id="bgPreview" class="preview-image" style="display:none"></div>
-     <button class="btn primary" type="submit">Save Background</button>
-    </form>
-   </div>
-   <div class="card">
-    <h3>Environment Prompt Builder</h3>
-    <p class="smalltext">Generate a detailed original environment prompt from your description.</p>
-    <div class="output" id="backgroundPrompt">Your environment prompt will appear here.</div>
-    <div class="toolbar"><button class="btn cyan" onclick="buildBackgroundPrompt()">Build Prompt</button><button class="btn" onclick="copyText('backgroundPrompt')">Copy</button></div>
-   </div>
+<section class="page" id="backgrounds">
+  <div class="section-head"><h2>▧ Background Studio</h2></div>
+  <div class="panel">
+    <h3>Create Environment</h3>
+    <div class="form-grid">
+      <div class="field"><label>Background Name</label><input id="bgName" placeholder="Ancient Moon Kingdom"></div>
+      <div class="field"><label>Environment Type</label><select id="bgType"><option>Fantasy City</option><option>Dark Forest</option><option>Ancient Temple</option><option>Mountain</option><option>Battlefield</option><option>Futuristic City</option><option>Ocean</option><option>Other</option></select></div>
+    </div>
+    <div class="field"><label>Description</label><textarea id="bgDescription" placeholder="Describe the environment, lighting, atmosphere and details..."></textarea></div>
+    <div class="field"><label>Upload Background Artwork</label><input type="file" id="bgImage" accept="image/*"></div>
+    <img id="backgroundUploadPreview" class="upload-preview" style="display:none">
+    <button class="btn primary" onclick="saveBackground()">Save Background</button>
+    <button class="btn" onclick="makeBackgroundPrompt()">Generate Text Prompt</button>
+    <textarea id="bgPrompt" placeholder="Your background prompt will appear here..." style="width:100%;margin-top:12px;min-height:90px;background:#0b1120;color:white;border:1px solid var(--line);border-radius:9px;padding:12px"></textarea>
   </div>
-  <div class="section-head"><h2>Saved Backgrounds</h2></div>
+  <div class="section-head"><h2>Background Library</h2></div>
   <div class="grid" id="backgroundGrid"></div>
- </section>
+</section>
 
- <!-- STORY -->
- <section class="page" id="story">
-  <div class="section-head"><h2>Story & Script Studio</h2><span class="tag">EPISODE WRITER</span></div>
-  <div class="card">
-   <div class="form-grid">
-    <div class="field"><label>Project / Anime Title</label><input id="storyTitle" placeholder="The Last Star Kingdom"></div>
-    <div class="field"><label>Episode</label><input id="storyEpisode" placeholder="Episode 01"></div>
-    <div class="field"><label>Genre</label><select id="storyGenre"><option>Fantasy Adventure</option><option>Action</option><option>Mystery</option><option>Science Fiction</option><option>Comedy</option><option>Drama</option></select></div>
-    <div class="field"><label>Main Character</label><select id="storyCharacter"></select></div>
-    <div class="field full"><label>Story / Script</label><textarea id="storyText" style="min-height:260px" placeholder="SCENE 01 — EXT. ANCIENT KINGDOM — NIGHT
-
-Narrator: A mysterious light appears above the kingdom.
-
-ASTRA: Something is coming...
-
-Write your original story here."></textarea></div>
-   </div>
-   <div class="toolbar">
-    <button class="btn primary" onclick="saveStory()">Save Story</button>
-    <button class="btn cyan" onclick="downloadStory()">Download Script</button>
-    <button class="btn" onclick="makeScenesFromStory()">Create Scene From Script</button>
-   </div>
+<section class="page" id="story">
+  <div class="panel">
+    <h2>▤ Story & Script Editor</h2>
+    <div class="field"><label>Anime / Episode Title</label><input id="storyTitle" placeholder="The Rise of the Void"></div>
+    <div class="field"><label>Story / Script</label><textarea id="storyText" style="min-height:350px" placeholder="SCENE 01&#10;EXT. ANCIENT KINGDOM - NIGHT&#10;&#10;Write your story and dialogue here..."></textarea></div>
+    <div class="top-actions"><button class="btn primary" onclick="saveStory()">Save Script</button><button class="btn" onclick="downloadStory()">Download TXT</button></div>
   </div>
-  <div class="notice">Your script is saved locally in this browser. AI story generation is not connected in this single-file version.</div>
- </section>
+</section>
 
- <!-- STORYBOARD -->
- <section class="page" id="storyboard">
-  <div class="section-head"><h2>Storyboard Studio</h2><button class="btn" onclick="downloadStoryboard()">Download Storyboard</button></div>
-  <div class="grid two">
-   <div class="card">
-    <h3>Add New Scene</h3>
-    <div class="field"><label>Scene Title</label><input id="sceneTitle" placeholder="The Arrival"></div>
-    <div class="field"><label>Location / Background</label><select id="sceneBackground"></select></div>
-    <div class="field"><label>Character</label><select id="sceneCharacter"></select></div>
-    <div class="field"><label>Camera Angle</label><select id="sceneCamera"><option>Wide Shot</option><option>Close Up</option><option>Medium Shot</option><option>Low Angle</option><option>High Angle</option><option>Over The Shoulder</option></select></div>
-    <div class="field"><label>Action / Visual Description</label><textarea id="sceneAction" placeholder="Describe what happens in this scene..."></textarea></div>
-    <div class="field"><label>Dialogue</label><textarea id="sceneDialogue" placeholder="Character dialogue..."></textarea></div>
-    <div class="field"><label>Duration (seconds)</label><input id="sceneDuration" type="number" min="1" max="120" value="5"></div>
-    <button class="btn primary" onclick="addScene()">＋ Add Scene</button>
-   </div>
-   <div class="card">
-    <h3>Scene Preview</h3>
-    <div id="scenePreview" class="empty">Add a scene to your storyboard.</div>
-   </div>
-  </div>
-  <div class="section-head"><h2>Production Scenes</h2></div>
-  <div id="sceneList"></div>
- </section>
-
- <!-- ANIMATION -->
- <section class="page" id="animation">
-  <div class="section-head"><h2>Animation Studio</h2><span class="tag">2D MOTION PREVIEW</span></div>
-  <div class="notice">This is a simple browser-based 2D scene animator. It can animate uploaded artwork and scene text. It is not a full AI video generator or professional character rigging system.</div>
-  <div class="grid two">
-   <div class="card">
-    <h3>Animation Controls</h3>
-    <div class="field"><label>Choose Storyboard Scene</label><select id="animationScene" onchange="loadAnimationScene()"></select></div>
-    <div class="field"><label>Animation Style</label><select id="animationStyle"><option>Floating Motion</option><option>Side Movement</option><option>Zoom In</option><option>Pulse</option></select></div>
-    <div class="field"><label>Background Color</label><input id="animationColor" type="color" value="#111a38"></div>
-    <div class="field"><label>Video Duration (seconds)</label><input id="animationDuration" type="number" min="3" max="30" value="8"></div>
-    <div class="toolbar">
-     <button class="btn primary" onclick="startAnimation()">▶ Play Preview</button>
-     <button class="btn" onclick="stopAnimation()">■ Stop</button>
-     <button class="btn cyan" onclick="exportVideo()">↓ Export WebM</button>
+<section class="page" id="storyboard">
+  <div class="panel">
+    <h2>▦ Storyboard Scene Builder</h2>
+    <div class="form-grid">
+      <div class="field"><label>Scene Title</label><input id="sceneTitle" placeholder="Scene 01 - The Arrival"></div>
+      <div class="field"><label>Character</label><select id="sceneCharacter"></select></div>
+      <div class="field"><label>Background</label><select id="sceneBackground"></select></div>
+      <div class="field"><label>Camera Angle</label><select id="sceneCamera"><option>Wide Shot</option><option>Close Up</option><option>Medium Shot</option><option>Low Angle</option><option>High Angle</option><option>Over The Shoulder</option></select></div>
+      <div class="field"><label>Action</label><input id="sceneAction" placeholder="Character enters the ancient temple"></div>
+      <div class="field"><label>Duration (seconds)</label><input id="sceneDuration" type="number" min="1" max="120" value="5"></div>
     </div>
-    <div class="smalltext" id="exportStatus">Ready to preview.</div>
-   </div>
-   <div class="card">
-    <h3>Animation Preview</h3>
-    <div class="canvas-wrap"><canvas id="animationCanvas" width="900" height="506"></canvas></div>
-    <div class="timeline"><div id="timelineProgress"></div></div>
-    <div class="smalltext">Preview resolution: 900 × 506</div>
-   </div>
+    <div class="field"><label>Dialogue</label><textarea id="sceneDialogue" placeholder="Character dialogue..."></textarea></div>
+    <button class="btn primary" onclick="saveScene()">＋ Add Storyboard Scene</button>
   </div>
- </section>
+  <div class="section-head"><h2>Your Scenes</h2></div>
+  <div id="sceneList" class="scene-list"></div>
+</section>
 
- <!-- PROJECTS -->
- <section class="page" id="projects">
-  <div class="section-head"><h2>Project Library</h2><button class="btn primary" onclick="createProject()">＋ New Project</button></div>
-  <div class="grid" id="projectGrid"></div>
- </section>
+<section class="page" id="animation">
+  <div class="panel">
+    <h2>▶ Animation Studio</h2>
+    <p class="muted">Select a character and motion effect to preview a simple animated scene. This exports a basic animated composition, not a fully rigged AI animation.</p>
+    <div class="form-grid">
+      <div class="field"><label>Character</label><select id="animationCharacter" onchange="drawAnimation()"></select></div>
+      <div class="field"><label>Motion Effect</label><select id="motionType" onchange="drawAnimation()"><option value="float">Floating Motion</option><option value="side">Side Movement</option><option value="zoom">Zoom In</option><option value="pulse">Energy Pulse</option></select></div>
+      <div class="field"><label>Scene Background</label><select id="animationBackground" onchange="drawAnimation()"></select></div>
+    </div>
+    <div class="preview"><canvas id="animationCanvas" width="960" height="540"></canvas></div>
+    <div class="top-actions" style="margin-top:14px"><button class="btn primary" onclick="startAnimation()">▶ Play Preview</button><button class="btn" onclick="stopAnimation()">Ⅱ Stop</button><button class="btn" onclick="exportVideo()">⇩ Export WebM Video</button></div>
+    <p class="muted" id="exportStatus">Video export depends on browser MediaRecorder support. Export captures the canvas animation.</p>
+  </div>
+</section>
 
- <!-- ADMIN -->
- <section class="page" id="admin">
-  <div class="section-head"><h2>Workspace Admin Panel</h2><span class="tag">LOCAL ADMIN</span></div>
-  <div class="notice">This panel manages data in this browser only. It is not a secure online admin system. Do not use it to store passwords or sensitive user information.</div>
-  <div class="stats">
-   <div class="stat"><small>CHARACTERS</small><strong id="adminCharacters">0</strong></div>
-   <div class="stat"><small>BACKGROUNDS</small><strong id="adminBackgrounds">0</strong></div>
-   <div class="stat"><small>SCENES</small><strong id="adminScenes">0</strong></div>
-   <div class="stat"><small>PROJECTS</small><strong id="adminProjects">0</strong></div>
+<section class="page" id="projects">
+  <div class="panel">
+    <h2>▣ Projects</h2>
+    <div class="form-grid"><div class="field"><label>Project Name</label><input id="projectName" placeholder="My Anime Season 1"></div><div class="field"><label>Project Type</label><select id="projectType"><option>Anime Series</option><option>Short Film</option><option>Character Collection</option><option>Story Project</option></select></div></div>
+    <button class="btn primary" onclick="addProject()">＋ Create Project</button>
   </div>
-  <div class="grid two">
-   <div class="card">
-    <h3>Workspace Management</h3>
-    <p class="smalltext">Export a backup before resetting your local workspace.</p>
-    <div class="toolbar"><button class="btn cyan" onclick="exportBackup()">Export JSON Backup</button><button class="btn" onclick="document.getElementById('backupInput').click()">Import Backup</button><input id="backupInput" type="file" accept=".json,application/json" hidden onchange="importBackup(event)"></div>
-   </div>
-   <div class="card">
-    <h3>Data Management</h3>
-    <p class="smalltext">Reset local data. This cannot be undone unless you have a backup.</p>
-    <button class="btn danger" onclick="resetWorkspace()">Reset Workspace</button>
-   </div>
+  <div id="projectGrid" class="grid"></div>
+</section>
+
+<section class="page" id="admin">
+  <div class="panel">
+    <h2>⚙ Admin Workspace</h2>
+    <p class="muted">Manage the content stored in this browser. This is a local workspace admin panel, not a secure multi-user server admin system.</p>
+    <div class="stats">
+      <div class="stat"><small>CHARACTERS</small><strong id="adminCharacters">0</strong></div>
+      <div class="stat"><small>BACKGROUNDS</small><strong id="adminBackgrounds">0</strong></div>
+      <div class="stat"><small>SCENES</small><strong id="adminScenes">0</strong></div>
+      <div class="stat"><small>PROJECTS</small><strong id="adminProjects">0</strong></div>
+    </div>
+    <div class="top-actions">
+      <button class="btn primary" onclick="exportBackup()">Export Workspace JSON</button>
+      <button class="btn" onclick="document.getElementById('importFile').click()">Import Backup JSON</button>
+      <input id="importFile" type="file" accept=".json,application/json" hidden onchange="importBackup(event)">
+      <button class="btn danger" onclick="resetWorkspace()">Reset Workspace</button>
+    </div>
   </div>
-  <div class="section-head"><h2>Workspace Overview</h2></div>
-  <div id="adminOverview" class="output"></div>
- </section>
+  <div class="panel"><h3>Admin Notes</h3><p class="muted">Your data is saved in this browser using localStorage. Clearing browser data may remove it. Use Export Workspace JSON to keep a backup. For a real online admin dashboard, user accounts and shared storage, a backend such as Supabase or Firebase is required.</p></div>
+</section>
+
+<div class="footer-note">FIX ANIME STUDIO · Create original worlds, characters and stories.</div>
 </main>
 </div>
-<div class="toast" id="toast"></div>
+
+<div class="modal" id="detailModal" onclick="if(event.target===this)closeModal()">
+ <div class="modal-box"><button class="close" onclick="closeModal()">✕</button><div id="modalContent"></div></div>
+</div>
 
 <script>
-const KEY="fix_anime_studio_single_v1";
-let data={characters:[],backgrounds:[],scenes:[],projects:[],story:{title:"",episode:"",genre:"",text:""}};
-let currentCharacterImage="";
-let currentBackgroundImage="";
-let currentAnimation=null;
-let animationFrame=0;
-let animationStart=0;
-let animationRecorder=null;
-let exportChunks=[];
+const STORAGE_KEY = "fix_anime_studio_single_v1";
 
+const starterCharacters = [
+ {id:"char001",name:"Astra Raiyan",role:"Main Hero",gender:"Male",age:"19",personality:"Brave, calm, mysterious",hair:"Silver white spiky hair",eyes:"Glowing blue",outfit:"Black futuristic ninja outfit",power:"Void Strike",backstory:"A young warrior who carries an ancient cosmic power.",image:"",symbol:"✦",color:"#617dff"},
+ {id:"char002",name:"Zenith Blaze",role:"Fire Warrior",gender:"Male",age:"21",personality:"Fearless, energetic, loyal",hair:"Flame red",eyes:"Golden orange",outfit:"Dark red battle armor",power:"Thunder Reign",backstory:"A legendary fighter who controls fire and lightning.",image:"",symbol:"🔥",color:"#ff653e"},
+ {id:"char003",name:"Draco Vortex",role:"Main Villain",gender:"Male",age:"28",personality:"Cold, intelligent, ruthless",hair:"Long black hair",eyes:"Crimson red",outfit:"Black royal armor",power:"Dark Eclipse",backstory:"A mysterious ruler seeking the power of the ancient void.",image:"",symbol:"☠",color:"#9c3d78"},
+ {id:"char004",name:"Sakura Mirai",role:"Ice Princess",gender:"Female",age:"19",personality:"Gentle, clever, determined",hair:"Pink silver hair",eyes:"Crystal blue",outfit:"White and blue royal dress",power:"Ice Blossom",backstory:"A princess who protects her kingdom with ancient ice magic.",image:"",symbol:"❄",color:"#69c9ff"},
+ {id:"char005",name:"Ryu Kazen",role:"Dragon Warrior",gender:"Male",age:"22",personality:"Proud, brave, protective",hair:"Dark blue spiky hair",eyes:"Dragon gold",outfit:"Black and orange combat suit",power:"Inferno Flame",backstory:"A warrior connected to the spirit of an ancient dragon.",image:"",symbol:"🐉",color:"#ed823f"},
+ {id:"char006",name:"Miyu Seraph",role:"Spirit Mage",gender:"Female",age:"20",personality:"Wise, mysterious, kind",hair:"Lavender long hair",eyes:"Violet",outfit:"Purple mystical robe",power:"Spirit Magic",backstory:"A gifted mage who can communicate with forgotten spirits.",image:"",symbol:"☾",color:"#9a75e8"},
+ {id:"char007",name:"Kairos Zero",role:"Time Scientist",gender:"Male",age:"25",personality:"Logical, quiet, curious",hair:"White silver hair",eyes:"Electric cyan",outfit:"Futuristic black scientist coat",power:"Time Control",backstory:"A genius who discovered a way to bend time itself.",image:"",symbol:"⌛",color:"#41d6db"},
+ {id:"char008",name:"Kage Noctis",role:"Shadow Ninja",gender:"Male",age:"23",personality:"Silent, disciplined, mysterious",hair:"Midnight black",eyes:"Red glowing eyes",outfit:"Dark hooded ninja armor",power:"Shadow Dance",backstory:"A silent warrior trained in the forgotten art of shadows.",image:"",symbol:"影",color:"#716baf"},
+ {id:"char009",name:"Hecate Noir",role:"Dark Sorceress",gender:"Female",age:"24",personality:"Powerful, mysterious, ambitious",hair:"Black violet hair",eyes:"Purple glowing eyes",outfit:"Elegant dark magical dress",power:"Night Curse",backstory:"A sorceress searching for the secrets of forbidden magic.",image:"",symbol:"♜",color:"#a84caa"},
+ {id:"char010",name:"Raven Sylph",role:"Forest Guardian",gender:"Female",age:"20",personality:"Peaceful, brave, independent",hair:"Emerald green",eyes:"Forest green",outfit:"Green and silver nature armor",power:"Nature Spirit",backstory:"A guardian who protects the ancient forests.",image:"",symbol:"🍃",color:"#4ba984"},
+ {id:"char011",name:"Drazen Flame",role:"Dragon Master",gender:"Male",age:"26",personality:"Strong, serious, honorable",hair:"Dark crimson",eyes:"Burning amber",outfit:"Dragon scale armor",power:"Dragon Soul",backstory:"The last master of an ancient dragon clan.",image:"",symbol:"♨",color:"#c84c38"},
+ {id:"char012",name:"Elena Knight",role:"Light Warrior",gender:"Female",age:"22",personality:"Honest, courageous, compassionate",hair:"Golden blonde",eyes:"Bright blue",outfit:"White and gold knight armor",power:"Light Blade",backstory:"A knight sworn to defend the innocent.",image:"",symbol:"⚔",color:"#c9a75a"},
+ {id:"char013",name:"Akira Storm",role:"Storm Fighter",gender:"Male",age:"20",personality:"Energetic, confident, playful",hair:"Electric blue",eyes:"Storm grey",outfit:"Blue futuristic combat jacket",power:"Storm Breaker",backstory:"A young fighter who commands the power of storms.",image:"",symbol:"⚡",color:"#438de5"},
+ {id:"char014",name:"Elara Moon",role:"Moon Guardian",gender:"Female",age:"21",personality:"Quiet, graceful, mysterious",hair:"Moon silver",eyes:"Lunar violet",outfit:"Silver celestial robe",power:"Moonlight Veil",backstory:"A guardian chosen by the ancient moon temple.",image:"",symbol:"☾",color:"#9d9ce8"},
+ {id:"char015",name:"Lord Veyron",role:"Ancient Antagonist",gender:"Male",age:"Unknown",personality:"Strategic, intimidating, patient",hair:"Long ash grey",eyes:"Glowing amber",outfit:"Ancient black royal armor",power:"Abyss Dominion",backstory:"An ancient ruler whose power was sealed for centuries.",image:"",symbol:"♛",color:"#a84c62"}
+];
+
+function freshData(){
+ return {
+  characters:starterCharacters.map(x=>({...x})),
+  backgrounds:[],scenes:[],projects:[],
+  story:{title:"",text:""}
+ };
+}
 function loadData(){
  try{
-  const saved=localStorage.getItem(KEY);
-  if(saved){data={...data,...JSON.parse(saved)}}
- }catch(e){console.warn(e)}
+  const saved=JSON.parse(localStorage.getItem(STORAGE_KEY));
+  if(!saved || !Array.isArray(saved.characters)) return freshData();
+  saved.backgrounds=Array.isArray(saved.backgrounds)?saved.backgrounds:[];
+  saved.scenes=Array.isArray(saved.scenes)?saved.scenes:[];
+  saved.projects=Array.isArray(saved.projects)?saved.projects:[];
+  saved.story=saved.story||{title:"",text:""};
+  return saved;
+ }catch(e){return freshData();}
 }
-function saveData(){
- try{
-  localStorage.setItem(KEY,JSON.stringify(data));
-  updateAll();
- }catch(e){
-  notify("Storage limit reached. Use smaller images or export a backup.");
- }
+let data=loadData();
+function persist(){
+ try{localStorage.setItem(STORAGE_KEY,JSON.stringify(data));}
+ catch(e){alert("Storage is full. Try smaller images or remove some uploads.");}
 }
-function notify(message){
- const t=document.getElementById("toast");
- t.textContent=message;t.style.display="block";
- clearTimeout(window.toastTimer);
- window.toastTimer=setTimeout(()=>t.style.display="none",3000);
-}
-function toggleMenu(){document.getElementById("sidebar").classList.toggle("open")}
-function showPage(id){
+function uid(){return "id_"+Date.now()+"_"+Math.random().toString(36).slice(2,8)}
+function esc(s=""){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function go(page){
  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
- document.getElementById(id).classList.add("active");
- document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===id));
- const names={dashboard:"Dashboard",characters:"Character Library",characterCreator:"Character Creator",backgrounds:"Background Creator",story:"Story & Script",storyboard:"Storyboard Studio",animation:"Animation Studio",projects:"Projects",admin:"Admin Panel"};
- document.getElementById("pageTitle").textContent=names[id]||id;
- document.getElementById("sidebar").classList.remove("open");
- updateAll();
+ document.querySelectorAll(".nav").forEach(n=>n.classList.toggle("active",n.dataset.page===page));
+ document.getElementById(page).classList.add("active");
+ const titles={dashboard:"Dashboard",characters:"Character Library",creator:"Character Creator",backgrounds:"Background Studio",story:"Story & Script",storyboard:"Storyboard",animation:"Animation Studio",projects:"Projects",admin:"Admin Panel"};
+ document.getElementById("pageTitle").textContent=titles[page]||page;
+ renderAll();
 }
-document.querySelectorAll(".nav button").forEach(b=>b.addEventListener("click",()=>showPage(b.dataset.page)));
+document.querySelectorAll(".nav").forEach(n=>n.addEventListener("click",()=>go(n.dataset.page)));
 
-function escapeHTML(value){
- return String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-}
-function fileToDataURL(file){
- return new Promise((resolve,reject)=>{
-  if(!file)return resolve("");
-  if(!file.type.startsWith("image/"))return reject(new Error("Choose an image file."));
-  if(file.size>1200000)return reject(new Error("Image must be smaller than 1.2 MB. Resize it first."));
-  const reader=new FileReader();
-  reader.onload=()=>resolve(reader.result);
-  reader.onerror=()=>reject(new Error("Could not read image."));
-  reader.readAsDataURL(file);
- });
-}
-function previewFile(input,preview,callback){
- input.addEventListener("change",async()=>{
-  const file=input.files[0];if(!file)return;
-  try{
-   const url=await fileToDataURL(file);
-   preview.src=url;preview.style.display="block";callback(url);
-  }catch(e){notify(e.message);input.value="";}
- });
-}
-previewFile(document.getElementById("cImage"),document.getElementById("cPreview"),v=>{
- currentCharacterImage=v;
- document.getElementById("creatorPreview").innerHTML='<img class="preview-image" src="'+v+'">';
-});
-previewFile(document.getElementById("bgImage"),document.getElementById("bgPreview"),v=>currentBackgroundImage=v);
-
-function newCharacter(){resetCharacterForm();showPage("characterCreator")}
-function resetCharacterForm(){
- document.getElementById("characterForm").reset();
- document.getElementById("characterId").value="";
- document.getElementById("cPreview").style.display="none";
- document.getElementById("creatorPreview").textContent="Upload character artwork to preview it here.";
- currentCharacterImage="";
-}
-document.getElementById("characterForm").addEventListener("submit",async e=>{
- e.preventDefault();
- const id=document.getElementById("characterId").value||crypto.randomUUID();
- const old=data.characters.find(x=>x.id===id);
- const character={
-  id,name:document.getElementById("cName").value.trim(),
-  role:document.getElementById("cRole").value,
-  gender:document.getElementById("cGender").value,
-  age:document.getElementById("cAge").value,
-  personality:document.getElementById("cPersonality").value,
-  hair:document.getElementById("cHair").value,
-  eyes:document.getElementById("cEyes").value,
-  outfit:document.getElementById("cOutfit").value,
-  power:document.getElementById("cPower").value,
-  story:document.getElementById("cStory").value,
-  image:currentCharacterImage||old?.image||"",
-  updated:new Date().toISOString()
- };
- if(old)data.characters=data.characters.map(x=>x.id===id?character:x);
- else data.characters.unshift(character);
- saveData();resetCharacterForm();showPage("characters");notify("Character saved successfully.");
-});
-function editCharacter(id){
- const c=data.characters.find(x=>x.id===id);if(!c)return;
- showPage("characterCreator");
- document.getElementById("characterId").value=c.id;
- const fields={cName:"name",cRole:"role",cGender:"gender",cAge:"age",cPersonality:"personality",cHair:"hair",cEyes:"eyes",cOutfit:"outfit",cPower:"power",cStory:"story"};
- Object.entries(fields).forEach(([key,val])=>document.getElementById(key).value=c[val]||"");
- currentCharacterImage=c.image||"";
- if(c.image){
-  document.getElementById("cPreview").src=c.image;
-  document.getElementById("cPreview").style.display="block";
-  document.getElementById("creatorPreview").innerHTML='<img class="preview-image" src="'+c.image+'">';
- }
-}
-function deleteCharacter(id){
- if(!confirm("Delete this character?"))return;
- data.characters=data.characters.filter(x=>x.id!==id);saveData();notify("Character deleted.");
+function avatar(c){
+ const image=c.image?`<img src="${c.image}" alt="${esc(c.name)}">`:"";
+ return `<div class="portrait" style="background:radial-gradient(circle at 50% 35%,${esc(c.color||"#596bb5")},#11152b 72%)">
+ <span class="role-tag">${esc(c.role||"Character")}</span>
+ <div class="orb">${esc(c.symbol||"✦")}</div>${image}
+ </div>`;
 }
 function characterCard(c){
- return `<article class="character-card">
- <div class="character-image">${c.image?`<img src="${c.image}" alt="">`:`<div class="placeholder">${escapeHTML((c.name||"?")[0].toUpperCase())}</div>`}</div>
- <div class="character-info"><h3>${escapeHTML(c.name)}</h3>
- <div class="tags"><span class="tag">${escapeHTML(c.role)}</span><span class="tag">${escapeHTML(c.power||"No power set")}</span></div>
- <p>${escapeHTML(c.personality||c.story||"Original character profile")}</p>
- <div class="actions"><button class="btn small" onclick="editCharacter('${c.id}')">Edit</button><button class="btn small danger" onclick="deleteCharacter('${c.id}')">Delete</button></div>
+ return `<article class="card">${avatar(c)}<div class="card-body">
+ <h3>${esc(c.name)}</h3><p>${esc(c.role||"Original Character")} · ${esc(c.gender||"")}${c.age?" · "+esc(c.age):""}</p>
+ <div class="tags"><span class="tag">✦ ${esc(c.power||"Unknown Power")}</span><span class="tag">${esc(c.personality||"")}</span></div>
+ <p>${esc(c.backstory||"No backstory added yet.")}</p>
+ <div class="card-actions"><button class="btn small" onclick="viewCharacter('${c.id}')">Details</button><button class="btn small" onclick="editCharacter('${c.id}')">Edit</button><button class="btn small danger" onclick="deleteCharacter('${c.id}')">Delete</button></div>
  </div></article>`;
 }
 function renderCharacters(){
  const q=(document.getElementById("characterSearch")?.value||"").toLowerCase();
- const role=document.getElementById("characterFilter")?.value||"";
- const list=data.characters.filter(c=>(c.name||"").toLowerCase().includes(q)&&(!role||c.role===role));
- document.getElementById("characterGrid").innerHTML=list.length?list.map(characterCard).join(""):'<div class="empty">No characters found. Create your first original character.</div>';
+ const role=document.getElementById("roleFilter")?.value||"";
+ const list=data.characters.filter(c=>(`${c.name} ${c.role} ${c.power}`.toLowerCase().includes(q))&&(!role||c.role.toLowerCase().includes(role.toLowerCase())));
+ document.getElementById("characterGrid").innerHTML=list.length?list.map(characterCard).join(""):`<div class="empty">No characters found.</div>`;
 }
-function buildCharacterPrompt(){
- const get=id=>document.getElementById(id).value||"not specified";
- const prompt=`Create a completely original anime character design. Character name: ${get("cName")}. Role: ${get("cRole")}. Presentation: ${get("cGender")}. Age: ${get("cAge")}. Personality: ${get("cPersonality")}. Hair: ${get("cHair")}. Eyes: ${get("cEyes")}. Outfit: ${get("cOutfit")}. Special ability: ${get("cPower")}. Backstory: ${get("cStory")}. Professional anime concept art, full body character sheet, clear silhouette, detailed original costume, expressive face, front and side views, polished original design, clean studio background. Do not copy existing copyrighted characters, logos, costumes or designs.`;
- document.getElementById("characterPrompt").textContent=prompt;
+function renderFeatured(){
+ document.getElementById("featuredCharacters").innerHTML=data.characters.slice(0,3).map(characterCard).join("");
 }
-function copyText(id){
- const text=document.getElementById(id).textContent;
- navigator.clipboard?.writeText(text).then(()=>notify("Copied to clipboard.")).catch(()=>notify("Copy not available in this browser."));
+function renderBackgrounds(){
+ const el=document.getElementById("backgroundGrid");
+ if(!data.backgrounds.length){el.innerHTML='<div class="empty">No backgrounds yet. Create your first environment above.</div>';return}
+ el.innerHTML=data.backgrounds.map(b=>`<article class="card">
+ <div class="portrait">${b.image?`<img src="${b.image}" alt="">`:`<div class="orb">▧</div>`}<span class="role-tag">${esc(b.type)}</span></div>
+ <div class="card-body"><h3>${esc(b.name)}</h3><p>${esc(b.description)}</p><button class="btn small danger" onclick="deleteBackground('${b.id}')">Delete</button></div></article>`).join("");
 }
-
-document.getElementById("backgroundForm").addEventListener("submit",e=>{
- e.preventDefault();
- const id=document.getElementById("bgId").value||crypto.randomUUID();
- const old=data.backgrounds.find(x=>x.id===id);
- const bg={id,name:document.getElementById("bgName").value.trim(),type:document.getElementById("bgType").value,description:document.getElementById("bgDescription").value,image:currentBackgroundImage||old?.image||""};
- if(old)data.backgrounds=data.backgrounds.map(x=>x.id===id?bg:x);
- else data.backgrounds.unshift(bg);
- saveData();e.target.reset();document.getElementById("bgId").value="";document.getElementById("bgPreview").style.display="none";currentBackgroundImage="";
- notify("Background saved.");
+function updateSelectors(){
+ const cOpts=data.characters.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join("");
+ const bOpts=data.backgrounds.map(b=>`<option value="${b.id}">${esc(b.name)}</option>`).join("");
+ ["sceneCharacter","animationCharacter"].forEach(id=>document.getElementById(id).innerHTML=cOpts||'<option value="">No characters</option>');
+ ["sceneBackground","animationBackground"].forEach(id=>document.getElementById(id).innerHTML=bOpts||'<option value="">No backgrounds</option>');
+}
+function renderScenes(){
+ const el=document.getElementById("sceneList");
+ if(!data.scenes.length){el.innerHTML='<div class="empty">No storyboard scenes created yet.</div>';return}
+ el.innerHTML=data.scenes.map((s,i)=>`<div class="scene"><div style="display:flex;justify-content:space-between;gap:10px"><strong>${i+1}. ${esc(s.title)}</strong><button class="btn small danger" onclick="deleteScene('${s.id}')">Delete</button></div><p class="muted">Character: ${esc(s.characterName)} · Background: ${esc(s.backgroundName)} · ${esc(s.camera)} · ${esc(s.duration)} sec</p><p>${esc(s.action)}</p><p class="muted">Dialogue: ${esc(s.dialogue||"None")}</p></div>`).join("");
+}
+function renderProjects(){
+ const el=document.getElementById("projectGrid");
+ if(!data.projects.length){el.innerHTML='<div class="empty">No projects yet. Create your first project.</div>';return}
+ el.innerHTML=data.projects.map(p=>`<div class="panel"><h3>${esc(p.name)}</h3><p class="muted">${esc(p.type)} · ${esc(p.date)}</p><button class="btn small danger" onclick="deleteProject('${p.id}')">Delete Project</button></div>`).join("");
+}
+function renderStats(){
+ const c=data.characters.length,b=data.backgrounds.length,s=data.scenes.length,p=data.projects.length;
+ document.getElementById("statCharacters").textContent=c;
+ document.getElementById("statBackgrounds").textContent=b;
+ document.getElementById("statScenes").textContent=s;
+ document.getElementById("statProjects").textContent=p;
+ document.getElementById("adminCharacters").textContent=c;
+ document.getElementById("adminBackgrounds").textContent=b;
+ document.getElementById("adminScenes").textContent=s;
+ document.getElementById("adminProjects").textContent=p;
+}
+function renderAll(){
+ renderStats();renderCharacters();renderFeatured();renderBackgrounds();renderScenes();renderProjects();updateSelectors();
+}
+function viewCharacter(id){
+ const c=data.characters.find(x=>x.id===id);if(!c)return;
+ document.getElementById("modalContent").innerHTML=`${avatar(c)}<h2>${esc(c.name)}</h2><p class="muted">${esc(c.role)} · ${esc(c.gender)} · ${esc(c.age)}</p><p><b>Personality:</b> ${esc(c.personality)}</p><p><b>Hair:</b> ${esc(c.hair)}</p><p><b>Eyes:</b> ${esc(c.eyes)}</p><p><b>Outfit:</b> ${esc(c.outfit)}</p><p><b>Power:</b> ${esc(c.power)}</p><p><b>Backstory:</b> ${esc(c.backstory)}</p>`;
+ document.getElementById("detailModal").classList.add("show");
+}
+function closeModal(){document.getElementById("detailModal").classList.remove("show")}
+function deleteCharacter(id){
+ if(!confirm("Delete this character?"))return;
+ data.characters=data.characters.filter(c=>c.id!==id);
+ persist();renderAll();
+}
+function editCharacter(id){
+ const c=data.characters.find(x=>x.id===id);if(!c)return;
+ go("creator");
+ document.getElementById("creatorHeading").textContent="Edit Character";
+ document.getElementById("editCharacterId").value=c.id;
+ const fields={cName:"name",cRole:"role",cGender:"gender",cAge:"age",cPersonality:"personality",cHair:"hair",cEyes:"eyes",cOutfit:"outfit",cPower:"power",cStory:"backstory"};
+ Object.entries(fields).forEach(([id,key])=>document.getElementById(id).value=c[key]||"");
+ document.getElementById("characterUploadPreview").style.display=c.image?"block":"none";
+ document.getElementById("characterUploadPreview").src=c.image||"";
+}
+function resetCharacterForm(){
+ document.getElementById("characterForm").reset();
+ document.getElementById("editCharacterId").value="";
+ document.getElementById("creatorHeading").textContent="✦ Character Creator";
+ document.getElementById("characterUploadPreview").style.display="none";
+}
+function readImage(file,callback){
+ if(!file){callback("");return}
+ if(!file.type.startsWith("image/")){alert("Please select an image file.");return}
+ if(file.size>850*1024){alert("Please use an image smaller than 850 KB.");return}
+ const reader=new FileReader();
+ reader.onload=()=>callback(reader.result);
+ reader.readAsDataURL(file);
+}
+document.getElementById("cImage").addEventListener("change",e=>{
+ const f=e.target.files[0];if(!f)return;
+ readImage(f,src=>{if(src){const p=document.getElementById("characterUploadPreview");p.src=src;p.style.display="block"}});
 });
-function buildBackgroundPrompt(){
- const name=document.getElementById("bgName").value||"Original fantasy world";
- const type=document.getElementById("bgType").value;
- const desc=document.getElementById("bgDescription").value;
- document.getElementById("backgroundPrompt").textContent=`Create an original anime environment background titled "${name}". Environment: ${type}. Description: ${desc}. Cinematic wide establishing shot, rich environmental details, atmospheric lighting, layered depth, beautiful composition, high quality original anime background art, no characters, no text, no logos, 16:9 composition.`;
+document.getElementById("characterForm").addEventListener("submit",e=>{
+ e.preventDefault();
+ const id=document.getElementById("editCharacterId").value;
+ const old=data.characters.find(c=>c.id===id);
+ const file=document.getElementById("cImage").files[0];
+ const save=image=>{
+  const c={id:id||uid(),name:cName.value.trim(),role:cRole.value.trim(),gender:cGender.value,age:cAge.value,personality:cPersonality.value,hair:cHair.value,eyes:cEyes.value,outfit:cOutfit.value,power:cPower.value,backstory:cStory.value,image:image||(old?.image||""),symbol:old?.symbol||"✦",color:old?.color||"#6578d8"};
+  if(id)data.characters=data.characters.map(x=>x.id===id?c:x);else data.characters.unshift(c);
+  persist();resetCharacterForm();renderAll();go("characters");alert("Character saved successfully!");
+ };
+ if(file)readImage(file,save);else save("");
+});
+
+let pendingBgImage="";
+document.getElementById("bgImage").addEventListener("change",e=>{
+ const f=e.target.files[0];if(!f)return;
+ readImage(f,src=>{pendingBgImage=src;const p=document.getElementById("backgroundUploadPreview");p.src=src;p.style.display=src?"block":"none"});
+});
+function saveBackground(){
+ const name=document.getElementById("bgName").value.trim();
+ if(!name){alert("Enter a background name.");return}
+ data.backgrounds.unshift({id:uid(),name,type:bgType.value,description:bgDescription.value,image:pendingBgImage});
+ persist();bgName.value="";bgDescription.value="";bgImage.value="";pendingBgImage="";backgroundUploadPreview.style.display="none";renderAll();alert("Background saved!");
 }
 function deleteBackground(id){
  if(!confirm("Delete this background?"))return;
- data.backgrounds=data.backgrounds.filter(x=>x.id!==id);saveData();
+ data.backgrounds=data.backgrounds.filter(x=>x.id!==id);persist();renderAll();
 }
-function editBackground(id){
- const b=data.backgrounds.find(x=>x.id===id);if(!b)return;
- showPage("backgrounds");
- document.getElementById("bgId").value=b.id;
- document.getElementById("bgName").value=b.name;
- document.getElementById("bgType").value=b.type;
- document.getElementById("bgDescription").value=b.description;
- currentBackgroundImage=b.image||"";
- if(b.image){document.getElementById("bgPreview").src=b.image;document.getElementById("bgPreview").style.display="block"}
+function makeBackgroundPrompt(){
+ const name=bgName.value||"Fantasy Environment",type=bgType.value,desc=bgDescription.value||"cinematic atmosphere";
+ bgPrompt.value=`Original anime environment concept art, ${type}, location named ${name}. ${desc}. Highly detailed environment design, dramatic cinematic lighting, atmospheric depth, beautiful composition, professional 2D anime background painting, no text, no watermark.`;
 }
-function renderBackgrounds(){
- document.getElementById("backgroundGrid").innerHTML=data.backgrounds.length?data.backgrounds.map(b=>`
- <div class="character-card"><div class="character-image">${b.image?`<img src="${b.image}">`:`<div class="placeholder">▧</div>`}</div>
- <div class="character-info"><h3>${escapeHTML(b.name)}</h3><span class="tag">${escapeHTML(b.type)}</span><p>${escapeHTML(b.description)}</p>
- <div class="actions"><button class="btn small" onclick="editBackground('${b.id}')">Edit</button><button class="btn small danger" onclick="deleteBackground('${b.id}')">Delete</button></div></div></div>`).join(""):'<div class="empty">No backgrounds yet. Create your original world.</div>';
-}
-
 function saveStory(){
- data.story={
-  title:document.getElementById("storyTitle").value,
-  episode:document.getElementById("storyEpisode").value,
-  genre:document.getElementById("storyGenre").value,
-  character:document.getElementById("storyCharacter").value,
-  text:document.getElementById("storyText").value
- };
- saveData();notify("Story saved.");
-}
-function downloadFile(name,content,type="text/plain"){
- const blob=new Blob([content],{type});
- const url=URL.createObjectURL(blob);
- const a=document.createElement("a");a.href=url;a.download=name;a.click();
- setTimeout(()=>URL.revokeObjectURL(url),1500);
+ data.story={title:storyTitle.value,text:storyText.value};persist();alert("Story saved!");
 }
 function downloadStory(){
- saveStory();
- const s=data.story;
- downloadFile((s.title||"anime-script").replace(/[^a-z0-9-_]/gi,"_")+".txt",`${s.title}\n${s.episode}\nGenre: ${s.genre}\n\n${s.text}`);
+ const text=`${storyTitle.value}\n\n${storyText.value}`;
+ downloadBlob(text,(storyTitle.value||"anime-story")+".txt","text/plain");
 }
-function makeScenesFromStory(){
- saveStory();
- const lines=data.story.text.split(/\n+/).filter(x=>x.trim());
- if(!lines.length){notify("Write a script first.");return}
- lines.forEach((line,i)=>{
-  if(/^scene\s*\d*/i.test(line)||data.scenes.length===0){
-   data.scenes.push({id:crypto.randomUUID(),title:`Scene ${data.scenes.length+1}`,background:"",character:data.story.character||"",camera:"Wide Shot",action:line,dialogue:"",duration:5});
-  }
- });
- saveData();showPage("storyboard");notify("Scene entries created from script.");
+function saveScene(){
+ const title=sceneTitle.value.trim();if(!title){alert("Enter a scene title.");return}
+ const c=data.characters.find(x=>x.id===sceneCharacter.value);
+ const b=data.backgrounds.find(x=>x.id===sceneBackground.value);
+ data.scenes.push({id:uid(),title,characterId:c?.id||"",characterName:c?.name||"None",backgroundId:b?.id||"",backgroundName:b?.name||"None",camera:sceneCamera.value,action:sceneAction.value,dialogue:sceneDialogue.value,duration:Math.max(1,Math.min(120,Number(sceneDuration.value)||5))});
+ persist();sceneTitle.value="";sceneAction.value="";sceneDialogue.value="";renderAll();alert("Storyboard scene added!");
 }
-function addScene(){
- const scene={
-  id:crypto.randomUUID(),
-  title:document.getElementById("sceneTitle").value||`Scene ${data.scenes.length+1}`,
-  background:document.getElementById("sceneBackground").value,
-  character:document.getElementById("sceneCharacter").value,
-  camera:document.getElementById("sceneCamera").value,
-  action:document.getElementById("sceneAction").value,
-  dialogue:document.getElementById("sceneDialogue").value,
-  duration:Math.max(1,Math.min(120,Number(document.getElementById("sceneDuration").value)||5))
- };
- data.scenes.push(scene);saveData();
- document.getElementById("sceneTitle").value="";
- document.getElementById("sceneAction").value="";
- document.getElementById("sceneDialogue").value="";
- notify("Scene added to storyboard.");
+function deleteScene(id){data.scenes=data.scenes.filter(s=>s.id!==id);persist();renderAll()}
+function addProject(){
+ const name=projectName.value.trim();if(!name){alert("Enter project name.");return}
+ data.projects.unshift({id:uid(),name,type:projectType.value,date:new Date().toLocaleDateString()});
+ projectName.value="";persist();renderAll();
 }
-function deleteScene(id){
- data.scenes=data.scenes.filter(s=>s.id!==id);saveData();
-}
-function editScene(id){
- const s=data.scenes.find(x=>x.id===id);if(!s)return;
- showPage("storyboard");
- document.getElementById("sceneTitle").value=s.title;
- document.getElementById("sceneBackground").value=s.background;
- document.getElementById("sceneCharacter").value=s.character;
- document.getElementById("sceneCamera").value=s.camera;
- document.getElementById("sceneAction").value=s.action;
- document.getElementById("sceneDialogue").value=s.dialogue;
- document.getElementById("sceneDuration").value=s.duration;
- data.scenes=data.scenes.filter(x=>x.id!==id);saveData();
-}
-function renderScenes(){
- document.getElementById("sceneList").innerHTML=data.scenes.length?data.scenes.map((s,i)=>`
- <div class="scene"><div style="display:flex;justify-content:space-between;gap:10px"><h3>${i+1}. ${escapeHTML(s.title)}</h3><span class="tag">${s.duration}s</span></div>
- <p>${escapeHTML(s.action)}</p><div class="tags"><span class="tag">${escapeHTML(s.camera)}</span><span class="tag">${escapeHTML(s.character||"No character")}</span><span class="tag">${escapeHTML(s.background||"No background")}</span></div>
- <p><b>Dialogue:</b> ${escapeHTML(s.dialogue||"—")}</p>
- <div class="actions"><button class="btn small" onclick="editScene('${s.id}')">Edit</button><button class="btn small danger" onclick="deleteScene('${s.id}')">Delete</button><button class="btn small cyan" onclick="selectAnimationScene('${s.id}')">Animate Scene</button></div></div>`).join(""):'<div class="empty">Your storyboard is empty. Add your first scene.</div>';
-}
-function downloadStoryboard(){
- const text=data.scenes.map((s,i)=>`SCENE ${i+1}: ${s.title}\nCamera: ${s.camera}\nCharacter: ${s.character}\nBackground: ${s.background}\nAction: ${s.action}\nDialogue: ${s.dialogue}\nDuration: ${s.duration}s\n`).join("\n");
- downloadFile("fix-anime-storyboard.txt",text||"No scenes yet.");
-}
-function selectAnimationScene(id){
- showPage("animation");document.getElementById("animationScene").value=id;loadAnimationScene();
-}
-function loadAnimationScene(){
- const id=document.getElementById("animationScene").value;
- const s=data.scenes.find(x=>x.id===id);
- if(s)document.getElementById("exportStatus").textContent="Selected: "+s.title;
- drawFrame(0);
-}
-
-const canvas=document.getElementById("animationCanvas");
-const ctx=canvas.getContext("2d");
-function drawFrame(t){
- const scene=data.scenes.find(x=>x.id===document.getElementById("animationScene").value);
- const bg=scene&&data.backgrounds.find(b=>b.name===scene.background);
- const character=scene&&data.characters.find(c=>c.name===scene.character);
- const color=document.getElementById("animationColor").value||"#111a38";
- ctx.clearRect(0,0,canvas.width,canvas.height);
- if(bg&&bg.image){
-  const img=new Image();img.src=bg.image;
-  try{ctx.drawImage(img,0,0,canvas.width,canvas.height)}catch(e){ctx.fillStyle=color;ctx.fillRect(0,0,canvas.width,canvas.height)}
- }else{
-  ctx.fillStyle=color;ctx.fillRect(0,0,canvas.width,canvas.height);
-  for(let i=0;i<45;i++){
-   const x=(i*137)%900,y=(i*79)%506;
-   ctx.fillStyle="rgba(190,210,255,.35)";ctx.fillRect(x,y,2,2);
-  }
- }
- const style=document.getElementById("animationStyle").value;
- let x=450,y=245,scale=1;
- if(style==="Floating Motion")y+=Math.sin(t*3)*18;
- if(style==="Side Movement")x=220+((t*100)%450);
- if(style==="Zoom In")scale=1+Math.min(t/8,.5);
- if(style==="Pulse")scale=1+Math.sin(t*4)*.08;
- if(character&&character.image){
-  const img=new Image();
-  img.onload=()=>{
-   const w=180*scale,h=230*scale;
-   ctx.drawImage(img,x-w/2,y-h/2,w,h);
-   drawLabels(scene,x,y);
-  };
-  img.src=character.image;
- }else{
-  ctx.fillStyle="#9a80ff";ctx.beginPath();ctx.arc(x,y-40,52*scale,0,Math.PI*2);ctx.fill();
-  ctx.fillStyle="#d8e2ff";ctx.fillRect(x-45*scale,y+15*scale,90*scale,130*scale);
-  drawLabels(scene,x,y);
- }
-}
-function drawLabels(scene,x,y){
- const title=scene?.title||"FIX ANIME STUDIO";
- ctx.fillStyle="rgba(4,8,20,.75)";ctx.fillRect(0,420,900,86);
- ctx.fillStyle="#fff";ctx.font="bold 28px Arial";ctx.fillText(title,28,458);
- ctx.fillStyle="#b9c9ed";ctx.font="16px Arial";
- ctx.fillText((scene?.action||"Create a scene in Storyboard Studio.").slice(0,95),28,486);
-}
-function animateLoop(now){
- if(!currentAnimation)return;
- const t=(now-animationStart)/1000;
- drawFrame(t);
- document.getElementById("timelineProgress").style.width=Math.min(100,t/currentAnimation.duration*100)+"%";
- if(t>=currentAnimation.duration){stopAnimation();return}
- animationFrame=requestAnimationFrame(animateLoop);
-}
-function startAnimation(){
- stopAnimation();
- const duration=Math.max(3,Math.min(30,Number(document.getElementById("animationDuration").value)||8));
- currentAnimation={duration};animationStart=performance.now();
- animationFrame=requestAnimationFrame(animateLoop);
- document.getElementById("exportStatus").textContent="Playing preview...";
-}
-function stopAnimation(){
- if(animationFrame)cancelAnimationFrame(animationFrame);
- animationFrame=0;currentAnimation=null;
- document.getElementById("exportStatus").textContent="Preview stopped.";
-}
-async function exportVideo(){
- if(!canvas.captureStream||!window.MediaRecorder){notify("WebM export is not supported in this browser.");return}
- stopAnimation();
- const duration=Math.max(3,Math.min(30,Number(document.getElementById("animationDuration").value)||8));
- const stream=canvas.captureStream(30);
- let mime="video/webm;codecs=vp9";
- if(!MediaRecorder.isTypeSupported(mime))mime="video/webm";
- try{
-  animationRecorder=new MediaRecorder(stream,{mimeType:mime});
-  exportChunks=[];
-  animationRecorder.ondataavailable=e=>{if(e.data.size)exportChunks.push(e.data)};
-  animationRecorder.onstop=()=>{
-   const blob=new Blob(exportChunks,{type:"video/webm"});
-   const url=URL.createObjectURL(blob);
-   const a=document.createElement("a");a.href=url;a.download="fix-anime-scene.webm";a.click();
-   setTimeout(()=>URL.revokeObjectURL(url),3000);
-   stream.getTracks().forEach(t=>t.stop());
-   document.getElementById("exportStatus").textContent="Video exported successfully.";
-  };
-  animationRecorder.start();
-  animationStart=performance.now();
-  const renderExport=now=>{
-   const t=(now-animationStart)/1000;
-   drawFrame(t);
-   document.getElementById("timelineProgress").style.width=Math.min(100,t/duration*100)+"%";
-   if(t<duration)requestAnimationFrame(renderExport);
-   else animationRecorder.stop();
-  };
-  requestAnimationFrame(renderExport);
-  document.getElementById("exportStatus").textContent="Rendering video...";
- }catch(e){notify("Could not export video: "+e.message)}
-}
-
-function createProject(){
- const name=prompt("Enter your anime project name:");
- if(!name)return;
- data.projects.unshift({id:crypto.randomUUID(),name,created:new Date().toISOString()});
- saveData();notify("Project created.");
-}
-function deleteProject(id){
- if(!confirm("Delete this project?"))return;
- data.projects=data.projects.filter(p=>p.id!==id);saveData();
-}
-function renderProjects(){
- document.getElementById("projectGrid").innerHTML=data.projects.length?data.projects.map(p=>`
- <div class="card"><span class="tag">ANIME PROJECT</span><h3>${escapeHTML(p.name)}</h3><p class="smalltext">Created: ${new Date(p.created).toLocaleDateString()}</p><button class="btn small danger" onclick="deleteProject('${p.id}')">Delete Project</button></div>`).join(""):'<div class="empty">No projects yet. Create your first anime project.</div>';
+function deleteProject(id){if(!confirm("Delete project?"))return;data.projects=data.projects.filter(p=>p.id!==id);persist();renderAll()}
+function downloadBlob(content,name,type){
+ const blob=new Blob([content],{type}),url=URL.createObjectURL(blob),a=document.createElement("a");
+ a.href=url;a.download=name;a.click();URL.revokeObjectURL(url);
 }
 function exportBackup(){
  const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
- const url=URL.createObjectURL(blob);
- const a=document.createElement("a");a.href=url;a.download="fix-anime-studio-backup.json";a.click();
- setTimeout(()=>URL.revokeObjectURL(url),2000);
- notify("Backup exported.");
+ const url=URL.createObjectURL(blob),a=document.createElement("a");
+ a.href=url;a.download="fix-anime-studio-backup.json";a.click();URL.revokeObjectURL(url);
 }
 function importBackup(event){
  const file=event.target.files[0];if(!file)return;
  const reader=new FileReader();
  reader.onload=()=>{
   try{
-   const incoming=JSON.parse(reader.result);
-   if(!incoming||!Array.isArray(incoming.characters)||!Array.isArray(incoming.scenes))throw new Error("Invalid backup");
-   if(!confirm("Replace current workspace with this backup?"))return;
-   data={...data,...incoming};saveData();notify("Backup imported.");
-  }catch(e){notify("Invalid backup file.")}
+   const imported=JSON.parse(reader.result);
+   if(!Array.isArray(imported.characters)||!Array.isArray(imported.backgrounds))throw new Error("Invalid backup");
+   data={characters:imported.characters,backgrounds:imported.backgrounds,scenes:imported.scenes||[],projects:imported.projects||[],story:imported.story||{title:"",text:""}};
+   persist();renderAll();alert("Backup imported!");
+  }catch(e){alert("Invalid backup file.");}
  };
- reader.readAsText(file);
+ reader.readAsText(file);event.target.value="";
 }
 function resetWorkspace(){
- if(!confirm("Delete all characters, backgrounds, scenes and projects?"))return;
- if(!confirm("This cannot be undone. Continue?"))return;
- data={characters:[],backgrounds:[],scenes:[],projects:[],story:{title:"",episode:"",genre:"",text:""}};
- saveData();notify("Workspace reset.");
+ if(!confirm("This will replace your current workspace with the original 15 starter characters and remove your other local data. Continue?"))return;
+ data=freshData();persist();storyTitle.value="";storyText.value="";renderAll();alert("Workspace reset.");
 }
 
-function updateSelects(){
- const chars=data.characters.map(c=>`<option>${escapeHTML(c.name)}</option>`).join("");
- const bgs=data.backgrounds.map(b=>`<option>${escapeHTML(b.name)}</option>`).join("");
- ["storyCharacter","sceneCharacter"].forEach(id=>{
-  const el=document.getElementById(id),old=el.value;
-  el.innerHTML='<option value="">None selected</option>'+chars;
-  if(old)el.value=old;
- });
- const bg=document.getElementById("sceneBackground"),old=bg.value;
- bg.innerHTML='<option value="">None selected</option>'+bgs;
- if(old)bg.value=old;
- const anim=document.getElementById("animationScene"),animOld=anim.value;
- anim.innerHTML='<option value="">Select a scene</option>'+data.scenes.map(s=>`<option value="${s.id}">${escapeHTML(s.title)}</option>`).join("");
- if(animOld)anim.value=animOld;
-}
-function updateAll(){
- document.getElementById("statCharacters").textContent=data.characters.length;
- document.getElementById("statBackgrounds").textContent=data.backgrounds.length;
- document.getElementById("statScenes").textContent=data.scenes.length;
- document.getElementById("statProjects").textContent=data.projects.length;
- document.getElementById("adminCharacters").textContent=data.characters.length;
- document.getElementById("adminBackgrounds").textContent=data.backgrounds.length;
- document.getElementById("adminScenes").textContent=data.scenes.length;
- document.getElementById("adminProjects").textContent=data.projects.length;
- document.getElementById("adminOverview").textContent=JSON.stringify({
-  characters:data.characters.map(c=>c.name),
-  backgrounds:data.backgrounds.map(b=>b.name),
-  scenes:data.scenes.map(s=>s.title),
-  projects:data.projects.map(p=>p.name)
- },null,2);
- renderCharacters();renderBackgrounds();renderScenes();renderProjects();updateSelects();
- document.getElementById("dashboardCharacters").innerHTML=data.characters.slice(0,3).map(characterCard).join("")||'<div class="empty">No characters yet.</div>';
- if(data.story){
-  document.getElementById("storyTitle").value=data.story.title||"";
-  document.getElementById("storyEpisode").value=data.story.episode||"";
-  document.getElementById("storyGenre").value=data.story.genre||"Fantasy Adventure";
-  document.getElementById("storyText").value=data.story.text||"";
+/* ANIMATION PREVIEW AND WEBM EXPORT */
+const canvas=document.getElementById("animationCanvas"),ctx=canvas.getContext("2d");
+let animationFrame=null,animationStart=0,recording=false;
+function drawFrame(t=0){
+ const c=data.characters.find(x=>x.id===animationCharacter.value)||data.characters[0];
+ const b=data.backgrounds.find(x=>x.id===animationBackground.value);
+ const motion=motionType.value;
+ const w=canvas.width,h=canvas.height;
+ const grad=ctx.createLinearGradient(0,0,w,h);
+ grad.addColorStop(0,"#111b3a");grad.addColorStop(1,"#25143e");
+ ctx.fillStyle=grad;ctx.fillRect(0,0,w,h);
+ for(let i=0;i<45;i++){
+  const x=(i*173)%w,y=(i*97)%h;
+  ctx.fillStyle="rgba(190,205,255,.35)";ctx.beginPath();ctx.arc(x,y,1.5,0,Math.PI*2);ctx.fill();
+ }
+ if(b?.image){
+  const img=new Image();
+  img.onload=()=>{ctx.globalAlpha=.5;ctx.drawImage(img,0,0,w,h);ctx.globalAlpha=1;drawCharacter(c,t,motion)};
+  img.src=b.image;
+ }else{
+  ctx.fillStyle="rgba(78,219,255,.08)";ctx.beginPath();ctx.arc(480,270,190,0,Math.PI*2);ctx.fill();
+  drawCharacter(c,t,motion);
  }
 }
-loadData();updateAll();drawFrame(0);
+function drawCharacter(c,t,motion){
+ const w=canvas.width,h=canvas.height;
+ let x=w/2,y=h/2,scale=1;
+ if(motion==="float")y+=Math.sin(t/350)*22;
+ if(motion==="side")x+=Math.sin(t/450)*100;
+ if(motion==="zoom")scale=1+Math.min(.35,(t%5000)/5000*.35);
+ if(motion==="pulse")scale=1+Math.sin(t/170)*.07;
+ ctx.save();ctx.translate(x,y);ctx.scale(scale,scale);
+ ctx.shadowColor=c?.color||"#8d79ff";ctx.shadowBlur=45;
+ ctx.fillStyle=c?.color||"#7185ff";ctx.beginPath();ctx.arc(0,0,83,0,Math.PI*2);ctx.fill();
+ ctx.shadowBlur=0;ctx.fillStyle="#10172b";ctx.beginPath();ctx.arc(0,0,67,0,Math.PI*2);ctx.fill();
+ ctx.fillStyle="#fff";ctx.font="82px Arial";ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(c?.symbol||"✦",0,0);
+ ctx.restore();
+ ctx.fillStyle="#fff";ctx.textAlign="center";ctx.font="bold 35px Arial";ctx.fillText(c?.name||"Anime Character",w/2,465);
+ ctx.fillStyle="#b9c4e8";ctx.font="18px Arial";ctx.fillText(c?.power||"Original Power",w/2,500);
+}
+function drawAnimation(){drawFrame(performance.now())}
+function animateLoop(now){
+ if(!animationStart)animationStart=now;
+ drawFrame(now-animationStart);
+ animationFrame=requestAnimationFrame(animateLoop);
+}
+function startAnimation(){stopAnimation();animationStart=0;animationFrame=requestAnimationFrame(animateLoop)}
+function stopAnimation(){if(animationFrame)cancelAnimationFrame(animationFrame);animationFrame=null;drawAnimation()}
+async function exportVideo(){
+ if(!canvas.captureStream||!window.MediaRecorder){alert("Your browser does not support canvas video recording. Try Chrome or Edge.");return}
+ if(recording)return;
+ stopAnimation();recording=true;
+ const stream=canvas.captureStream(30);
+ let recorder;
+ try{recorder=new MediaRecorder(stream,{mimeType:"video/webm"});}
+ catch(e){recorder=new MediaRecorder(stream);}
+ const chunks=[];
+ recorder.ondataavailable=e=>{if(e.data.size)chunks.push(e.data)};
+ recorder.onstop=()=>{
+  const blob=new Blob(chunks,{type:"video/webm"});
+  const url=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=url;a.download="fix-anime-animation.webm";a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+  stream.getTracks().forEach(t=>t.stop());recording=false;
+  document.getElementById("exportStatus").textContent="Video export completed.";
+ };
+ document.getElementById("exportStatus").textContent="Recording animation for 8 seconds...";
+ recorder.start();startAnimation();
+ setTimeout(()=>{stopAnimation();if(recorder.state!=="inactive")recorder.stop()},8000);
+}
+
+/* RESTORE SAVED SCRIPT AND START */
+storyTitle.value=data.story.title||"";
+storyText.value=data.story.text||"";
+renderAll();
+drawAnimation();
 </script>
 </body>
 </html>
