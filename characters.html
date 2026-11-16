@@ -3,124 +3,130 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Characters | FIX ANIME STUDIO</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:#080b18;color:#f7f5ff;font-family:Arial,sans-serif}
-header{padding:20px 7%;display:flex;justify-content:space-between;align-items:center;gap:15px;background:#10172b;border-bottom:1px solid #29324b;position:sticky;top:0;z-index:5}
-.logo{font-size:21px;font-weight:900}.logo span{color:#b56aff}
-a{color:#c6b5ff;text-decoration:none}
-.hero{text-align:center;padding:65px 20px 35px;background:radial-gradient(circle at 50% 0,#42216b,transparent 65%)}
-.hero h1{font-size:clamp(32px,6vw,55px);margin-bottom:12px}
-.hero p{color:#aeb8d3;line-height:1.7}
-.search{display:block;width:min(450px,90%);margin:25px auto 0;padding:14px 17px;border-radius:12px;border:1px solid #394362;background:#111a30;color:white;outline:none}
-main{padding:35px 7% 70px}
-.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
-.card{background:linear-gradient(145deg,#17213b,#101629);border:1px solid #29334d;border-radius:18px;overflow:hidden;transition:.25s}
-.card:hover{transform:translateY(-6px);border-color:#ad67ff;box-shadow:0 15px 35px #8b35ff22}
-.art{height:225px;display:grid;place-items:center;font-size:90px;position:relative;overflow:hidden}
-.art:after{content:"";position:absolute;width:170px;height:170px;border-radius:50%;background:white;filter:blur(90px);opacity:.25}
-.info{padding:21px}
-.info h2{font-size:23px;margin-bottom:10px}
-.info p{color:#aab4ce;line-height:1.6;font-size:14px;min-height:45px}
-.tag{display:inline-block;margin-top:15px;padding:7px 11px;border-radius:30px;background:#a855f722;color:#d9b5ff;font-size:11px;font-weight:bold}
-.power{color:#61d7ff;margin:15px 0;font-size:14px}
-.details{border:1px solid #485273;background:#202a43;color:white;padding:11px 15px;border-radius:9px;width:100%}
-.details:hover{background:#793de1}
-.empty{text-align:center;color:#aab4ce;padding:35px;display:none}
-footer{text-align:center;padding:25px;border-top:1px solid #29334d;color:#8994b1}
-@media(max-width:850px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:570px){header{padding:16px 5%}.grid{grid-template-columns:1fr}main{padding:25px 5%}.art{height:240px}}
+body{background:#080914;color:#f4f3ff;font-family:Arial,sans-serif}
+header{height:75px;padding:0 7%;display:flex;align-items:center;justify-content:space-between;background:#101124;border-bottom:1px solid #29264b;position:sticky;top:0;z-index:5}
+.logo{font-size:21px;font-weight:900;color:white;text-decoration:none}.logo span{color:#a78bfa}
+nav{display:flex;gap:22px}nav a{color:#c8c3e7;text-decoration:none;font-size:14px}
+nav a:hover{color:#c4b5fd}
+main{max-width:1200px;margin:auto;padding:55px 22px}
+.hero{text-align:center;margin-bottom:35px}
+.tag{color:#a78bfa;letter-spacing:4px;font-size:12px;font-weight:bold}
+h1{font-size:clamp(34px,6vw,60px);margin:14px 0}
+.hero p{color:#aaa8c4;line-height:1.7}
+.controls{display:flex;gap:12px;flex-wrap:wrap;margin:30px 0}
+input,select{background:#14152a;border:1px solid #37345e;color:white;padding:14px;border-radius:10px;outline:none}
+input{flex:1;min-width:180px}
+select{min-width:145px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px}
+.card{background:linear-gradient(145deg,#17182f,#10111e);border:1px solid #302d53;border-radius:18px;overflow:hidden;transition:.25s}
+.card:hover{transform:translateY(-6px);border-color:#9b7cff}
+.art{height:270px;background:radial-gradient(circle at center,#39306a,#141526 70%);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.art img{width:100%;height:100%;object-fit:cover}
+.placeholder{font-size:90px}
+.info{padding:19px}
+.info h2{font-size:21px;margin-bottom:8px}
+.info p{color:#aaa8c4;font-size:13px;line-height:1.6;min-height:42px}
+.pills{display:flex;gap:7px;flex-wrap:wrap;margin:13px 0}
+.pill{font-size:11px;padding:6px 10px;border-radius:20px;background:#302653;color:#d8caff}
+.detail{color:#c4b5fd;font-size:13px;line-height:1.7}
+.empty{text-align:center;color:#aaa8c4;padding:60px 10px;grid-column:1/-1}
+footer{text-align:center;padding:35px;color:#77758f;border-top:1px solid #24233c}
+@media(max-width:600px){header{padding:0 15px}nav{gap:10px}nav a{font-size:12px}.art{height:230px}}
 </style>
 </head>
 <body>
 <header>
-  <div class="logo">FIX <span>ANIME STUDIO</span></div>
-  <a href="index.html">← Home</a>
+<a class="logo" href="index.html">FIX <span>ANIME</span> STUDIO</a>
+<nav>
+<a href="index.html">Home</a>
+<a href="characters.html">Characters</a>
+<a href="admin.html">Admin</a>
+</nav>
 </header>
 
+<main>
 <section class="hero">
-  <h1>Anime <span style="color:#bd83ff">Universe</span></h1>
-  <p>Discover heroes, legends, warriors and mysterious characters.</p>
-  <input class="search" id="search" placeholder="Search your favourite character...">
+<div class="tag">✦ THE ANIME UNIVERSE ✦</div>
+<h1>Character <span style="color:#a78bfa">Gallery</span></h1>
+<p>Discover heroes, villains, warriors and legends from FIX ANIME STUDIO.</p>
 </section>
 
-<main>
-  <div class="grid" id="grid"></div>
-  <div class="empty" id="empty">No characters found.</div>
+<div class="controls">
+<input id="search" placeholder="Search characters..." oninput="render()">
+<select id="type" onchange="render()">
+<option value="all">All Characters</option>
+<option value="2D">2D Anime</option>
+<option value="3D">3D Anime</option>
+</select>
+<select id="role" onchange="render()">
+<option value="all">All Roles</option>
+<option>Hero</option><option>Villain</option><option>Warrior</option>
+<option>Princess</option><option>Other</option>
+</select>
+</div>
+
+<section class="grid" id="gallery"></section>
 </main>
 
 <footer>© 2026 FIX ANIME STUDIO · Create Your Own Universe</footer>
 
 <script>
 const KEY="fixAnimeCharacters";
-
 const defaults=[
- {id:"akira",name:"Akira Storm",role:"MAIN HERO",power:"Thunder Strike",description:"A fearless young hero with mysterious energy powers. His destiny is connected to an ancient storm.",emoji:"⚡",color:"#193b77"},
- {id:"kage",name:"Kage Shadow",role:"DARK NINJA",power:"Shadow Control",description:"A mysterious ninja who protects the forgotten kingdom and guards its ancient secrets.",emoji:"🥷",color:"#282342"},
- {id:"zareth",name:"Lord Zareth",role:"MAIN VILLAIN",power:"Dark Energy",description:"An ancient villain seeking control of the dark universe and its hidden power.",emoji:"👿",color:"#571b49"},
- {id:"ryu",name:"Ryu Blaze",role:"FIRE WARRIOR",power:"Inferno Flame",description:"A powerful warrior whose spirit burns like a dragon. He never gives up.",emoji:"🔥",color:"#873719"},
- {id:"yuki",name:"Yuki Frost",role:"ICE PRINCESS",power:"Frozen Storm",description:"A brave princess with the ancient power of ice and a mysterious royal past.",emoji:"❄️",color:"#155579"},
- {id:"drakon",name:"Drakon Vey",role:"DRAGON MASTER",power:"Dragon Soul",description:"A legendary dragon master from a forgotten world who can communicate with ancient dragons.",emoji:"🐉",color:"#17513e"}
+{id:1,name:"Akira Storm",role:"Hero",type:"2D",power:"Thunder Strike",story:"A brave young hero who protects his world with the power of thunder.",image:"",emoji:"⚡"},
+{id:2,name:"Kage Shadow",role:"Warrior",type:"2D",power:"Shadow Control",story:"A mysterious warrior who can move through the shadows.",image:"",emoji:"🥷"},
+{id:3,name:"Lord Zareth",role:"Villain",type:"3D",power:"Dark Energy",story:"A powerful villain who wants to control the universe.",image:"",emoji:"👿"},
+{id:4,name:"Ryu Blaze",role:"Warrior",type:"3D",power:"Inferno Flame",story:"A fire warrior with a fearless heart.",image:"",emoji:"🔥"},
+{id:5,name:"Yuki Frost",role:"Princess",type:"2D",power:"Frozen Storm",story:"A princess who protects her kingdom with ice magic.",image:"",emoji:"❄️"},
+{id:6,name:"Drakon Vey",role:"Other",type:"3D",power:"Dragon Soul",story:"A legendary guardian connected to ancient dragons.",image:"",emoji:"🐉"}
 ];
 
 function getCharacters(){
  try{
   const saved=localStorage.getItem(KEY);
-  if(saved!==null)return JSON.parse(saved);
+  if(saved!==null){
+   const data=JSON.parse(saved);
+   if(Array.isArray(data))return data;
+  }
  }catch(e){}
  localStorage.setItem(KEY,JSON.stringify(defaults));
  return defaults;
 }
-
-function render(){
- const list=getCharacters();
- const query=document.getElementById("search").value.toLowerCase();
- const grid=document.getElementById("grid");
- grid.innerHTML="";
- const filtered=list.filter(c=>
-  [c.name,c.role,c.power,c.description].join(" ").toLowerCase().includes(query)
- );
- document.getElementById("empty").style.display=filtered.length?"none":"block";
-
- filtered.forEach(c=>{
-  const card=document.createElement("article");
-  card.className="card";
-  const art=document.createElement("div");
-  art.className="art";
-  art.style.background=`linear-gradient(135deg,${c.color||"#34245b"},#101629)`;
-  art.textContent=c.emoji||"✨";
-
-  const info=document.createElement("div");
-  info.className="info";
-  const name=document.createElement("h2");
-  name.textContent=c.name;
-  const desc=document.createElement("p");
-  desc.textContent=c.description;
-  const tag=document.createElement("span");
-  tag.className="tag";
-  tag.textContent=c.role;
-  const power=document.createElement("div");
-  power.className="power";
-  power.textContent="✦ Power: "+c.power;
-  const button=document.createElement("button");
-  button.className="details";
-  button.textContent="View Full Profile →";
-  button.onclick=()=>alert(
-   "CHARACTER PROFILE\n\nName: "+c.name+
-   "\nRole: "+c.role+
-   "\nPower: "+c.power+
-   "\n\n"+c.description
-  );
-
-  info.append(name,desc,tag,power,button);
-  card.append(art,info);
-  grid.appendChild(card);
- });
+function safe(s){
+ return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 }
-
-document.getElementById("search").addEventListener("input",render);
+function render(){
+ const q=document.getElementById("search").value.toLowerCase();
+ const type=document.getElementById("type").value;
+ const role=document.getElementById("role").value;
+ const list=getCharacters().filter(c=>
+  (type==="all"||c.type===type)&&
+  (role==="all"||c.role===role)&&
+  [c.name,c.power,c.story,c.role].join(" ").toLowerCase().includes(q)
+ );
+ const gallery=document.getElementById("gallery");
+ if(!list.length){
+  gallery.innerHTML='<div class="empty"><h2>No characters found</h2><p>Try another search or add characters from Admin Panel.</p></div>';
+  return;
+ }
+ gallery.innerHTML=list.map(c=>`
+ <article class="card">
+  <div class="art">
+   ${c.image?`<img src="${safe(c.image)}" alt="${safe(c.name)}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">`:''}
+   <div class="placeholder" style="${c.image?'display:none':''}">${safe(c.emoji||"🎭")}</div>
+  </div>
+  <div class="info">
+   <h2>${safe(c.name)}</h2>
+   <div class="pills"><span class="pill">${safe(c.type||"2D")}</span><span class="pill">${safe(c.role||"Other")}</span></div>
+   <p>${safe(c.story||"No story added yet.")}</p>
+   <div class="detail">✦ Power: ${safe(c.power||"Unknown")}</div>
+  </div>
+ </article>`).join("");
+}
 window.addEventListener("storage",render);
 render();
 </script>
