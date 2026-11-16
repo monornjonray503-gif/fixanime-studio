@@ -4,631 +4,529 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#080b18">
-<title>FIX ANIME STUDIO | Anime Creation Universe</title>
-<meta name="description" content="FIX ANIME STUDIO - Create anime characters, stories, worlds and episodes.">
-
+<meta name="theme-color" content="#080914">
+<title>FIX ANIME STUDIO — AI Animation Workspace</title>
 <style>
 :root{
-  --bg:#080b18;
-  --panel:#11182c;
-  --panel2:#17213b;
-  --purple:#a855f7;
-  --blue:#38bdf8;
-  --text:#f7f5ff;
-  --muted:#aab4ce;
-  --border:#29334d;
+ --bg:#080914;--panel:#111326;--panel2:#171a32;--line:#292c4c;
+ --text:#f4f3ff;--muted:#969ab8;--purple:#9670ff;--cyan:#43d9ed;
+ --pink:#f36bb6;--green:#5de0b1;--red:#ff718b;
 }
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  background:
-    radial-gradient(circle at 80% 5%,#29134d,transparent 30%),
-    radial-gradient(circle at 10% 40%,#10284b,transparent 35%),
-    var(--bg);
-  color:var(--text);
-  font-family:Arial,sans-serif;
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+.app{min-height:100vh;display:flex}
+.sidebar{width:245px;background:#0d0f20;border-right:1px solid var(--line);padding:22px 15px;position:fixed;inset:0 auto 0 0;z-index:10;overflow:auto}
+.brand{font-size:20px;font-weight:900;letter-spacing:-.8px;padding:5px 10px 25px}
+.brand span{color:var(--purple)}
+.brand small{display:block;font-size:10px;color:var(--muted);letter-spacing:3px;margin-top:7px}
+.nav-label{font-size:10px;color:#727795;letter-spacing:2px;margin:20px 10px 9px}
+.nav-btn{width:100%;display:flex;align-items:center;gap:12px;padding:12px 13px;border:0;border-radius:10px;background:transparent;color:#aeb1cc;text-align:left;margin:3px 0;font-size:13px}
+.nav-btn:hover,.nav-btn.active{background:linear-gradient(90deg,#30245d,#1b1c37);color:white}
+.nav-btn.active{box-shadow:inset 3px 0 var(--purple)}
+.nav-icon{width:20px;text-align:center;color:#bba7ff;font-size:17px}
+.sidebar-bottom{margin-top:35px;padding:15px;border:1px solid var(--line);border-radius:13px;background:#14162a}
+.sidebar-bottom p{font-size:11px;color:var(--muted);line-height:1.6}
+.main{margin-left:245px;width:calc(100% - 245px);min-width:0}
+.topbar{height:72px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 30px;background:#0b0d1b;position:sticky;top:0;z-index:8}
+.top-left{display:flex;align-items:center;gap:13px}
+.topbar h2{font-size:14px;margin:0}
+.topbar small{color:var(--muted);font-size:11px}
+.top-actions{display:flex;align-items:center;gap:10px}
+.avatar{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#8b5cf6,#ec4899);font-weight:bold}
+.content{padding:30px;max-width:1500px;margin:auto}
+.page{display:none}.page.active{display:block}
+.eyebrow{font-size:10px;color:var(--cyan);letter-spacing:3px;font-weight:bold}
+h1{font-size:clamp(27px,4vw,39px);letter-spacing:-1.3px;margin:10px 0}
+h2{letter-spacing:-.4px}
+.sub{color:var(--muted);font-size:13px;line-height:1.7}
+.btn{border:1px solid transparent;border-radius:9px;padding:11px 15px;color:white;background:linear-gradient(110deg,#8058ed,#a35ce5);font-weight:700;font-size:12px}
+.btn:hover{filter:brightness(1.15);transform:translateY(-1px)}
+.btn.secondary{background:#1b1e38;border-color:#35385e;color:#dedcff}
+.btn.ghost{background:transparent;border-color:var(--line);color:#bfc2db}
+.btn.danger{background:#51263a;border-color:#82445d}
+.btn.small{padding:8px 10px;font-size:11px}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.grid{display:grid;gap:15px}
+.stats{grid-template-columns:repeat(4,minmax(0,1fr));margin:25px 0}
+.stat,.panel{background:linear-gradient(145deg,#15172d,#101222);border:1px solid var(--line);border-radius:15px;padding:19px}
+.stat small{color:var(--muted);font-size:11px}
+.stat strong{display:block;font-size:28px;margin:10px 0 4px}
+.stat span{font-size:10px;color:var(--green)}
+.panel{margin-bottom:18px}
+.panel h3{font-size:15px;margin:0 0 14px}
+.quick-grid{grid-template-columns:repeat(3,minmax(0,1fr));margin:18px 0 25px}
+.quick{padding:20px;background:#15172d;border:1px solid var(--line);border-radius:14px;cursor:pointer;transition:.2s}
+.quick:hover{border-color:var(--purple);transform:translateY(-3px)}
+.quick .ico{font-size:24px;margin-bottom:14px;color:#bba7ff}
+.quick strong{display:block;font-size:13px}
+.quick small{color:var(--muted);font-size:11px;line-height:1.5}
+.toolbar{display:flex;gap:9px;flex-wrap:wrap;margin:20px 0}
+.field{background:#0c0e1e;border:1px solid #343653;border-radius:9px;padding:11px 12px;color:white;outline:none;min-width:0;width:100%}
+.field:focus{border-color:var(--purple)}
+.toolbar .field{width:auto;flex:1;min-width:150px}
+label{font-size:11px;color:#b7bad3;display:block;margin-bottom:7px}
+.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.form-group.full{grid-column:1/-1}
+textarea.field{min-height:95px;resize:vertical}
+.cards{grid-template-columns:repeat(3,minmax(0,1fr))}
+.character{overflow:hidden;padding:0}
+.art{height:205px;position:relative;display:grid;place-items:center;overflow:hidden;background:radial-gradient(circle at 50% 45%,#6550a4,#20203e 55%,#101221)}
+.art img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.art .initial{font-size:74px;font-weight:900;color:#fff;text-shadow:0 4px 35px #080914;z-index:1}
+.art:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 55%,#101222)}
+.char-info{padding:15px}
+.char-info h3{margin:0 0 6px;font-size:15px}
+.char-info p{font-size:11px;color:var(--muted);line-height:1.6;min-height:35px}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
+.tag{font-size:9px;color:#d7caff;background:#2b2450;border-radius:20px;padding:5px 8px}
+.card-actions{display:flex;gap:7px;margin-top:12px}
+.card-actions button{flex:1}
+.empty{padding:40px;text-align:center;color:var(--muted);border:1px dashed #393b5d;border-radius:13px}
+.scene-list{display:grid;gap:10px}
+.scene{padding:14px;background:#15172c;border:1px solid var(--line);border-radius:12px;display:flex;gap:13px;align-items:center}
+.scene-no{width:38px;height:38px;border-radius:9px;background:#2b2450;display:grid;place-items:center;color:#d8c9ff;font-weight:bold}
+.scene p{font-size:11px;color:var(--muted);margin:5px 0}
+.editor{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:15px}
+.preview{aspect-ratio:16/9;background:radial-gradient(circle at 50% 40%,#38305e,#0b0d1a 75%);border:1px solid #39385e;border-radius:13px;display:grid;place-items:center;position:relative;overflow:hidden}
+.preview-text{text-align:center;padding:20px}
+.preview-text strong{display:block;font-size:clamp(18px,3vw,32px)}
+.preview-text p{color:#c1b7e7;font-size:12px}
+.timeline{margin-top:15px;background:#101225;border:1px solid var(--line);padding:14px;border-radius:12px}
+.track{height:33px;border-radius:6px;background:#1d2040;margin:8px 0;display:flex;overflow:hidden}
+.clip{height:100%;min-width:70px;flex:1;background:linear-gradient(90deg,#7855dd,#b16be9);margin-right:3px;border-radius:4px;display:grid;place-items:center;font-size:10px}
+.clip:nth-child(2){background:linear-gradient(90deg,#267f9b,#47bfd2)}
+.clip:nth-child(3){background:linear-gradient(90deg,#a94b83,#e36ca9)}
+.track-label{font-size:10px;color:var(--muted)}
+.list{display:grid;gap:9px}
+.list-item{padding:13px;background:#15172c;border:1px solid var(--line);border-radius:10px}
+.list-item strong{font-size:12px}
+.list-item p{font-size:11px;color:var(--muted);margin:5px 0}
+.status{font-size:10px;color:var(--green)}
+.notice{padding:13px;border:1px solid #4b4274;background:#211c3c;border-radius:10px;color:#d4c9ff;font-size:11px;line-height:1.7;margin:14px 0}
+.modal{display:none;position:fixed;inset:0;background:#050610dd;z-index:30;place-items:center;padding:15px}
+.modal.open{display:grid}
+.modal-box{width:min(650px,100%);max-height:90vh;overflow:auto;background:#14162a;border:1px solid #45416f;border-radius:16px;padding:22px}
+.modal-box h2{margin-top:0}
+.close{float:right;background:#292b48;color:white;border:0;border-radius:8px;padding:7px 11px}
+hr{border:0;border-top:1px solid var(--line);margin:18px 0}
+.mobile-menu{display:none}
+.footer{text-align:center;color:#696d8a;font-size:10px;padding:30px}
+@media(max-width:1000px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.quick-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:720px){
+ .sidebar{transform:translateX(-100%);transition:.25s}.sidebar.show{transform:translateX(0)}
+ .main{margin-left:0;width:100%}.mobile-menu{display:inline-block}
+ .topbar{padding:0 13px}.content{padding:19px 14px}
+ .cards{grid-template-columns:1fr 1fr}.editor{grid-template-columns:1fr}
+ .quick-grid{grid-template-columns:1fr 1fr}
 }
-a{text-decoration:none;color:inherit}
-button{font:inherit;cursor:pointer}
-
-/* NAVBAR */
-.navbar{
-  position:sticky;
-  top:0;
-  z-index:100;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:20px;
-  padding:17px 6%;
-  background:rgba(8,11,24,.94);
-  backdrop-filter:blur(18px);
-  border-bottom:1px solid var(--border);
-}
-.logo{
-  font-size:22px;
-  font-weight:900;
-  white-space:nowrap;
-}
-.logo span{color:#bd83ff}
-.nav-links{
-  display:flex;
-  align-items:center;
-  gap:22px;
-  font-size:14px;
-  color:var(--muted);
-}
-.nav-links a:hover{color:var(--blue)}
-.nav-button,.primary{
-  border:0;
-  border-radius:10px;
-  padding:12px 18px;
-  background:linear-gradient(100deg,#963be8,#5267ff);
-  color:white;
-  font-weight:bold;
-  box-shadow:0 0 20px #963be833;
-}
-
-/* HERO */
-.hero{
-  min-height:590px;
-  display:flex;
-  align-items:center;
-  padding:85px 8%;
-  position:relative;
-  overflow:hidden;
-}
-.hero-content{
-  max-width:720px;
-  position:relative;
-  z-index:2;
-}
-.hero-label{
-  color:var(--blue);
-  letter-spacing:3px;
-  font-size:12px;
-  font-weight:bold;
-  margin-bottom:22px;
-}
-.hero h1{
-  font-size:clamp(42px,7vw,78px);
-  line-height:1.08;
-  margin-bottom:22px;
-}
-.gradient-text{
-  background:linear-gradient(90deg,#c084fc,#38bdf8);
-  background-clip:text;
-  -webkit-background-clip:text;
-  color:transparent;
-}
-.hero p{
-  color:var(--muted);
-  line-height:1.8;
-  max-width:560px;
-  margin-bottom:30px;
-}
-.hero-actions{display:flex;flex-wrap:wrap;gap:13px}
-.secondary{
-  display:inline-block;
-  border:1px solid #ffffff35;
-  background:#ffffff0b;
-  color:white;
-  padding:12px 20px;
-  border-radius:10px;
-}
-.hero-glow{
-  position:absolute;
-  width:350px;
-  height:350px;
-  right:12%;
-  top:20%;
-  background:#7828d6;
-  filter:blur(130px);
-  opacity:.3;
-}
-
-/* GENERAL SECTIONS */
-.section{padding:70px 7%}
-.heading{text-align:center;margin-bottom:38px}
-.heading h2{font-size:clamp(26px,4vw,38px);margin-bottom:12px}
-.heading p{color:var(--muted);line-height:1.7}
-.grid{
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:22px;
-}
-.card{
-  background:linear-gradient(145deg,var(--panel2),var(--panel));
-  border:1px solid var(--border);
-  border-radius:17px;
-  padding:24px;
-  transition:.3s;
-}
-.card:hover{
-  transform:translateY(-6px);
-  border-color:var(--purple);
-  box-shadow:0 12px 35px #8b35ff22;
-}
-.card-icon{
-  width:58px;
-  height:58px;
-  display:grid;
-  place-items:center;
-  font-size:30px;
-  background:#a855f722;
-  border-radius:14px;
-  margin-bottom:19px;
-}
-.card h3{font-size:20px;margin-bottom:12px}
-.card p{color:var(--muted);font-size:14px;line-height:1.7;margin-bottom:18px}
-.card-link{
-  color:var(--blue);
-  font-weight:bold;
-  font-size:14px;
-}
-
-/* FEATURE STRIP */
-.feature-strip{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
-  margin-top:35px;
-}
-.feature{
-  background:#ffffff08;
-  border:1px solid var(--border);
-  padding:22px;
-  border-radius:14px;
-  text-align:center;
-}
-.feature strong{display:block;font-size:25px;color:#c084fc;margin-bottom:8px}
-.feature span{font-size:13px;color:var(--muted)}
-
-/* CHARACTER PREVIEW */
-.character-preview{
-  background:linear-gradient(130deg,#17112f,#101d35);
-  border-top:1px solid var(--border);
-  border-bottom:1px solid var(--border);
-}
-.character-preview .card{
-  text-align:center;
-  padding:0;
-  overflow:hidden;
-}
-.character-art{
-  height:180px;
-  display:grid;
-  place-items:center;
-  font-size:75px;
-}
-.art-one{background:linear-gradient(135deg,#193b77,#6724bd)}
-.art-two{background:linear-gradient(135deg,#101522,#34345e)}
-.art-three{background:linear-gradient(135deg,#4b123d,#160e2d)}
-.character-text{padding:20px}
-.character-text h3{margin-bottom:8px}
-.character-text p{margin:0}
-.character-tag{
-  display:inline-block;
-  margin-top:12px;
-  padding:6px 11px;
-  background:#a855f722;
-  color:#d9b5ff;
-  border-radius:30px;
-  font-size:10px;
-  font-weight:bold;
-}
-.center-action{text-align:center;margin-top:32px}
-
-/* CREATOR BANNER */
-.creator-banner{
-  margin:30px 7% 70px;
-  padding:55px 25px;
-  text-align:center;
-  background:linear-gradient(120deg,#27134c,#122e53);
-  border:1px solid var(--border);
-  border-radius:20px;
-}
-.creator-banner h2{font-size:clamp(25px,4vw,35px);margin-bottom:13px}
-.creator-banner p{
-  color:var(--muted);
-  line-height:1.7;
-  margin-bottom:24px;
-}
-
-/* MODAL */
-.modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  z-index:200;
-  background:#000c;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-}
-.modal.show{display:flex}
-.modal-box{
-  width:100%;
-  max-width:430px;
-  background:#141c32;
-  border:1px solid var(--border);
-  padding:28px;
-  border-radius:17px;
-}
-.modal-box h2{margin-bottom:20px}
-.modal-box input{
-  width:100%;
-  padding:14px;
-  margin-bottom:15px;
-  background:#080e20;
-  border:1px solid var(--border);
-  color:white;
-  border-radius:9px;
-  outline:none;
-}
-.modal-actions{display:flex;gap:10px}
-.modal-actions button{flex:1}
-.cancel{
-  background:#29334c;
-  color:white;
-  border:0;
-  padding:12px;
-  border-radius:9px;
-}
-.project-message{
-  color:var(--blue);
-  font-size:13px;
-  margin-top:12px;
-}
-
-/* FOOTER */
-footer{
-  padding:30px 6%;
-  border-top:1px solid var(--border);
-  text-align:center;
-  color:var(--muted);
-  font-size:13px;
-}
-.footer-links{
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:20px;
-  margin-bottom:18px;
-}
-.footer-links a:hover{color:var(--blue)}
-
-/* RESPONSIVE */
-@media(max-width:850px){
-  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .nav-links{gap:12px}
-}
-@media(max-width:600px){
-  .navbar{padding:14px 5%;flex-wrap:wrap}
-  .logo{font-size:18px}
-  .nav-links{
-    order:3;
-    width:100%;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:15px;
-    font-size:12px;
-  }
-  .nav-button{padding:10px 12px;font-size:12px}
-  .hero{min-height:490px;padding:65px 6%}
-  .section{padding:50px 6%}
-  .grid{grid-template-columns:1fr}
-  .feature-strip{grid-template-columns:1fr}
-  .creator-banner{margin:20px 6% 50px;padding:38px 18px}
-}
+@media(max-width:430px){.cards{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.stat strong{font-size:23px}.topbar small{display:none}.quick-grid{grid-template-columns:1fr 1fr}}
 </style>
 </head>
-
 <body>
+<div class="app">
+<aside class="sidebar" id="sidebar">
+ <div class="brand">FIX <span>ANIME</span><small>CREATIVE INTELLIGENCE</small></div>
+ <div class="nav-label">WORKSPACE</div>
+ <button class="nav-btn active" data-page="dashboard"><span class="nav-icon">⌂</span>Overview</button>
+ <button class="nav-btn" data-page="characters"><span class="nav-icon">◈</span>Characters</button>
+ <button class="nav-btn" data-page="story"><span class="nav-icon">▤</span>Script & Story</button>
+ <button class="nav-btn" data-page="scenes"><span class="nav-icon">▧</span>Storyboard</button>
+ <button class="nav-btn" data-page="video"><span class="nav-icon">▶</span>Animation Studio</button>
+ <button class="nav-btn" data-page="backgrounds"><span class="nav-icon">▦</span>Backgrounds</button>
+ <button class="nav-btn" data-page="voice"><span class="nav-icon">♫</span>Voice Studio</button>
+ <div class="nav-label">MANAGEMENT</div>
+ <button class="nav-btn" data-page="library"><span class="nav-icon">▣</span>Project Library</button>
+ <button class="nav-btn" data-page="admin"><span class="nav-icon">⚙</span>Admin Panel</button>
+ <div class="sidebar-bottom">
+  <strong style="font-size:12px">Your creative space</strong>
+  <p>Build original worlds, characters and animated stories.</p>
+  <span class="status">● Local workspace active</span>
+ </div>
+</aside>
 
-<!-- NAVIGATION -->
-<header class="navbar">
-  <a href="index.html" class="logo">
-    FIX <span>ANIME</span> STUDIO
-  </a>
-
-  <nav class="nav-links">
-    <a href="index.html">Home</a>
-    <a href="#projects">Projects</a>
-    <a href="characters.html">Characters</a>
-    <a href="#creator">Creator</a>
-    <a href="admin.html">Admin</a>
-  </nav>
-
-  <button class="nav-button" onclick="openModal()">
-    + New Project
-  </button>
+<main class="main">
+<header class="topbar">
+ <div class="top-left">
+  <button class="btn secondary small mobile-menu" onclick="document.getElementById('sidebar').classList.toggle('show')">☰</button>
+  <div><h2 id="pageTitle">Overview</h2><small>FIX ANIME STUDIO / Workspace</small></div>
+ </div>
+ <div class="top-actions">
+  <button class="btn ghost small" onclick="newProject()">＋ New Project</button>
+  <div class="avatar">F</div>
+ </div>
 </header>
 
-<!-- HERO -->
-<main>
-<section class="hero" id="home">
-  <div class="hero-glow"></div>
+<div class="content">
 
-  <div class="hero-content">
-    <div class="hero-label">✦ YOUR IMAGINATION. YOUR UNIVERSE.</div>
-
-    <h1>
-      Create Your Own<br>
-      <span class="gradient-text">Anime Universe</span>
-    </h1>
-
-    <p>
-      Welcome to FIX ANIME STUDIO. Create original anime
-      characters, design fantasy worlds, develop amazing
-      stories and build your own anime universe.
-    </p>
-
-    <div class="hero-actions">
-      <button class="primary" onclick="openModal()">
-        Start Creating →
-      </button>
-      <a href="characters.html" class="secondary">
-        Explore Characters
-      </a>
-    </div>
-  </div>
+<section class="page active" id="dashboard">
+ <div class="row">
+  <div><div class="eyebrow">YOUR ANIMATION WORKSPACE</div><h1>Create your next universe.</h1><p class="sub">Turn original ideas into characters, scenes and animated stories.</p></div>
+  <button class="btn" onclick="newProject()">＋ Create Project</button>
+ </div>
+ <div class="grid stats">
+  <div class="stat"><small>Total Characters</small><strong id="statChars">0</strong><span>In your library</span></div>
+  <div class="stat"><small>Projects</small><strong id="statProjects">0</strong><span>Saved locally</span></div>
+  <div class="stat"><small>Storyboard Scenes</small><strong id="statScenes">0</strong><span>Across workspace</span></div>
+  <div class="stat"><small>Video Exports</small><strong id="statExports">0</strong><span>Downloaded files</span></div>
+ </div>
+ <h2 style="font-size:17px">Creative tools</h2>
+ <div class="grid quick-grid">
+  <div class="quick" onclick="go('characters')"><div class="ico">◈</div><strong>Character Creator</strong><small>Build original 2D and 3D characters.</small></div>
+  <div class="quick" onclick="go('story')"><div class="ico">▤</div><strong>Story Writer</strong><small>Write scripts and organize your story.</small></div>
+  <div class="quick" onclick="go('scenes')"><div class="ico">▧</div><strong>Storyboard Builder</strong><small>Plan scenes, shots and dialogue.</small></div>
+  <div class="quick" onclick="go('backgrounds')"><div class="ico">▦</div><strong>Background Studio</strong><small>Prepare scene background artwork.</small></div>
+  <div class="quick" onclick="go('voice')"><div class="ico">♫</div><strong>Voice Studio</strong><small>Prepare narration and dialogue.</small></div>
+  <div class="quick" onclick="go('video')"><div class="ico">▶</div><strong>Animation Editor</strong><small>Arrange scenes on a timeline.</small></div>
+ </div>
+ <div class="panel">
+  <div class="row"><h3>Recent Projects</h3><button class="btn secondary small" onclick="go('library')">View Library</button></div>
+  <div id="recentProjects" class="list"></div>
+ </div>
 </section>
 
-<!-- PROJECTS -->
-<section class="section" id="projects">
-  <div class="heading">
-    <h2>✦ Creative Workspace</h2>
-    <p>Everything starts with your imagination.</p>
-  </div>
-
-  <div class="grid" id="projectGrid">
-
-    <article class="card">
-      <div class="card-icon">🎨</div>
-      <h3>Character Creator</h3>
-      <p>Design original anime heroes, villains and unique characters.</p>
-      <a href="characters.html" class="card-link">Explore Characters →</a>
-    </article>
-
-    <article class="card">
-      <div class="card-icon">🌌</div>
-      <h3>Anime World</h3>
-      <p>Imagine fantasy kingdoms, magical cities and mysterious worlds.</p>
-      <button class="card-link" onclick="showFeature('Anime World')">Explore →</button>
-    </article>
-
-    <article class="card">
-      <div class="card-icon">🎬</div>
-      <h3>Episode Studio</h3>
-      <p>Organize your ideas into stories, scenes and anime episodes.</p>
-      <button class="card-link" onclick="showFeature('Episode Studio')">Explore →</button>
-    </article>
-
-    <article class="card">
-      <div class="card-icon">📖</div>
-      <h3>Story Creator</h3>
-      <p>Write original anime stories, dialogues and exciting adventures.</p>
-      <button class="card-link" onclick="showFeature('Story Creator')">Explore →</button>
-    </article>
-
-    <article class="card">
-      <div class="card-icon">🧊</div>
-      <h3>3D Universe</h3>
-      <p>Plan your future 3D characters, environments and animation scenes.</p>
-      <button class="card-link" onclick="showFeature('3D Universe')">Explore →</button>
-    </article>
-
-    <article class="card">
-      <div class="card-icon">✨</div>
-      <h3>Anime Gallery</h3>
-      <p>Showcase your characters, artwork and creative projects.</p>
-      <a href="characters.html" class="card-link">Open Gallery →</a>
-    </article>
-
-  </div>
-
-  <div class="feature-strip">
-    <div class="feature">
-      <strong>2D</strong>
-      <span>Anime Art Concept</span>
-    </div>
-    <div class="feature">
-      <strong>3D</strong>
-      <span>Future 3D Studio</span>
-    </div>
-    <div class="feature">
-      <strong>∞</strong>
-      <span>Unlimited Imagination</span>
-    </div>
-  </div>
+<section class="page" id="characters">
+ <div class="row"><div><div class="eyebrow">CHARACTER UNIVERSE</div><h1>Character Library</h1><p class="sub">Create and manage your own consistent original characters.</p></div><button class="btn" onclick="openCharacter()">＋ New Character</button></div>
+ <div class="toolbar">
+  <input class="field" id="charSearch" placeholder="Search characters..." oninput="renderCharacters()">
+  <select class="field" id="charType" onchange="renderCharacters()"><option value="all">All Styles</option><option>2D</option><option>3D</option></select>
+  <select class="field" id="charRole" onchange="renderCharacters()"><option value="all">All Roles</option><option>Hero</option><option>Villain</option><option>Warrior</option><option>Princess</option><option>Mage</option><option>Other</option></select>
+ </div>
+ <div class="grid cards" id="characterGrid"></div>
 </section>
 
-<!-- CHARACTER PREVIEW -->
-<section class="section character-preview" id="characters-preview">
-  <div class="heading">
-    <h2>✦ Anime Universe Characters</h2>
-    <p>Meet some of the heroes and legends of our universe.</p>
+<section class="page" id="story">
+ <div class="eyebrow">STORY DEVELOPMENT</div><h1>Script & Story</h1>
+ <p class="sub">Write your episode idea, story outline and dialogue.</p>
+ <div class="panel">
+  <div class="form-grid">
+   <div class="form-group"><label>Project / Episode Title</label><input class="field" id="storyTitle" placeholder="The Last Light"></div>
+   <div class="form-group"><label>Genre</label><select class="field" id="storyGenre"><option>Fantasy Adventure</option><option>Action</option><option>Mystery</option><option>Comedy</option><option>Science Fiction</option><option>Drama</option></select></div>
+   <div class="form-group full"><label>Story Idea</label><textarea class="field" id="storyIdea" placeholder="Describe your original anime story..."></textarea></div>
+   <div class="form-group full"><label>Episode Script / Dialogue</label><textarea class="field" id="script" style="min-height:220px" placeholder="SCENE 1 — EXT. ANCIENT CITY — NIGHT&#10;&#10;NARRATOR: A new journey begins...&#10;&#10;HERO: Who is there?"></textarea></div>
   </div>
-
-  <div class="grid">
-
-    <article class="card">
-      <div class="character-art art-one">⚡</div>
-      <div class="character-text">
-        <h3>Akira Storm</h3>
-        <p>Thunder-powered young hero.</p>
-        <span class="character-tag">MAIN HERO</span>
-      </div>
-    </article>
-
-    <article class="card">
-      <div class="character-art art-two">🥷</div>
-      <div class="character-text">
-        <h3>Kage Shadow</h3>
-        <p>Mysterious guardian ninja.</p>
-        <span class="character-tag">DARK NINJA</span>
-      </div>
-    </article>
-
-    <article class="card">
-      <div class="character-art art-three">👿</div>
-      <div class="character-text">
-        <h3>Lord Zareth</h3>
-        <p>Ancient master of dark energy.</p>
-        <span class="character-tag">MAIN VILLAIN</span>
-      </div>
-    </article>
-
-  </div>
-
-  <div class="center-action">
-    <a href="characters.html" class="primary">
-      View All Characters →
-    </a>
-  </div>
+  <div class="toolbar"><button class="btn" onclick="saveStory()">Save Story</button><button class="btn secondary" onclick="downloadScript()">Download Script</button></div>
+  <div class="notice">AI script writing is not connected yet. This editor saves your own writing locally. An AI writing API can be connected through a secure backend later.</div>
+ </div>
 </section>
 
-<!-- CREATOR -->
-<section class="creator-banner" id="creator">
-  <h2>Ready to Create Your Anime?</h2>
-  <p>
-    Start with an idea. Build a character. Create a story.
-    Make your own anime universe with FIX ANIME STUDIO.
-  </p>
-  <button class="primary" onclick="openModal()">
-    Create New Project →
-  </button>
+<section class="page" id="scenes">
+ <div class="eyebrow">VISUAL STORYTELLING</div><h1>Storyboard Studio</h1>
+ <p class="sub">Break your episode into individual scenes and shots.</p>
+ <div class="panel">
+  <div class="row"><h3>Scene Builder</h3><button class="btn" onclick="addScene()">＋ Add Scene</button></div>
+  <div class="form-grid">
+   <div class="form-group"><label>Scene Title</label><input class="field" id="sceneTitle" placeholder="The arrival"></div>
+   <div class="form-group"><label>Location / Background</label><input class="field" id="sceneLocation" placeholder="Ancient forest at night"></div>
+   <div class="form-group"><label>Characters</label><select class="field" id="sceneCharacter"></select></div>
+   <div class="form-group"><label>Camera Shot</label><select class="field" id="sceneCamera"><option>Wide Shot</option><option>Close Up</option><option>Medium Shot</option><option>Over The Shoulder</option><option>Low Angle</option><option>High Angle</option></select></div>
+   <div class="form-group full"><label>Action & Dialogue</label><textarea class="field" id="sceneAction" placeholder="Describe what happens in this scene..."></textarea></div>
+  </div>
+  <div class="toolbar"><button class="btn" onclick="addScene()">Add to Storyboard</button><button class="btn secondary" onclick="downloadStoryboard()">Download Storyboard</button></div>
+ </div>
+ <div class="panel"><div class="row"><h3>Your Scenes</h3><span class="sub" id="sceneCount">0 scenes</span></div><div class="scene-list" id="sceneList"></div></div>
 </section>
+
+<section class="page" id="video">
+ <div class="eyebrow">PRODUCTION WORKSPACE</div><h1>Animation Studio</h1>
+ <p class="sub">Arrange your storyboard into a video production plan.</p>
+ <div class="editor">
+  <div>
+   <div class="preview" id="videoPreview"><div class="preview-text"><strong>FIX ANIME STUDIO</strong><p>Your animation preview canvas</p></div></div>
+   <div class="toolbar">
+    <button class="btn" onclick="previewScene()">▶ Preview Scene</button>
+    <button class="btn secondary" onclick="downloadProduction()">Export Project Data</button>
+   </div>
+   <div class="timeline">
+    <div class="row"><strong style="font-size:12px">EDITING TIMELINE</strong><span class="sub">Scene sequence</span></div>
+    <div class="track-label">VIDEO / SCENES</div><div class="track" id="videoTrack"></div>
+    <div class="track-label">CHARACTERS / ACTIONS</div><div class="track"><div class="clip">Character</div><div class="clip">Action</div></div>
+    <div class="track-label">VOICE / AUDIO</div><div class="track"><div class="clip">Dialogue</div><div class="clip">Narration</div></div>
+   </div>
+  </div>
+  <div class="panel">
+   <h3>Animation Controls</h3>
+   <label>Character Action</label><select class="field" id="action"><option>Idle</option><option>Walking</option><option>Running</option><option>Talking</option><option>Waving</option><option>Jumping</option><option>Surprised</option></select>
+   <label style="margin-top:13px">Facial Expression</label><select class="field" id="expression"><option>Neutral</option><option>Happy</option><option>Angry</option><option>Sad</option><option>Surprised</option><option>Determined</option></select>
+   <label style="margin-top:13px">Camera Movement</label><select class="field" id="camera"><option>Static</option><option>Zoom In</option><option>Zoom Out</option><option>Pan Left</option><option>Pan Right</option></select>
+   <label style="margin-top:13px">Scene Duration (seconds)</label><input class="field" id="duration" type="number" min="1" max="300" value="8">
+   <div class="notice">These controls save production settings. Real character rigging, lip-sync and rendered video require an animation engine or AI video API.</div>
+  </div>
+ </div>
+</section>
+
+<section class="page" id="backgrounds">
+ <div class="eyebrow">ENVIRONMENT DESIGN</div><h1>Background Studio</h1>
+ <p class="sub">Organize visual references and background prompts for your anime scenes.</p>
+ <div class="panel">
+  <label>Background Description</label><textarea id="bgPrompt" class="field" placeholder="A mysterious ancient city, glowing blue lanterns, cinematic night atmosphere, original anime environment..."></textarea>
+  <label style="margin-top:14px">Visual Style</label><select class="field" id="bgStyle"><option>2D Anime</option><option>3D Cinematic</option><option>Watercolor Fantasy</option><option>Dark Fantasy</option><option>Cyberpunk</option></select>
+  <label style="margin-top:14px">Reference Image URL (optional)</label><input id="bgUrl" class="field" placeholder="https://...">
+  <div class="toolbar"><button class="btn" onclick="saveBackground()">Save Background Brief</button><button class="btn secondary" onclick="downloadBackgrounds()">Export Briefs</button></div>
+  <div class="notice">This is a background planning tool. Actual AI background generation will need a connected image-generation service.</div>
+ </div>
+ <div class="grid cards" id="backgroundGrid"></div>
+</section>
+
+<section class="page" id="voice">
+ <div class="eyebrow">DIALOGUE & SOUND</div><h1>Voice Studio</h1>
+ <p class="sub">Prepare character dialogue, narration and voice direction.</p>
+ <div class="panel">
+  <div class="form-grid">
+   <div class="form-group"><label>Character</label><select class="field" id="voiceCharacter"></select></div>
+   <div class="form-group"><label>Voice Direction</label><select class="field" id="voiceStyle"><option>Calm</option><option>Energetic</option><option>Dramatic</option><option>Mysterious</option><option>Gentle</option><option>Confident</option></select></div>
+   <div class="form-group"><label>Language</label><select class="field" id="voiceLanguage"><option>English</option><option>Bangla</option><option>Japanese</option><option>Hindi</option></select></div>
+   <div class="form-group"><label>Voice Type</label><select class="field" id="voiceType"><option>Natural</option><option>Deep</option><option>Bright</option><option>Soft</option></select></div>
+   <div class="form-group full"><label>Dialogue / Narration</label><textarea class="field" id="voiceText" placeholder="Write the dialogue here..."></textarea></div>
+  </div>
+  <div class="toolbar"><button class="btn" onclick="saveVoice()">Save Voice Script</button><button class="btn secondary" onclick="downloadVoice()">Download Voice Script</button></div>
+  <div class="notice">Voice generation and lip-sync are not active in this frontend version. Connect a text-to-speech service through a secure server to generate audio.</div>
+ </div>
+ <div class="panel"><h3>Saved Voice Scripts</h3><div class="list" id="voiceList"></div></div>
+</section>
+
+<section class="page" id="library">
+ <div class="eyebrow">YOUR WORK</div><h1>Project Library</h1>
+ <p class="sub">Your locally saved projects and creative assets.</p>
+ <div class="toolbar"><button class="btn" onclick="newProject()">＋ New Project</button><button class="btn secondary" onclick="exportAll()">Export Workspace Backup</button><button class="btn ghost" onclick="document.getElementById('importFile').click()">Import Backup</button><input type="file" id="importFile" accept=".json,application/json" hidden onchange="importBackup(event)"></div>
+ <div class="list" id="projectList"></div>
+</section>
+
+<section class="page" id="admin">
+ <div class="eyebrow">CONTROL CENTER</div><h1>Admin Panel</h1>
+ <p class="sub">Manage your local workspace data.</p>
+ <div class="grid stats">
+  <div class="stat"><small>Characters</small><strong id="adminChars">0</strong></div>
+  <div class="stat"><small>Projects</small><strong id="adminProjects">0</strong></div>
+  <div class="stat"><small>Scenes</small><strong id="adminScenes">0</strong></div>
+  <div class="stat"><small>Background Briefs</small><strong id="adminBackgrounds">0</strong></div>
+ </div>
+ <div class="panel">
+  <h3>Workspace Management</h3>
+  <div class="toolbar"><button class="btn" onclick="exportAll()">Download Backup</button><button class="btn secondary" onclick="document.getElementById('importFile').click()">Restore Backup</button></div>
+  <div class="notice">This Admin Panel is a local browser workspace, not a secure multi-user admin system. For a public website, use server-side authentication and a shared database. Never store admin passwords or private API keys in frontend code.</div>
+ </div>
+ <div class="panel">
+  <h3>Data Management</h3>
+  <p class="sub">Resetting the workspace removes locally stored characters, scenes, projects and briefs.</p>
+  <button class="btn danger" onclick="resetWorkspace()">Reset Local Workspace</button>
+ </div>
+</section>
+
+<div class="footer">FIX ANIME STUDIO · ORIGINAL WORLDS. UNLIMITED STORIES.</div>
+</div>
 </main>
-
-<!-- PROJECT MODAL -->
-<div class="modal" id="projectModal">
-  <div class="modal-box">
-    <h2>✦ Create New Project</h2>
-
-    <input
-      id="projectName"
-      type="text"
-      placeholder="Enter your anime project name"
-      maxlength="60"
-    >
-
-    <div class="modal-actions">
-      <button class="primary" onclick="createProject()">Create Project</button>
-      <button class="cancel" onclick="closeModal()">Cancel</button>
-    </div>
-
-    <div class="project-message" id="projectMessage"></div>
-  </div>
 </div>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-links">
-    <a href="index.html">Home</a>
-    <a href="characters.html">Characters</a>
-    <a href="admin.html">Admin Panel</a>
+<div class="modal" id="characterModal">
+ <div class="modal-box">
+  <button class="close" onclick="closeCharacter()">✕</button>
+  <h2 id="modalTitle">Create Character</h2>
+  <p class="sub">Add an original character to your universe.</p>
+  <input type="hidden" id="characterId">
+  <div class="form-grid" style="margin-top:20px">
+   <div class="form-group"><label>Character Name</label><input class="field" id="cName" maxlength="60" placeholder="Character name"></div>
+   <div class="form-group"><label>Art Style</label><select class="field" id="cType"><option>2D</option><option>3D</option></select></div>
+   <div class="form-group"><label>Role</label><select class="field" id="cRole"><option>Hero</option><option>Villain</option><option>Warrior</option><option>Princess</option><option>Mage</option><option>Other</option></select></div>
+   <div class="form-group"><label>Special Ability</label><input class="field" id="cPower" placeholder="Special ability"></div>
+   <div class="form-group full"><label>Artwork Image URL</label><input class="field" id="cImage" placeholder="https://..."></div>
+   <div class="form-group full"><label>Character Description</label><textarea class="field" id="cStory" placeholder="Personality, appearance, backstory..."></textarea></div>
   </div>
-
-  <p>© 2026 FIX ANIME STUDIO. All Rights Reserved.</p>
-  <p style="margin-top:9px">Create • Imagine • Animate</p>
-</footer>
+  <div class="toolbar"><button class="btn" onclick="saveCharacter()">Save Character</button><button class="btn secondary" onclick="closeCharacter()">Cancel</button></div>
+ </div>
+</div>
 
 <script>
-const PROJECT_KEY = "fixAnimeProjects";
-
-function openModal(){
-  document.getElementById("projectModal").classList.add("show");
-  document.getElementById("projectName").focus();
+const DBKEY="fixAnimeStudio_v1";
+const initial={
+ characters:[
+ {id:"a1",name:"Astra Raiyan",type:"2D",role:"Hero",power:"Void Strike",story:"A thoughtful young explorer with a mysterious cosmic gift.",image:"",color:"#7255be"},
+ {id:"a2",name:"Zenith Blaze",type:"3D",role:"Warrior",power:"Thunder Reign",story:"A disciplined guardian whose courage inspires a city.",image:"",color:"#267b9a"},
+ {id:"a3",name:"Draco Vortex",type:"3D",role:"Villain",power:"Dark Eclipse",story:"A calculating antagonist who seeks an ancient source of power.",image:"",color:"#773b70"},
+ {id:"a4",name:"Sakura Mirai",type:"2D",role:"Princess",power:"Ice Blossom",story:"A kind but determined royal protector of a winter kingdom.",image:"",color:"#a64e89"},
+ {id:"a5",name:"Ryu Kazen",type:"2D",role:"Warrior",power:"Inferno Flame",story:"A bold wanderer with a fiery spirit and a strong sense of justice.",image:"",color:"#b45d35"},
+ {id:"a6",name:"Miyu Seraph",type:"3D",role:"Mage",power:"Spirit Magic",story:"A quiet scholar who studies the hidden language of spirits.",image:"",color:"#416eaa"}
+ ],
+ projects:[],scenes:[],stories:[],backgrounds:[],voices:[],exports:0
+};
+function load(){
+ try{
+  const saved=JSON.parse(localStorage.getItem(DBKEY));
+  if(saved&&typeof saved==="object")return {...structuredClone(initial),...saved};
+ }catch(e){}
+ return structuredClone(initial);
 }
-
-function closeModal(){
-  document.getElementById("projectModal").classList.remove("show");
-  document.getElementById("projectMessage").textContent = "";
+let db=load();
+function persist(){try{localStorage.setItem(DBKEY,JSON.stringify(db));refreshAll();return true}catch(e){alert("Storage is full. Export a backup or remove some large data.");return false}}
+function uid(){return "x"+Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
+function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function go(id){
+ document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+ document.getElementById(id).classList.add("active");
+ document.querySelectorAll(".nav-btn").forEach(b=>b.classList.toggle("active",b.dataset.page===id));
+ const names={dashboard:"Overview",characters:"Characters",story:"Script & Story",scenes:"Storyboard",video:"Animation Studio",backgrounds:"Background Studio",voice:"Voice Studio",library:"Project Library",admin:"Admin Panel"};
+ document.getElementById("pageTitle").textContent=names[id]||id;
+ document.getElementById("sidebar").classList.remove("show");
+ refreshAll();
 }
-
-function showFeature(name){
-  alert(name + " is planned for a future FIX ANIME STUDIO update.");
+document.querySelectorAll(".nav-btn").forEach(b=>b.addEventListener("click",()=>go(b.dataset.page)));
+function refreshAll(){
+ const count=id=>document.getElementById(id);
+ ["statChars","adminChars"].forEach(id=>count(id).textContent=db.characters.length);
+ ["statProjects","adminProjects"].forEach(id=>count(id).textContent=db.projects.length);
+ ["statScenes","adminScenes"].forEach(id=>count(id).textContent=db.scenes.length);
+ count("adminBackgrounds").textContent=db.backgrounds.length;
+ count("statExports").textContent=db.exports||0;
+ renderCharacters();renderScenes();renderProjects();renderBackgrounds();renderVoices();renderTimeline();fillCharacterSelects();
 }
-
-function getProjects(){
-  try{
-    return JSON.parse(localStorage.getItem(PROJECT_KEY)) || [];
-  }catch(error){
-    return [];
-  }
+function openCharacter(id){
+ const c=db.characters.find(x=>x.id===id);
+ document.getElementById("modalTitle").textContent=c?"Edit Character":"Create Character";
+ document.getElementById("characterId").value=c?.id||"";
+ document.getElementById("cName").value=c?.name||"";
+ document.getElementById("cType").value=c?.type||"2D";
+ document.getElementById("cRole").value=c?.role||"Hero";
+ document.getElementById("cPower").value=c?.power||"";
+ document.getElementById("cImage").value=c?.image||"";
+ document.getElementById("cStory").value=c?.story||"";
+ document.getElementById("characterModal").classList.add("open");
 }
-
-function saveProjects(projects){
-  localStorage.setItem(PROJECT_KEY, JSON.stringify(projects));
+function closeCharacter(){document.getElementById("characterModal").classList.remove("open")}
+function saveCharacter(){
+ const name=document.getElementById("cName").value.trim();
+ if(!name){alert("Enter a character name.");return}
+ const id=document.getElementById("characterId").value;
+ const obj={id:id||uid(),name,type:document.getElementById("cType").value,role:document.getElementById("cRole").value,power:document.getElementById("cPower").value.trim(),image:document.getElementById("cImage").value.trim(),story:document.getElementById("cStory").value.trim(),color:"#55418f"};
+ if(obj.image&&!/^https?:\/\//i.test(obj.image)){alert("Use a valid https:// or http:// image URL.");return}
+ if(id)db.characters=db.characters.map(c=>c.id===id?obj:c);else db.characters.unshift(obj);
+ if(persist())closeCharacter();
 }
-
-function createProject(){
-  const input = document.getElementById("projectName");
-  const message = document.getElementById("projectMessage");
-  const name = input.value.trim();
-
-  if(!name){
-    message.textContent = "Please enter a project name.";
-    return;
-  }
-
-  const projects = getProjects();
-
-  projects.push({
-    id: Date.now().toString(),
-    name: name,
-    createdAt: new Date().toISOString()
-  });
-
-  saveProjects(projects);
-  renderProjects();
-
-  input.value = "";
-  message.textContent = "Project created successfully!";
+function renderCharacters(){
+ const grid=document.getElementById("characterGrid");if(!grid)return;
+ const q=(document.getElementById("charSearch")?.value||"").toLowerCase();
+ const type=document.getElementById("charType")?.value||"all";
+ const role=document.getElementById("charRole")?.value||"all";
+ const list=db.characters.filter(c=>(type==="all"||c.type===type)&&(role==="all"||c.role===role)&&(c.name+" "+c.power+" "+c.story).toLowerCase().includes(q));
+ if(!list.length){grid.innerHTML='<div class="empty" style="grid-column:1/-1">No characters found. Create your first character.</div>';return}
+ grid.innerHTML=list.map(c=>`<article class="panel character">
+ <div class="art" style="background:radial-gradient(circle at 50% 45%,${esc(c.color||"#55418f")},#17172f 70%)">
+ ${c.image?`<img src="${esc(c.image)}" alt="${esc(c.name)}" onerror="this.remove()">`:""}
+ <span class="initial">${esc(c.name.slice(0,1).toUpperCase())}</span>
+ </div><div class="char-info"><h3>${esc(c.name)}</h3>
+ <div class="tags"><span class="tag">${esc(c.type)}</span><span class="tag">${esc(c.role)}</span></div>
+ <p>${esc(c.story||"No description yet.")}</p><div class="sub">✦ ${esc(c.power||"Ability not set")}</div>
+ <div class="card-actions"><button class="btn secondary small" onclick="openCharacter('${c.id}')">Edit</button><button class="btn danger small" onclick="deleteCharacter('${c.id}')">Delete</button></div></div></article>`).join("");
 }
-
+function deleteCharacter(id){if(!confirm("Delete this character?"))return;db.characters=db.characters.filter(c=>c.id!==id);persist()}
+function newProject(){
+ const name=prompt("Enter your project title:");
+ if(!name||!name.trim())return;
+ db.projects.unshift({id:uid(),name:name.trim(),date:new Date().toLocaleString(),description:"New anime project"});
+ persist();go("library");
+}
 function renderProjects(){
-  const grid = document.getElementById("projectGrid");
-
-  document.querySelectorAll(".user-project").forEach(item => item.remove());
-
-  getProjects().forEach(project => {
-    const card = document.createElement("article");
-    card.className = "card user-project";
-
-    const icon = document.createElement("div");
-    icon.className = "card-icon";
-    icon.textContent = "🎬";
-
-    const title = document.createElement("h3");
-    title.textContent = project.name;
-
-    const description = document.createElement("p");
-    description.textContent = "Your anime project.";
-
-    const status = document.createElement("span");
-    status.className = "character-tag";
-    status.textContent = "YOUR PROJECT";
-
-    card.append(icon,title,description,status);
-    grid.appendChild(card);
-  });
+ const list=document.getElementById("projectList"),recent=document.getElementById("recentProjects");
+ if(!list||!recent)return;
+ const html=db.projects.map(p=>`<div class="list-item row"><div><strong>${esc(p.name)}</strong><p>${esc(p.description||"Anime project")} · ${esc(p.date||"")}</p></div><button class="btn danger small" onclick="deleteProject('${p.id}')">Delete</button></div>`).join("");
+ list.innerHTML=html||'<div class="empty">No projects yet. Create your first project.</div>';
+ recent.innerHTML=db.projects.slice(0,3).map(p=>`<div class="list-item"><strong>${esc(p.name)}</strong><p>${esc(p.date||"Saved project")}</p></div>`).join("")||'<div class="empty">Your recent projects will appear here.</div>';
 }
-
-document.getElementById("projectModal").addEventListener("click",function(event){
-  if(event.target === this) closeModal();
-});
-
-document.getElementById("projectName").addEventListener("keydown",function(event){
-  if(event.key === "Enter") createProject();
-  if(event.key === "Escape") closeModal();
-});
-
-renderProjects();
+function deleteProject(id){if(!confirm("Delete this project?"))return;db.projects=db.projects.filter(p=>p.id!==id);persist()}
+function saveStory(){
+ const title=document.getElementById("storyTitle").value.trim();
+ const script=document.getElementById("script").value;
+ if(!title&&!script){alert("Enter a story title or script.");return}
+ const obj={id:uid(),title:title||"Untitled Story",genre:document.getElementById("storyGenre").value,idea:document.getElementById("storyIdea").value,script,date:new Date().toLocaleString()};
+ db.stories.unshift(obj);persist();alert("Story saved to workspace.");
+}
+function downloadText(name,text){
+ const blob=new Blob([text],{type:"text/plain;charset=utf-8"});
+ const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=name;a.click();URL.revokeObjectURL(url);
+}
+function downloadScript(){
+ const text="FIX ANIME STUDIO — SCRIPT\n\n"+document.getElementById("storyTitle").value+"\n\n"+document.getElementById("storyIdea").value+"\n\n"+document.getElementById("script").value;
+ downloadText("fix-anime-script.txt",text);db.exports++;persist();
+}
+function addScene(){
+ const title=document.getElementById("sceneTitle").value.trim();
+ if(!title){alert("Enter a scene title.");return}
+ db.scenes.push({id:uid(),title,location:document.getElementById("sceneLocation").value,character:document.getElementById("sceneCharacter").value,camera:document.getElementById("sceneCamera").value,action:document.getElementById("sceneAction").value});
+ ["sceneTitle","sceneLocation","sceneAction"].forEach(id=>document.getElementById(id).value="");
+ persist();
+}
+function renderScenes(){
+ const el=document.getElementById("sceneList");if(!el)return;
+ document.getElementById("sceneCount").textContent=db.scenes.length+" scenes";
+ el.innerHTML=db.scenes.map((s,i)=>`<div class="scene"><div class="scene-no">${String(i+1).padStart(2,"0")}</div><div style="flex:1"><strong style="font-size:12px">${esc(s.title)}</strong><p>${esc(s.location)} · ${esc(s.character)} · ${esc(s.camera)}</p><p>${esc(s.action)}</p></div><button class="btn danger small" onclick="deleteScene('${s.id}')">Delete</button></div>`).join("")||'<div class="empty">No scenes added yet.</div>';
+}
+function deleteScene(id){db.scenes=db.scenes.filter(s=>s.id!==id);persist()}
+function downloadStoryboard(){downloadText("fix-anime-storyboard.txt",db.scenes.map((s,i)=>`SCENE ${i+1}: ${s.title}\nLocation: ${s.location}\nCharacter: ${s.character}\nCamera: ${s.camera}\nAction: ${s.action}`).join("\n\n"))}
+function fillCharacterSelects(){
+ ["sceneCharacter","voiceCharacter"].forEach(id=>{
+  const el=document.getElementById(id);if(!el)return;
+  const old=el.value;
+  el.innerHTML='<option value="">Select Character</option>'+db.characters.map(c=>`<option>${esc(c.name)}</option>`).join("");
+  if([...el.options].some(o=>o.value===old))el.value=old;
+ });
+}
+function renderTimeline(){
+ const el=document.getElementById("videoTrack");if(!el)return;
+ el.innerHTML=db.scenes.map((s,i)=>`<div class="clip" title="${esc(s.title)}">Scene ${i+1}</div>`).join("")||'<span class="sub" style="padding:8px">Add storyboard scenes to build your timeline.</span>';
+}
+let previewIndex=0;
+function previewScene(){
+ if(!db.scenes.length){alert("Add scenes in Storyboard first.");return}
+ const s=db.scenes[previewIndex%db.scenes.length];previewIndex++;
+ document.getElementById("videoPreview").innerHTML=`<div class="preview-text"><div class="eyebrow">SCENE PREVIEW ${previewIndex}</div><strong>${esc(s.title)}</strong><p>${esc(s.location)} · ${esc(s.character)}</p><p>${esc(s.action)}</p><span class="tag">${esc(document.getElementById("action").value)} · ${esc(document.getElementById("expression").value)}</span></div>`;
+}
+function downloadProduction(){downloadJSON("fix-anime-production.json",{scenes:db.scenes,characters:db.characters,settings:{action:document.getElementById("action").value,expression:document.getElementById("expression").value,camera:document.getElementById("camera").value,duration:document.getElementById("duration").value}});db.exports++;persist()}
+function saveBackground(){
+ const promptText=document.getElementById("bgPrompt").value.trim();if(!promptText){alert("Enter a background description.");return}
+ db.backgrounds.unshift({id:uid(),prompt:promptText,style:document.getElementById("bgStyle").value,url:document.getElementById("bgUrl").value.trim()});
+ persist();document.getElementById("bgPrompt").value="";
+}
+function renderBackgrounds(){
+ const el=document.getElementById("backgroundGrid");if(!el)return;
+ el.innerHTML=db.backgrounds.map(b=>`<div class="panel">${b.url?`<img src="${esc(b.url)}" style="width:100%;height:140px;object-fit:cover;border-radius:9px" onerror="this.style.display='none'">`:""}<div class="tags"><span class="tag">${esc(b.style)}</span></div><p class="sub">${esc(b.prompt)}</p><button class="btn danger small" onclick="deleteBackground('${b.id}')">Delete</button></div>`).join("")||'<div class="empty" style="grid-column:1/-1">No background briefs yet.</div>';
+}
+function deleteBackground(id){db.backgrounds=db.backgrounds.filter(b=>b.id!==id);persist()}
+function downloadBackgrounds(){downloadText("fix-anime-background-briefs.txt",db.backgrounds.map((b,i)=>`${i+1}. ${b.style}\n${b.prompt}\n${b.url||""}`).join("\n\n"))}
+function saveVoice(){
+ const text=document.getElementById("voiceText").value.trim();if(!text){alert("Write some dialogue first.");return}
+ db.voices.unshift({id:uid(),character:document.getElementById("voiceCharacter").value,style:document.getElementById("voiceStyle").value,language:document.getElementById("voiceLanguage").value,type:document.getElementById("voiceType").value,text});
+ persist();document.getElementById("voiceText").value="";
+}
+function renderVoices(){
+ const el=document.getElementById("voiceList");if(!el)return;
+ el.innerHTML=db.voices.map(v=>`<div class="list-item"><strong>${esc(v.character||"Narrator")} · ${esc(v.language)} · ${esc(v.style)}</strong><p>${esc(v.text)}</p><button class="btn danger small" onclick="deleteVoice('${v.id}')">Delete</button></div>`).join("")||'<div class="empty">No voice scripts saved.</div>';
+}
+function deleteVoice(id){db.voices=db.voices.filter(v=>v.id!==id);persist()}
+function downloadVoice(){const text=document.getElementById("voiceText").value;if(!text){alert("Write dialogue first.");return}downloadText("fix-anime-voice-script.txt",text)}
+function downloadJSON(name,obj){
+ const blob=new Blob([JSON.stringify(obj,null,2)],{type:"application/json"});
+ const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=name;a.click();URL.revokeObjectURL(url);
+}
+function downloadAll(){downloadJSON("fix-anime-studio-backup.json",db)}
+function exportAll(){downloadAll();db.exports++;persist()}
+function downloadBackgrounds(){}
+function importBackup(event){
+ const file=event.target.files[0];if(!file)return;
+ const reader=new FileReader();
+ reader.onload=()=>{
+  try{const data=JSON.parse(reader.result);if(!data||!Array.isArray(data.characters)||!Array.isArray(data.projects))throw Error("Invalid backup");db={...structuredClone(initial),...data};persist();alert("Workspace backup restored.");}
+  catch(e){alert("This file is not a valid FIX ANIME STUDIO backup.");}
+  event.target.value="";
+ };
+ reader.readAsText(file);
+}
+function resetWorkspace(){
+ if(!confirm("This will erase all local workspace data. Download a backup first. Continue?"))return;
+ db=structuredClone(initial);persist();alert("Workspace reset.");
+}
+refreshAll();
 </script>
-
 </body>
 </html>
